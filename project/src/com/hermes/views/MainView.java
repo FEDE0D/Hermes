@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -14,37 +16,59 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+
 import java.awt.Dimension;
 import java.awt.Insets;
+
 import javax.swing.ImageIcon;
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.CardLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPopupMenu;
 import javax.swing.JMenuItem;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.border.CompoundBorder;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JComboBox;
+
 import java.awt.GridBagConstraints;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
+
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.KeyStroke;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
+import java.awt.Dialog.ModalExclusionType;
 
 public class MainView {
 
@@ -55,8 +79,9 @@ public class MainView {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private final Action action = new SwingAction();
+	private final Action actionFiltrosAvanzados = new SwingAction();
 	private JToolBar toolBar_1;
+	private final Action actionSalir = new SwingAction_1();
 
 	/**
 	 * Launch the application.
@@ -86,14 +111,35 @@ public class MainView {
 	 */
 	private void initialize() {
 		frmHermesVMonitor = new JFrame();
-		frmHermesVMonitor.setMinimumSize(new Dimension(640, 480));
+		frmHermesVMonitor.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+		frmHermesVMonitor.setMinimumSize(new Dimension(1024, 600));
 		frmHermesVMonitor.setTitle("Hermes Monitor");
 		frmHermesVMonitor.setBounds(100, 100, 450, 300);
 		frmHermesVMonitor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		JMenuBar menuBar = new JMenuBar();
+		frmHermesVMonitor.getContentPane().add(menuBar, BorderLayout.NORTH);
+		
+		JMenu mnMenu = new JMenu("Menu");
+		menuBar.add(mnMenu);
+		
+		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				System.exit(0);
+			}
+		});
+		mntmSalir.setAction(actionSalir);
+		mntmSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
+		mnMenu.add(mntmSalir);
+		
+		JPanel panel_14 = new JPanel();
+		frmHermesVMonitor.getContentPane().add(panel_14, BorderLayout.CENTER);
+		panel_14.setLayout(new BorderLayout(0, 0));
+		
 		JToolBar toolBar = new JToolBar();
+		panel_14.add(toolBar, BorderLayout.NORTH);
 		toolBar.setFloatable(false);
-		frmHermesVMonitor.getContentPane().add(toolBar, BorderLayout.NORTH);
 		
 		JPanel panel_1 = new JPanel();
 		toolBar.add(panel_1);
@@ -101,7 +147,6 @@ public class MainView {
 		
 		JPanel panelUsuario = new JPanel();
 		panelUsuario.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), new EmptyBorder(8, 8, 8, 8)));
-		panelUsuario.setSize(new Dimension(128, 96));
 		panel_1.add(panelUsuario, BorderLayout.WEST);
 		panelUsuario.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -118,14 +163,13 @@ public class MainView {
 		
 		txtBuscar = new JTextField();
 		txtBuscar.setHorizontalAlignment(SwingConstants.LEFT);
-		txtBuscar.setText("buscar");
 		txtBuscar.setToolTipText("Busca por palabras");
 		txtBuscar.setColumns(30);
 		
 		JLabel lblFiltros = new JLabel("Filtros");
 		
 		JButton btnMore = new JButton("mas filtros");
-		btnMore.setAction(action);
+		btnMore.setAction(actionFiltrosAvanzados);
 		btnMore.setMargin(new Insets(2, 4, 2, 4));
 		btnMore.setHorizontalTextPosition(SwingConstants.LEFT);
 		btnMore.addActionListener(new ActionListener() {
@@ -141,20 +185,20 @@ public class MainView {
 					.addContainerGap()
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblFiltros)
-						.addComponent(txtBuscar, GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+						.addComponent(txtBuscar, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
 						.addComponent(btnMore, Alignment.TRAILING))
 					.addContainerGap())
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(9)
+					.addGap(4)
 					.addComponent(lblFiltros)
-					.addGap(18)
+					.addGap(4)
 					.addComponent(txtBuscar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnMore, GroupLayout.PREFERRED_SIZE, 26, Short.MAX_VALUE)
-					.addContainerGap())
+					.addGap(4)
+					.addComponent(btnMore, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(24, Short.MAX_VALUE))
 		);
 		gl_panel_2.setAutoCreateGaps(true);
 		gl_panel_2.setAutoCreateContainerGaps(true);
@@ -164,12 +208,8 @@ public class MainView {
 		panel_1.add(panel_3, BorderLayout.EAST);
 		panel_3.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNotification = new JButton("1");
-		btnNotification.setMinimumSize(new Dimension(64, 25));
-		panel_3.add(btnNotification, BorderLayout.CENTER);
-		
 		JPanel panel = new JPanel();
-		frmHermesVMonitor.getContentPane().add(panel, BorderLayout.CENTER);
+		panel_14.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		toolBar_1 = new JToolBar();
@@ -180,10 +220,139 @@ public class MainView {
 		JPanel panel_10 = new JPanel();
 		panel_10.setBorder(new CompoundBorder(null, new EmptyBorder(8, 8, 8, 8)));
 		toolBar_1.add(panel_10);
-		panel_10.setLayout(new BorderLayout(0, 0));
+		GridBagLayout gbl_panel_10 = new GridBagLayout();
+		gbl_panel_10.columnWidths = new int[]{196, 171, 248, 0};
+		gbl_panel_10.rowHeights = new int[]{111, 0};
+		gbl_panel_10.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_10.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel_10.setLayout(gbl_panel_10);
+		
+		JPanel panel_13 = new JPanel();
+		panel_13.setBorder(new EmptyBorder(4, 4, 4, 4));
+		GridBagConstraints gbc_panel_13 = new GridBagConstraints();
+		gbc_panel_13.fill = GridBagConstraints.BOTH;
+		gbc_panel_13.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_13.gridx = 0;
+		gbc_panel_13.gridy = 0;
+		panel_10.add(panel_13, gbc_panel_13);
+		panel_13.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_15 = new JPanel();
+		panel_13.add(panel_15, BorderLayout.NORTH);
+		
+		JLabel lblEtiquetas = new JLabel("Etiquetas");
+		panel_15.add(lblEtiquetas);
+		
+		JButton btnAgregarEtiqueta = new JButton("+");
+		btnAgregarEtiqueta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Agregar etiqueta: "+JOptionPane.showInputDialog("Ingrese el nombre de la nueva etiqueta"));
+			}
+		});
+		btnAgregarEtiqueta.setMargin(new Insets(2, 2, 2, 2));
+		panel_15.add(btnAgregarEtiqueta);
+		
+		JButton btnBorraretiqueta = new JButton("-");
+		btnBorraretiqueta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Borrar etiqueta?: "+JOptionPane.showConfirmDialog(null, "Desea eliminar la etiqueta ...?"));
+			}
+		});
+		btnBorraretiqueta.setMinimumSize(new Dimension(44, 25));
+		btnBorraretiqueta.setMaximumSize(new Dimension(44, 25));
+		btnBorraretiqueta.setMargin(new Insets(2, 6, 2, 6));
+		panel_15.add(btnBorraretiqueta);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		panel_13.add(scrollPane_2);
+		
+		JList list = new JList();
+		scrollPane_2.setViewportView(list);
+		list.setVisibleRowCount(5);
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {"Importante", "Charlar con padre", "Avance", "Etc1", "Etc2", "Etc3", "Etc4", "Etc5", "Etc6", "Etc7", "Etc8"};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBorder(new CompoundBorder(null, new EmptyBorder(0, 4, 0, 4)));
+		GridBagConstraints gbc_panel_9 = new GridBagConstraints();
+		gbc_panel_9.fill = GridBagConstraints.BOTH;
+		gbc_panel_9.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_9.gridx = 1;
+		gbc_panel_9.gridy = 0;
+		panel_10.add(panel_9, gbc_panel_9);
+		panel_9.setLayout(new GridLayout(3, 0, 0, 0));
+		
+		JPanel panel_8 = new JPanel();
+		FlowLayout flowLayout_3 = (FlowLayout) panel_8.getLayout();
+		flowLayout_3.setAlignment(FlowLayout.LEFT);
+		panel_9.add(panel_8);
+		
+		JLabel lblNio = new JLabel("Niño");
+		panel_8.add(lblNio);
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Luis", "Mariela", "Juan"}));
+		panel_8.add(comboBox_3);
+		
+		JPanel panel_11 = new JPanel();
+		FlowLayout flowLayout_4 = (FlowLayout) panel_11.getLayout();
+		flowLayout_4.setAlignment(FlowLayout.LEFT);
+		panel_9.add(panel_11);
+		
+		JLabel lblHora = new JLabel("");
+		lblHora.setIcon(new ImageIcon(MainView.class.getResource("/icons/time_16.png")));
+		panel_11.add(lblHora);
+		
+		JLabel lblDesde = new JLabel("desde");
+		panel_11.add(lblDesde);
+		
+		textField = new JTextField();
+		panel_11.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblHasta = new JLabel("hasta");
+		panel_11.add(lblHasta);
+		
+		textField_1 = new JTextField();
+		panel_11.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JPanel panel_12 = new JPanel();
+		FlowLayout flowLayout_5 = (FlowLayout) panel_12.getLayout();
+		flowLayout_5.setAlignment(FlowLayout.LEFT);
+		panel_9.add(panel_12);
+		
+		JLabel lblFecha = new JLabel("");
+		lblFecha.setIcon(new ImageIcon(MainView.class.getResource("/icons/date_16.png")));
+		panel_12.add(lblFecha);
+		
+		JLabel label = new JLabel("desde");
+		panel_12.add(label);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		panel_12.add(textField_2);
+		
+		JLabel label_1 = new JLabel("hasta");
+		panel_12.add(label_1);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		panel_12.add(textField_3);
 		
 		JPanel panel_4 = new JPanel();
-		panel_10.add(panel_4, BorderLayout.WEST);
+		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
+		gbc_panel_4.fill = GridBagConstraints.BOTH;
+		gbc_panel_4.gridx = 2;
+		gbc_panel_4.gridy = 0;
+		panel_10.add(panel_4, gbc_panel_4);
 		panel_4.setLayout(new GridLayout(3, 2, 0, 0));
 		
 		JPanel panel_5 = new JPanel();
@@ -221,85 +390,6 @@ public class MainView {
 		JComboBox comboBox_2 = new JComboBox();
 		panel_7.add(comboBox_2);
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"*", "Emociones", "<Predeterminada>"}));
-		
-		JPanel panel_9 = new JPanel();
-		panel_10.add(panel_9, BorderLayout.CENTER);
-		panel_9.setLayout(new GridLayout(3, 0, 0, 0));
-		
-		JPanel panel_8 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_8.getLayout();
-		flowLayout_3.setAlignment(FlowLayout.RIGHT);
-		panel_9.add(panel_8);
-		
-		JLabel lblNio = new JLabel("Niño");
-		panel_8.add(lblNio);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Luis", "Mariela", "Juan"}));
-		panel_8.add(comboBox_3);
-		
-		JPanel panel_11 = new JPanel();
-		FlowLayout flowLayout_4 = (FlowLayout) panel_11.getLayout();
-		flowLayout_4.setAlignment(FlowLayout.RIGHT);
-		panel_9.add(panel_11);
-		
-		JLabel lblDesde = new JLabel("desde");
-		panel_11.add(lblDesde);
-		
-		textField = new JTextField();
-		panel_11.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblHasta = new JLabel("hasta");
-		panel_11.add(lblHasta);
-		
-		textField_1 = new JTextField();
-		panel_11.add(textField_1);
-		textField_1.setColumns(10);
-		
-		JPanel panel_12 = new JPanel();
-		FlowLayout flowLayout_5 = (FlowLayout) panel_12.getLayout();
-		flowLayout_5.setAlignment(FlowLayout.RIGHT);
-		panel_9.add(panel_12);
-		
-		JLabel label = new JLabel("desde");
-		panel_12.add(label);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panel_12.add(textField_2);
-		
-		JLabel label_1 = new JLabel("hasta");
-		panel_12.add(label_1);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		panel_12.add(textField_3);
-		
-		JPanel panel_13 = new JPanel();
-		panel_13.setBorder(new EmptyBorder(4, 4, 4, 4));
-		panel_10.add(panel_13, BorderLayout.SOUTH);
-		panel_13.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblEtiquetas = new JLabel("Etiquetas");
-		panel_13.add(lblEtiquetas, BorderLayout.NORTH);
-		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		panel_13.add(scrollPane_2);
-		
-		JList list = new JList();
-		list.setLayoutOrientation(JList.VERTICAL_WRAP);
-		scrollPane_2.setViewportView(list);
-		list.setVisibleRowCount(5);
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Importante", "Charlar con padre", "Avance", "Etc1", "Etc2", "Etc3", "Etc4", "Etc5", "Etc6", "Etc7", "Etc8", "Importante", "Charlar con padre", "Avance", "Etc1", "Etc2", "Etc3", "Etc4", "Etc5", "Etc6", "Etc7", "Etc8", "Importante", "Charlar con padre", "Avance", "Etc1", "Etc2", "Etc3", "Etc4", "Etc5", "Etc6", "Etc7", "Etc8", "Importante", "Charlar con padre", "Avance", "Etc1", "Etc2", "Etc3", "Etc4", "Etc5", "Etc6", "Etc7", "Etc8"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
@@ -383,5 +473,13 @@ public class MainView {
 	}
 	public JToolBar getFiltrosAvanzados() {
 		return toolBar_1;
+	}
+	private class SwingAction_1 extends AbstractAction {
+		public SwingAction_1() {
+			putValue(NAME, "Salir");
+			putValue(SHORT_DESCRIPTION, "Salir del Hermes");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }
