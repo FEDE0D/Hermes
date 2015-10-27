@@ -82,6 +82,8 @@ public class MainView {
 	private final Action actionFiltrosAvanzados = new SwingAction();
 	private JToolBar toolBar_1;
 	private final Action actionSalir = new SwingAction_1();
+	private final Action actionLimpiarFiltros = new SwingAction_2();
+	private final Action actionEditarEtiquetas = new SwingAction_3();
 
 	/**
 	 * Launch the application.
@@ -111,7 +113,6 @@ public class MainView {
 	 */
 	private void initialize() {
 		frmHermesVMonitor = new JFrame();
-		frmHermesVMonitor.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		frmHermesVMonitor.setMinimumSize(new Dimension(1024, 600));
 		frmHermesVMonitor.setTitle("Hermes Monitor");
 		frmHermesVMonitor.setBounds(100, 100, 450, 300);
@@ -222,16 +223,17 @@ public class MainView {
 		toolBar_1.add(panel_10);
 		GridBagLayout gbl_panel_10 = new GridBagLayout();
 		gbl_panel_10.columnWidths = new int[]{196, 171, 248, 0};
-		gbl_panel_10.rowHeights = new int[]{111, 0};
-		gbl_panel_10.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_10.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel_10.rowHeights = new int[]{111, 0, 0};
+		gbl_panel_10.columnWeights = new double[]{1.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_10.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		panel_10.setLayout(gbl_panel_10);
 		
 		JPanel panel_13 = new JPanel();
 		panel_13.setBorder(new EmptyBorder(4, 4, 4, 4));
 		GridBagConstraints gbc_panel_13 = new GridBagConstraints();
+		gbc_panel_13.gridheight = 2;
 		gbc_panel_13.fill = GridBagConstraints.BOTH;
-		gbc_panel_13.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_13.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_13.gridx = 0;
 		gbc_panel_13.gridy = 0;
 		panel_10.add(panel_13, gbc_panel_13);
@@ -242,26 +244,6 @@ public class MainView {
 		
 		JLabel lblEtiquetas = new JLabel("Etiquetas");
 		panel_15.add(lblEtiquetas);
-		
-		JButton btnAgregarEtiqueta = new JButton("+");
-		btnAgregarEtiqueta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Agregar etiqueta: "+JOptionPane.showInputDialog("Ingrese el nombre de la nueva etiqueta"));
-			}
-		});
-		btnAgregarEtiqueta.setMargin(new Insets(2, 2, 2, 2));
-		panel_15.add(btnAgregarEtiqueta);
-		
-		JButton btnBorraretiqueta = new JButton("-");
-		btnBorraretiqueta.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Borrar etiqueta?: "+JOptionPane.showConfirmDialog(null, "Desea eliminar la etiqueta ...?"));
-			}
-		});
-		btnBorraretiqueta.setMinimumSize(new Dimension(44, 25));
-		btnBorraretiqueta.setMaximumSize(new Dimension(44, 25));
-		btnBorraretiqueta.setMargin(new Insets(2, 6, 2, 6));
-		panel_15.add(btnBorraretiqueta);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		panel_13.add(scrollPane_2);
@@ -279,11 +261,22 @@ public class MainView {
 			}
 		});
 		
+		JButton btnEditEtiquetas = new JButton("Editar");
+		btnEditEtiquetas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				DialogEtiquetas etiquetas = new DialogEtiquetas();
+				etiquetas.setLocationRelativeTo(null);
+				etiquetas.setVisible(true);
+			}
+		});
+		btnEditEtiquetas.setAction(actionEditarEtiquetas);
+		panel_13.add(btnEditEtiquetas, BorderLayout.SOUTH);
+		
 		JPanel panel_9 = new JPanel();
 		panel_9.setBorder(new CompoundBorder(null, new EmptyBorder(0, 4, 0, 4)));
 		GridBagConstraints gbc_panel_9 = new GridBagConstraints();
 		gbc_panel_9.fill = GridBagConstraints.BOTH;
-		gbc_panel_9.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_9.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_9.gridx = 1;
 		gbc_panel_9.gridy = 0;
 		panel_10.add(panel_9, gbc_panel_9);
@@ -294,7 +287,7 @@ public class MainView {
 		flowLayout_3.setAlignment(FlowLayout.LEFT);
 		panel_9.add(panel_8);
 		
-		JLabel lblNio = new JLabel("Niño");
+		JLabel lblNio = new JLabel("Niño/a");
 		panel_8.add(lblNio);
 		
 		JComboBox comboBox_3 = new JComboBox();
@@ -310,14 +303,14 @@ public class MainView {
 		lblHora.setIcon(new ImageIcon(MainView.class.getResource("/icons/time_16.png")));
 		panel_11.add(lblHora);
 		
-		JLabel lblDesde = new JLabel("desde");
+		JLabel lblDesde = new JLabel("desde:");
 		panel_11.add(lblDesde);
 		
 		textField = new JTextField();
 		panel_11.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblHasta = new JLabel("hasta");
+		JLabel lblHasta = new JLabel("hasta:");
 		panel_11.add(lblHasta);
 		
 		textField_1 = new JTextField();
@@ -333,15 +326,15 @@ public class MainView {
 		lblFecha.setIcon(new ImageIcon(MainView.class.getResource("/icons/date_16.png")));
 		panel_12.add(lblFecha);
 		
-		JLabel label = new JLabel("desde");
-		panel_12.add(label);
+		JLabel lblDesde_1 = new JLabel("desde:");
+		panel_12.add(lblDesde_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		panel_12.add(textField_2);
 		
-		JLabel label_1 = new JLabel("hasta");
-		panel_12.add(label_1);
+		JLabel lblHasta_1 = new JLabel("hasta:");
+		panel_12.add(lblHasta_1);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
@@ -349,6 +342,7 @@ public class MainView {
 		
 		JPanel panel_4 = new JPanel();
 		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
+		gbc_panel_4.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_4.fill = GridBagConstraints.BOTH;
 		gbc_panel_4.gridx = 2;
 		gbc_panel_4.gridy = 0;
@@ -391,10 +385,32 @@ public class MainView {
 		panel_7.add(comboBox_2);
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"*", "Emociones", "<Predeterminada>"}));
 		
+		JPanel panel_16 = new JPanel();
+		GridBagConstraints gbc_panel_16 = new GridBagConstraints();
+		gbc_panel_16.anchor = GridBagConstraints.EAST;
+		gbc_panel_16.gridwidth = 2;
+		gbc_panel_16.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panel_16.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_16.gridx = 1;
+		gbc_panel_16.gridy = 1;
+		panel_10.add(panel_16, gbc_panel_16);
+		panel_16.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.setAction(actionLimpiarFiltros);
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				System.out.println("Limpiar todos los filtros");
+			}
+		});
+		btnClear.setHorizontalAlignment(SwingConstants.TRAILING);
+		panel_16.add(btnClear, BorderLayout.EAST);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
+		table.setAutoCreateRowSorter(true);
 		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -478,6 +494,26 @@ public class MainView {
 		public SwingAction_1() {
 			putValue(NAME, "Salir");
 			putValue(SHORT_DESCRIPTION, "Salir del Hermes");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_2 extends AbstractAction {
+		public SwingAction_2() {
+			putValue(ACTION_COMMAND_KEY, "");
+			putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK));
+			putValue(SMALL_ICON, new ImageIcon(MainView.class.getResource("/icons/erase_16.png")));
+			putValue(NAME, "Limpiar");
+			putValue(SHORT_DESCRIPTION, "Limpiar todos los filtros");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+	private class SwingAction_3 extends AbstractAction {
+		public SwingAction_3() {
+			putValue(SMALL_ICON, new ImageIcon(MainView.class.getResource("/icons/edit_16.png")));
+			putValue(NAME, "Editar");
+			putValue(SHORT_DESCRIPTION, "Cambiar o eliminar etiquetas");
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
