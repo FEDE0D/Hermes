@@ -69,6 +69,9 @@ import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Component;
 
 public class MainView {
 
@@ -410,6 +413,15 @@ public class MainView {
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON3){
+					int row = table.rowAtPoint(e.getPoint());
+					table.setRowSelectionInterval(row, row);
+				}
+			}
+		});
 		table.setAutoCreateRowSorter(true);
 		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(
@@ -477,6 +489,19 @@ public class MainView {
 			}
 		});
 		scrollPane.setViewportView(table);
+		
+		JPopupMenu popupMenu = new JPopupMenu();
+		addPopup(table, popupMenu);
+		
+		JMenuItem mntmEditar = new JMenuItem("Cambiar etiquetas");
+		mntmEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				DialogEtiquetasNotificacion den = new DialogEtiquetasNotificacion();
+				den.setLocationRelativeTo(null);
+				den.setVisible(true);
+			}
+		});
+		popupMenu.add(mntmEditar);
 	}
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
@@ -517,5 +542,22 @@ public class MainView {
 		}
 		public void actionPerformed(ActionEvent e) {
 		}
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
