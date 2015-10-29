@@ -6,6 +6,6 @@ public interface IPacienteDAO {
 	
 	public Paciente createInstance(ResultSet resultado);
 	public String getNameClass();
-	public void guardarPaciente(Paciente paciente);
-	public void actualizarPaciente(Paciente paciente);
+	public void guardar(Paciente paciente);
+	public void actualizar(Paciente paciente);
 }

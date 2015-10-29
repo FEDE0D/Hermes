@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenericDAO<T> implements IGenericDAO{
+public class GenericDAO<T> implements IGenericDAO<T>{
 	
 	private Conexion conexion;
 	public GenericDAO(){
@@ -68,6 +68,31 @@ public class GenericDAO<T> implements IGenericDAO{
 		}
 		return eliminado;
 	}
-
+	
+	/**
+	 * SOLO LO PUEDEN USAR objetos Contexto/Contenido/Categoria.
+	 * Esto sirve para identificar si existe un objeto personalizado por un paciente dentro del monitor
+	 *
+	 * @param  idTablet es el ID de la tablet de un paciente.
+	 * @param  idEnTablet es el ID con que se guardo un Contexto/Contenido/Categoria dentro de una tablet
+	 * @return   Retorna objeto un tipo Contexto/Contenido/Categoria 
+	 */
+	public T getByIdEnTabletANDIdTablet(int idTablet, int idEnTablet){
+		String sql= "select * from "+ this.getNameClass() + " where idEnTablet = "+ idEnTablet + " AND idTablet= "+idTablet+" limit 1";
+		try {
+			Statement consulta = this.conexion.getEnlace().createStatement();
+			ResultSet resultado= consulta.executeQuery(sql);
+			T obj= null;
+			while(resultado.next()){
+				obj= (this.createInstance(resultado));
+			}
+			resultado.close();
+			return obj;
+		}
+		catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return null;
+	}
 
 }

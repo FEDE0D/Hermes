@@ -22,11 +22,11 @@ public class PacienteDAO extends GenericDAO<Paciente> implements IPacienteDAO{
 			e.printStackTrace();
 		}
 		return p;
-	};
+	}
 	public String getNameClass(){
 		return "Paciente";
 	}
-	public void guardarPaciente(Paciente paciente){
+	public void guardar(Paciente paciente){
 		String sql= "INSERT INTO PACIENTE (NOMBRE,APELLIDO,SEXO) VALUES ( " + "'" + paciente.getNombre() + "' ," 
 												  + "'" + paciente.getApellido() + "' ," 
 												  + "'" + paciente.getSexo() + "' ) ";
@@ -40,7 +40,7 @@ public class PacienteDAO extends GenericDAO<Paciente> implements IPacienteDAO{
 		}
 	}
 	
-	public void actualizarPaciente(Paciente paciente){
+	public void actualizar(Paciente paciente){
 		String sql= "UPDATE PACIENTE SET NOMBRE= " + paciente.getNombre() + 
 				" APELLIDO =" + paciente.getApellido() + 
 				" SEXO= "+ paciente.getSexo() +
