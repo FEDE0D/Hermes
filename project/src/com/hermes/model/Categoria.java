@@ -1,4 +1,4 @@
-package com.hermes.model.Categoria;
+package com.hermes.model;
 
 public class Categoria {
 

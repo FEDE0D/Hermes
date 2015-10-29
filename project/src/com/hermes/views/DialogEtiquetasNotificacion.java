@@ -19,6 +19,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Dialog.ModalityType;
 
+/**
+ * @author federico
+ *
+ */
 public class DialogEtiquetasNotificacion extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

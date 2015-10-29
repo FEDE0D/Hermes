@@ -1,4 +1,4 @@
-package com.hermes.model;
+package com.hermes.dao;
 import java.sql.*;
 
 public class Conexion {
@@ -19,7 +19,7 @@ public class Conexion {
 			Class.forName("org.sqlite.JDBC");
 			this.enlace= DriverManager.getConnection("jdbc:sqlite:bdd.db");
 			} catch (ClassNotFoundException e) {
-			System.out.println("no se encontró el driver");
+			System.out.println("no se encontrï¿½ el driver");
 			} catch (SQLException e) {
 			System.out.println("no se pudo conectar a la BD");
 			}

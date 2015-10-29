@@ -49,6 +49,7 @@ import javax.swing.JComboBox;
 
 import java.awt.GridBagConstraints;
 
+import com.hermes.dao.sqlite.PacienteDAO;
 import com.hermes.main.ViewManager;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -75,7 +76,10 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Component;
-import com.hermes.model.Paciente.PacienteDAO;
+/**
+ * @author federico
+ *
+ */
 public class MainView {
 
 	private JFrame frmHermesVMonitor;

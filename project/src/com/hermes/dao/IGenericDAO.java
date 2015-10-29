@@ -1,4 +1,4 @@
-package com.hermes.model;
+package com.hermes.dao;
 
 import java.util.List;
 

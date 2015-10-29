@@ -1,10 +1,12 @@
-package com.hermes.model.Etiqueta;
+package com.hermes.dao.sqlite;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.hermes.model.Conexion;
+import com.hermes.dao.Conexion;
+import com.hermes.dao.IEtiquetaDAO;
+import com.hermes.model.Etiqueta;
 
 public class EtiquetaDAO implements IEtiquetaDAO{
 	private Conexion conexion;

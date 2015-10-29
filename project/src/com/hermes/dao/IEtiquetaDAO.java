@@ -1,6 +1,8 @@
-package com.hermes.model.Etiqueta;
+package com.hermes.dao;
 
 import java.sql.ResultSet;
+
+import com.hermes.model.Etiqueta;
 
 
 public interface IEtiquetaDAO {

@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.hermes.uml.Notificacion;
+import com.hermes.model.Notificacion;
 
 enum TYPE {NOTIFICATION, ABM_CONTENIDO, ABM_CATEGORIA, ABM_CONTEXTO}
 enum ABM_TYPE {ALTA, BAJA, MODIFICACION}

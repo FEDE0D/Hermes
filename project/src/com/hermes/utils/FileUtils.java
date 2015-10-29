@@ -9,6 +9,10 @@ import java.io.OutputStream;
 
 import com.hermes.main.Hermes;
 
+/**
+ * @author federico
+ *
+ */
 public class FileUtils {
 
 	/**

@@ -1,4 +1,4 @@
-package com.hermes.model.Contexto;
+package com.hermes.model;
 
 public class Contexto {
 	private int id, idEnTablet, idTablet;

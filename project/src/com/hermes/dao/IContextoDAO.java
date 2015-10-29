@@ -1,6 +1,8 @@
-package com.hermes.model.Contexto;
+package com.hermes.dao;
 
 import java.sql.ResultSet;
+
+import com.hermes.model.Contexto;
 
 public interface IContextoDAO {
 	public Contexto createInstance(ResultSet resultado);

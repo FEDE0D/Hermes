@@ -6,6 +6,10 @@ import java.io.FileReader;
 
 import com.hermes.utils.FileUtils;
 
+/**
+ * @author federico
+ *
+ */
 public class Hermes {
 	
 	private static String OS;

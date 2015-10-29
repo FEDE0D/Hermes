@@ -1,4 +1,4 @@
-package com.hermes.uml;
+package com.hermes.model;
 
 import java.sql.Date;
 import java.sql.Time;

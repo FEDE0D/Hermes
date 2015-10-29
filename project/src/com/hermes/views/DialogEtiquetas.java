@@ -21,6 +21,10 @@ import javax.swing.JLabel;
 import java.awt.Dimension;
 import javax.swing.ListSelectionModel;
 
+/**
+ * @author federico
+ *
+ */
 public class DialogEtiquetas extends JDialog {
 
 	/**

@@ -1,6 +1,8 @@
-package com.hermes.model.Categoria;
+package com.hermes.dao;
 
 import java.sql.ResultSet;
+
+import com.hermes.model.Categoria;
 
 public interface ICategoriaDAO {
 	public Categoria createInstance(ResultSet resultado);

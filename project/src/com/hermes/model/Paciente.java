@@ -1,4 +1,4 @@
-package com.hermes.model.Paciente;
+package com.hermes.model;
 
 public class Paciente {
 	private int id;

@@ -1,6 +1,8 @@
-package com.hermes.model.Paciente;
+package com.hermes.dao;
 
 import java.sql.ResultSet;
+
+import com.hermes.model.Paciente;
 
 public interface IPacienteDAO {
 	

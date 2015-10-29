@@ -5,8 +5,9 @@ import java.util.List;
 
 import javax.swing.AbstractListModel;
 
-import com.hermes.uml.Etiqueta;
-import com.hermes.uml.Notificacion;
+import com.hermes.dao.sqlite.EtiquetaDAO;
+import com.hermes.model.Etiqueta;
+import com.hermes.model.Notificacion;
 import com.hermes.views.DialogEtiquetas;
 import com.hermes.views.DialogEtiquetasNotificacion;
 import com.hermes.views.MainView;
@@ -76,11 +77,6 @@ public class ViewManager {
 		
 		public ModeloListaEtiquetas() {
 			lista = new ArrayList<Etiqueta>();
-			lista.add(new Etiqueta());
-			lista.add(new Etiqueta());
-			lista.add(new Etiqueta());
-			lista.add(new Etiqueta());
-			lista.add(new Etiqueta());
 		}
 		
 		@Override

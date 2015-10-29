@@ -1,11 +1,12 @@
-package com.hermes.model.Paciente;
+package com.hermes.dao.sqlite;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.hermes.model.Conexion;
-import com.hermes.model.GenericDAO;
+import com.hermes.dao.Conexion;
+import com.hermes.dao.IPacienteDAO;
+import com.hermes.model.Paciente;
 
 
 public class PacienteDAO extends GenericDAO<Paciente> implements IPacienteDAO{

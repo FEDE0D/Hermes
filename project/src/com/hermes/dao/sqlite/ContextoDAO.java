@@ -1,10 +1,12 @@
-package com.hermes.model.Contexto;
+package com.hermes.dao.sqlite;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.hermes.model.Conexion;
+import com.hermes.dao.Conexion;
+import com.hermes.dao.IContextoDAO;
+import com.hermes.model.Contexto;
 
 public class ContextoDAO implements IContextoDAO{
 
