@@ -1,0 +1,11 @@
+{
+  "datetime": "2015-10-29 15:52:54",
+  "device_id": "00000000-54b3-e7c7-0000-000046bffd97",
+  "type": "NOTIFICATION",
+  "data": {
+    "id_contenido": 4,
+    "id_categoria": 5,
+    "id_contexto": 2,
+    "id_paciente": 55
+  }
+}

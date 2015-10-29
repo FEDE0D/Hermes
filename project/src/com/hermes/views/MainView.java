@@ -49,6 +49,7 @@ import javax.swing.JComboBox;
 
 import java.awt.GridBagConstraints;
 
+import com.hermes.main.ViewManager;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -87,10 +88,19 @@ public class MainView {
 	private final Action actionSalir = new SwingAction_1();
 	private final Action actionLimpiarFiltros = new SwingAction_2();
 	private final Action actionEditarEtiquetas = new SwingAction_3();
+	private JList list;
 
+	/**
+	 * 
+	 * */
+	public void showView(){
+		frmHermesVMonitor.setVisible(true);
+	}
+	
 	/**
 	 * Launch the application.
 	 */
+	@Deprecated
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -251,7 +261,7 @@ public class MainView {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		panel_13.add(scrollPane_2);
 		
-		JList list = new JList();
+		list = new JList();
 		scrollPane_2.setViewportView(list);
 		list.setVisibleRowCount(5);
 		list.setModel(new AbstractListModel() {
@@ -267,9 +277,7 @@ public class MainView {
 		JButton btnEditEtiquetas = new JButton("Editar");
 		btnEditEtiquetas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				DialogEtiquetas etiquetas = new DialogEtiquetas();
-				etiquetas.setLocationRelativeTo(null);
-				etiquetas.setVisible(true);
+				ViewManager.getInstance().startDialogEtiquetas();
 			}
 		});
 		btnEditEtiquetas.setAction(actionEditarEtiquetas);
@@ -496,9 +504,7 @@ public class MainView {
 		JMenuItem mntmEditar = new JMenuItem("Cambiar etiquetas");
 		mntmEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				DialogEtiquetasNotificacion den = new DialogEtiquetasNotificacion();
-				den.setLocationRelativeTo(null);
-				den.setVisible(true);
+				ViewManager.getInstance().startDialogEtiquetasNotificacion();
 			}
 		});
 		popupMenu.add(mntmEditar);
@@ -559,5 +565,8 @@ public class MainView {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+	public JList getListEtiquetas() {
+		return list;
 	}
 }
