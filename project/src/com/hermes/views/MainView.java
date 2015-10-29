@@ -71,8 +71,10 @@ import java.awt.event.InputEvent;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.Component;
-
+import com.hermes.model.Paciente.PacienteDAO;
 public class MainView {
 
 	private JFrame frmHermesVMonitor;
@@ -92,6 +94,16 @@ public class MainView {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		//traigo todos los pacientes
+//		for (Paciente paciente : new PacienteDAO().getAll()) {
+//			System.out.println(paciente.getApellido());
+//		}
+		
+		//traigo un paciente por id
+		System.out.println(new PacienteDAO().getById(1).getApellido());
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
