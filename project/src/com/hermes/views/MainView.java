@@ -108,23 +108,6 @@ public class MainView {
 	public void showView(){
 		frmHermesVMonitor.setVisible(true);
 	}
-	
-	/**
-	 * Launch the application.
-	 */
-	@Deprecated
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainView window = new MainView();
-					window.frmHermesVMonitor.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
