@@ -1,8 +1,10 @@
 package com.hermes.dao.sqlite;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 
 import com.hermes.dao.Conexion;
 import com.hermes.dao.INotificacionDAO;
@@ -18,8 +20,18 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 	public Notificacion createInstance(ResultSet resultado) {
 		Notificacion p=null;
 		try {
-			p = new Notificacion(resultado.getLong("id"),resultado.getLong("idDevice"),resultado.getLong("idContenido"),resultado.getLong("idContexto"),resultado.getLong("idPaciente"),
-							resultado.getDate("date"),resultado.getTime("time"),resultado.getDate("dateReceived"),resultado.getTime("timeReceived"), resultado.getBoolean("visto"));
+			p = new Notificacion(
+					resultado.getLong("id"),
+					resultado.getLong("idDevice"),
+					resultado.getLong("idContenido"),
+					resultado.getLong("idContexto"),
+					resultado.getLong("idPaciente"),
+					Date.valueOf(resultado.getString("date")),
+					Time.valueOf(resultado.getString("time")),
+					Date.valueOf(resultado.getString("dateReceived")),
+					Time.valueOf(resultado.getString("timeReceived")),
+					resultado.getBoolean("visto")
+				);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
