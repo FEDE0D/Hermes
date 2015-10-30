@@ -101,6 +101,10 @@ public class MainView {
 	private final Action actionLimpiarFiltros = new SwingAction_2();
 	private final Action actionEditarEtiquetas = new SwingAction_3();
 	private JList list;
+	private JComboBox comboBox_3;
+	private JComboBox comboBox;
+	private JComboBox comboBox_1;
+	private JComboBox comboBox_2;
 
 	/**
 	 * 
@@ -296,7 +300,7 @@ public class MainView {
 		JLabel lblNio = new JLabel("Niño/a");
 		panel_8.add(lblNio);
 		
-		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3 = new JComboBox();
 		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Luis", "Mariela", "Juan"}));
 		panel_8.add(comboBox_3);
 		
@@ -363,7 +367,7 @@ public class MainView {
 		JLabel lblContenido = new JLabel("Contenido");
 		panel_5.add(lblContenido);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		panel_5.add(comboBox);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Entusiasmado", "Contento", "Alegre", "Molesto", "*"}));
 		
@@ -375,7 +379,7 @@ public class MainView {
 		JLabel lblContexto = new JLabel("Contexto");
 		panel_6.add(lblContexto);
 		
-		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1 = new JComboBox();
 		panel_6.add(comboBox_1);
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Pista", "Establo-Terapia", "Hogar", "*"}));
 		
@@ -387,7 +391,7 @@ public class MainView {
 		JLabel lblCategoria = new JLabel("Categoria");
 		panel_7.add(lblCategoria);
 		
-		JComboBox comboBox_2 = new JComboBox();
+		comboBox_2 = new JComboBox();
 		panel_7.add(comboBox_2);
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"*", "Emociones", "<Predeterminada>"}));
 		
@@ -566,5 +570,17 @@ public class MainView {
 	}
 	public JTable getTableNotificaciones() {
 		return table;
+	}
+	public JComboBox getComboBoxNiño() {
+		return comboBox_3;
+	}
+	public JComboBox getComboBoxContenido() {
+		return comboBox;
+	}
+	public JComboBox getComboBoxContexto() {
+		return comboBox_1;
+	}
+	public JComboBox getComboBoxCategoria() {
+		return comboBox_2;
 	}
 }

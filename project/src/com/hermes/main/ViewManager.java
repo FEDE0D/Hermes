@@ -1,19 +1,22 @@
 package com.hermes.main;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
-import javax.swing.table.AbstractTableModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
+import com.hermes.dao.sqlite.CategoriaDAO;
+import com.hermes.dao.sqlite.ContenidoDAO;
+import com.hermes.dao.sqlite.ContextoDAO;
 import com.hermes.dao.sqlite.EtiquetaDAO;
 import com.hermes.dao.sqlite.NotificacionDAO;
 import com.hermes.dao.sqlite.NotificacionEtiquetaDAO;
-import com.hermes.model.Etiqueta;
+import com.hermes.dao.sqlite.PacienteDAO;
+import com.hermes.model.Categoria;
+import com.hermes.model.Contenido;
+import com.hermes.model.Contexto;
 import com.hermes.model.Notificacion;
+import com.hermes.model.Paciente;
 import com.hermes.views.DialogEtiquetas;
 import com.hermes.views.DialogEtiquetasNotificacion;
 import com.hermes.views.MainView;
@@ -27,9 +30,10 @@ import com.hermes.views.MainView;
 public class ViewManager {
 
 	private static ViewManager _instance;
+	private MainView mainView;
 	
 	private ViewManager(){
-		
+		mainView = new MainView();
 	}
 	
 	public static ViewManager getInstance() {
@@ -39,12 +43,8 @@ public class ViewManager {
 	}
 	
 	public void startMainView(){
-		MainView window = new MainView();
-		
-		window.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
-		window.getTableNotificaciones().setModel(new TableNotificacionesModel());
-		
-		window.showView();
+		update();
+		mainView.showView();
 	}
 	
 	public void startDialogEtiquetas(){
@@ -68,7 +68,7 @@ public class ViewManager {
 	 */
 	public void showNotification(Notificacion n){
 		// TODO guardar notification
-		System.out.println(n);
+		System.out.println("Guardar notificacion: "+n);
 		update();
 	}
 	
@@ -78,7 +78,12 @@ public class ViewManager {
 	 * Se vuelve a cargar desde la bbdd los datos y se pide a los componentes que se dibujen.
 	 */
 	public void update(){
-		
+		mainView.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
+		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel());
+		mainView.getComboBoxContenido().setModel(new ComboBoxModel<Contenido>(new ContenidoDAO().getAll()));
+		mainView.getComboBoxContexto().setModel(new ComboBoxModel<Contexto>(new ContextoDAO().getAll()));
+		mainView.getComboBoxCategoria().setModel(new ComboBoxModel<Categoria>(new CategoriaDAO().getAll()));
+		mainView.getComboBoxNiño().setModel(new ComboBoxModel<Paciente>(new PacienteDAO().getAll()));
 	}
 	
 	private class TableNotificacionesModel extends DefaultTableModel{
@@ -95,6 +100,25 @@ public class ViewManager {
 				data[i][4] = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(notificaciones.get(i).getId());
 			}
 			this.setDataVector(data, columns);
+		}
+		
+	}
+	
+	private class ComboBoxModel<T> extends DefaultComboBoxModel<T>{
+		
+		public ComboBoxModel(){
+			
+		}
+		
+		public ComboBoxModel(List<T> elementos) {
+			this();
+			agregarElementos(elementos);
+		}
+		
+		public void agregarElementos(List<T> elementos){
+			for (T e : elementos){
+				addElement(e);
+			}
 		}
 		
 	}
