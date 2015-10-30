@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -55,12 +56,13 @@ public class MessageReader {
 		JSONObject data = (JSONObject) root.get("data");
 		
 		Notificacion n = new Notificacion();
-		n.setDate(Date.valueOf((String) root.get("date")));
-		n.setTime(Time.valueOf((String) root.get("time")));
-		n.setDeviceId((String) root.get("deviceID"));
+		n.setTimestamp(Timestamp.valueOf((String) root.get("timestamp")));
+		n.setIdTablet((String) root.get("idTablet"));
 		n.setIdPaciente((Long) data.get("idPaciente"));
 		n.setIdContenido((Long) data.get("idContenido"));
 		n.setIdContexto((Long) data.get("idContexto"));
+		
+		// TODO guardar la nueva notificacion
 		
 		ViewManager.getInstance().showNotification(n);
 		

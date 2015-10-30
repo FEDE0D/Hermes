@@ -2,10 +2,14 @@ package com.hermes.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.AbstractListModel;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import com.hermes.dao.sqlite.EtiquetaDAO;
+import com.hermes.dao.sqlite.NotificacionDAO;
 import com.hermes.model.Etiqueta;
 import com.hermes.model.Notificacion;
 import com.hermes.views.DialogEtiquetas;
@@ -33,8 +37,15 @@ public class ViewManager {
 	}
 	
 	public void startMainView(){
-		MainView window = new MainView();		
-		window.getListEtiquetas().setModel(new ModeloListaEtiquetas());
+		MainView window = new MainView();
+//		Vector<Etiqueta> etiquetas = new Vector<>();
+//		etiquetas.add(new Etiqueta(1, "etiqueta 1"));
+//		etiquetas.add(new Etiqueta(2, "etiqueta 2"));
+//		etiquetas.add(new Etiqueta(3, "etiqueta 3"));
+//		window.getListEtiquetas().setListData(etiquetas);
+		
+		window.getTableNotificaciones().setModel(new TableNotificacionesModel());
+		
 		window.showView();
 	}
 	
@@ -69,24 +80,20 @@ public class ViewManager {
 		
 	}
 	
-	
-	private class ModeloListaEtiquetas extends AbstractListModel<Etiqueta>{
+	private class TableNotificacionesModel extends DefaultTableModel{
 		
-		private static final long serialVersionUID = 5996664679011962017L;
-		private List<Etiqueta> lista;
-		
-		public ModeloListaEtiquetas() {
-			lista = new ArrayList<Etiqueta>();
-		}
-		
-		@Override
-		public Etiqueta getElementAt(int i) {
-			return lista.get(i);
-		}
-
-		@Override
-		public int getSize() {
-			return lista.size();
+		public TableNotificacionesModel(){
+			List<Notificacion> notificaciones = new NotificacionDAO().getAll();
+			Object[] columns = new String[] {"Fecha/Hora", "Niño", "Contenido", "Contexto", "Etiquetas"};
+			Object[][] data = new Object[notificaciones.size()][5];
+			for (int i= 0; i < notificaciones.size(); i++){
+				data[i][0] = notificaciones.get(i).getTimestamp();
+				data[i][1] = notificaciones.get(i).getIdPaciente();
+				data[i][2] = notificaciones.get(i).getIdContenido();
+				data[i][3] = notificaciones.get(i).getIdContexto();
+				data[i][4] = "...";
+			}
+			this.setDataVector(data, columns);
 		}
 		
 	}

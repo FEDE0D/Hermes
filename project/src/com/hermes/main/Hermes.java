@@ -17,6 +17,7 @@ public class Hermes {
 	
 	private static final String appFolderName = ".hermes";
 	private static final String databaseFileName = "database.db";
+	private static final String localDatabaseFilePath = "database/bbdd.db";
 	private static ViewManager viewManager;
 	
 	public static String getAppFolderPath(){
@@ -25,6 +26,10 @@ public class Hermes {
 	
 	public static String getDatabaseFilePath(){
 		return workingDirectory+"/"+appFolderName+"/"+databaseFileName;
+	}
+	
+	public static String getLocalDatabaseFilePath(){
+		return localDatabaseFilePath;
 	}
 	
 	public static ViewManager getViewManager(){
@@ -44,9 +49,9 @@ public class Hermes {
 		
 		// Copiar el archivo de base de datos inicial, si no existe
 		File dbfile = new java.io.File(getDatabaseFilePath());
-		if (!dbfile.exists()){
+//		if (!dbfile.exists()){
 			FileUtils.copy("database/bbdd.db", getDatabaseFilePath());
-		}
+//		}
 		
 	}
 	

@@ -1,6 +1,8 @@
 package com.hermes.dao;
 import java.sql.*;
 
+import com.hermes.main.Hermes;
+
 public class Conexion {
 	
 	private static Conexion conexion;
@@ -17,7 +19,7 @@ public class Conexion {
 	private Conexion(){
 		try {
 			Class.forName("org.sqlite.JDBC");
-			this.enlace= DriverManager.getConnection("jdbc:sqlite:bdd.db");
+			this.enlace= DriverManager.getConnection("jdbc:sqlite:res/"+Hermes.getLocalDatabaseFilePath());
 			} catch (ClassNotFoundException e) {
 			System.out.println("no se encontr� el driver");
 			} catch (SQLException e) {

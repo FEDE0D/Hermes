@@ -585,4 +585,7 @@ public class MainView {
 	public JList getListEtiquetas() {
 		return list;
 	}
+	public JTable getTableNotificaciones() {
+		return table;
+	}
 }

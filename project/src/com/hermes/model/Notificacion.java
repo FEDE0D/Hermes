@@ -2,18 +2,18 @@ package com.hermes.model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 public class Notificacion {
 
 	private Long id;
+	private String idTablet;
 	private Long idContenido;
 	private Long idContexto;
 	private Long idPaciente;
-	private Date date;
-	private Time time;
+	private Timestamp timestamp;
 	private Date dateReceived;
 	private Time timeReceived;
-	private String deviceId; 
 
 	public Long getId() {
 		return id;
@@ -21,6 +21,14 @@ public class Notificacion {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getIdTablet() {
+		return idTablet;
+	}
+
+	public void setIdTablet(String idTablet) {
+		this.idTablet = idTablet;
 	}
 
 	public Long getIdContenido() {
@@ -47,22 +55,6 @@ public class Notificacion {
 		this.idPaciente = idPaciente;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public Time getTime() {
-		return time;
-	}
-
-	public void setTime(Time time) {
-		this.time = time;
-	}
-
 	public Date getDateReceived() {
 		return dateReceived;
 	}
@@ -79,12 +71,12 @@ public class Notificacion {
 		this.timeReceived = timeReceived;
 	}
 
-	public String getDeviceId() {
-		return deviceId;
+	public Timestamp getTimestamp() {
+		return timestamp;
 	}
 
-	public void setDeviceId(String deviceId) {
-		this.deviceId = deviceId;
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }
