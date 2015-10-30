@@ -49,8 +49,11 @@ import javax.swing.JComboBox;
 
 import java.awt.GridBagConstraints;
 
+import com.hermes.dao.sqlite.NotificacionDAO;
 import com.hermes.dao.sqlite.PacienteDAO;
 import com.hermes.main.ViewManager;
+import com.hermes.model.Notificacion;
+import com.hermes.model.Paciente;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -108,11 +111,19 @@ public class MainView {
 	 */
 	@Deprecated
 	public static void main(String[] args) {
+		Paciente pa= new Paciente();
+		pa.setApellido("Marx");
+		pa.setNombre("Carlitos");
+		pa.setSexo('F');
+		new PacienteDAO().guardar(pa);
+		//probando pacientes
+		for (Paciente paciente : new PacienteDAO().getAll()) {
+			System.out.println("Nombre "+paciente.getNombre());
+		}
 		
-		//traigo todos los pacientes
-//		for (Paciente paciente : new PacienteDAO().getAll()) {
-//			System.out.println(paciente.getApellido());
-//		}
+		for (Notificacion notificacion : new NotificacionDAO().getAll()) {
+			System.out.println("Dispositivo "+notificacion.getIdDevice());
+		}
 		
 		//traigo un paciente por id
 		System.out.println(new PacienteDAO().getById(1).getApellido());
