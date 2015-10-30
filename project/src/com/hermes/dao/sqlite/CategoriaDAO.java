@@ -8,7 +8,7 @@ import com.hermes.dao.Conexion;
 import com.hermes.dao.ICategoriaDAO;
 import com.hermes.model.Categoria;
 
-public class CategoriaDAO implements ICategoriaDAO{
+public class CategoriaDAO  extends GenericDAO<Categoria> implements ICategoriaDAO{
 
 	private Conexion conexion;
 	public CategoriaDAO(){

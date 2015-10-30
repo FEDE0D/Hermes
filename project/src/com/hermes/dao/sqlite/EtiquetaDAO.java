@@ -8,7 +8,7 @@ import com.hermes.dao.Conexion;
 import com.hermes.dao.IEtiquetaDAO;
 import com.hermes.model.Etiqueta;
 
-public class EtiquetaDAO implements IEtiquetaDAO{
+public class EtiquetaDAO extends GenericDAO<Etiqueta> implements IEtiquetaDAO{
 	private Conexion conexion;
 	public EtiquetaDAO(){
 		super();
@@ -31,8 +31,8 @@ public class EtiquetaDAO implements IEtiquetaDAO{
 	}
 
 	@Override
-	public void guardar(Etiqueta categoria) {
-		String sql= "INSERT INTO ETIQUETA (DESCRIPCION) VALUES ( " + "'" + categoria.getDescripcion() + "' ) ";
+	public void guardar(Etiqueta etiqueta) {
+		String sql= "INSERT INTO ETIQUETA (DESCRIPCION) VALUES ( " + "'" + etiqueta.getDescripcion() + "' ) ";
 			try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);

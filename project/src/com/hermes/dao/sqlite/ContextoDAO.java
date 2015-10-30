@@ -8,7 +8,7 @@ import com.hermes.dao.Conexion;
 import com.hermes.dao.IContextoDAO;
 import com.hermes.model.Contexto;
 
-public class ContextoDAO implements IContextoDAO{
+public class ContextoDAO  extends GenericDAO<Contexto> implements IContextoDAO{
 
 	private Conexion conexion;
 	public ContextoDAO(){

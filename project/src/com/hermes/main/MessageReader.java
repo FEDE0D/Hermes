@@ -57,7 +57,7 @@ public class MessageReader {
 		Notificacion n = new Notificacion();
 		n.setDate(Date.valueOf((String) root.get("date")));
 		n.setTime(Time.valueOf((String) root.get("time")));
-		n.setDeviceId((String) root.get("deviceID"));
+		n.setIdDevice((Long) root.get("idDevice"));
 		n.setIdPaciente((Long) data.get("idPaciente"));
 		n.setIdContenido((Long) data.get("idContenido"));
 		n.setIdContexto((Long) data.get("idContexto"));
