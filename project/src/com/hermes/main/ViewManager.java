@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -38,12 +39,8 @@ public class ViewManager {
 	
 	public void startMainView(){
 		MainView window = new MainView();
-//		Vector<Etiqueta> etiquetas = new Vector<>();
-//		etiquetas.add(new Etiqueta(1, "etiqueta 1"));
-//		etiquetas.add(new Etiqueta(2, "etiqueta 2"));
-//		etiquetas.add(new Etiqueta(3, "etiqueta 3"));
-//		window.getListEtiquetas().setListData(etiquetas);
 		
+		window.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
 		window.getTableNotificaciones().setModel(new TableNotificacionesModel());
 		
 		window.showView();
@@ -51,6 +48,9 @@ public class ViewManager {
 	
 	public void startDialogEtiquetas(){
 		DialogEtiquetas de = new DialogEtiquetas();
+		
+		de.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
+		
 		de.setLocationRelativeTo(null);
 		de.setVisible(true);
 	}

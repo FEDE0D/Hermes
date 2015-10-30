@@ -26,6 +26,7 @@ import javax.swing.ListSelectionModel;
  *
  */
 public class DialogEtiquetas extends JDialog {
+	private JList list;
 
 	/**
 	 * Create the dialog.
@@ -54,7 +55,7 @@ public class DialogEtiquetas extends JDialog {
 					JScrollPane scrollPane = new JScrollPane();
 					panel_1.add(scrollPane, BorderLayout.CENTER);
 					{
-						JList list = new JList();
+						list = new JList();
 						list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 						scrollPane.setViewportView(list);
 						list.setModel(new AbstractListModel() {
@@ -114,5 +115,8 @@ public class DialogEtiquetas extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	public JList getListEtiquetas() {
+		return list;
 	}
 }
