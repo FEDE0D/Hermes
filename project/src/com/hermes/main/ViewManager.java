@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.hermes.dao.sqlite.EtiquetaDAO;
 import com.hermes.dao.sqlite.NotificacionDAO;
+import com.hermes.dao.sqlite.NotificacionEtiquetaDAO;
 import com.hermes.model.Etiqueta;
 import com.hermes.model.Notificacion;
 import com.hermes.views.DialogEtiquetas;
@@ -91,7 +92,7 @@ public class ViewManager {
 				data[i][1] = notificaciones.get(i).getIdPaciente();
 				data[i][2] = notificaciones.get(i).getIdContenido();
 				data[i][3] = notificaciones.get(i).getIdContexto();
-				data[i][4] = "...";
+				data[i][4] = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(notificaciones.get(i).getId());
 			}
 			this.setDataVector(data, columns);
 		}
