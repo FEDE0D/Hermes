@@ -6,7 +6,6 @@ import java.sql.Statement;
 
 import com.hermes.dao.Conexion;
 import com.hermes.dao.INotificacionDAO;
-import com.hermes.model.Etiqueta;
 import com.hermes.model.Notificacion;
 
 public class NotificacionDAO extends GenericDAO<Notificacion> implements INotificacionDAO {
