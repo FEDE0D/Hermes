@@ -21,8 +21,13 @@ public class GenericDAO<T> implements IGenericDAO<T>{
 	public String getNameClass(){
 		return "GenericDao";
 	}
+	
 	public List<T> getAll(){
-		String sql= "select * from "+ this.getNameClass();
+		return this.getAll("id");
+	}
+	
+	public List<T> getAll(String sortColumn){
+		String sql= "select * from "+ this.getNameClass()+" ORDER BY "+sortColumn;
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			ResultSet resultado= consulta.executeQuery(sql);
@@ -39,7 +44,7 @@ public class GenericDAO<T> implements IGenericDAO<T>{
 		return null;
 	}
 	
-	public T getById(int id){
+	public T getById(Long id){
 		String sql= "select * from "+ this.getNameClass() + " where id = "+ id + " limit 1";
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
@@ -57,7 +62,7 @@ public class GenericDAO<T> implements IGenericDAO<T>{
 		return null;
 	}
 	
-	public boolean deteleById(int id){
+	public boolean deteleById(Long id){
 		String sql= "DELETE from "+ this.getNameClass() + " where id = "+ id;
 		boolean eliminado= false;
 		try {

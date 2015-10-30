@@ -52,17 +52,16 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 				+ "'" + notificacion.getIdPaciente() + "' ," 
 				+ "'" + notificacion.getDate() + "' ," 
 				+ "'" + notificacion.getTime() + "' ," 
-				+ "'" + notificacion.getDateReceived() + "' ," 
-				+ "'" + notificacion.getTimeReceived() + "' ," 
+				+ "" + "date(current_timestamp, 'localtime')" + " ," 
+				+ "" + "time(current_timestamp, 'localtime')" + " ," 
 				+ "'" + notificacion.isVisto() + "' ) ";
-			try {
+		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);
 			consulta.close();
-			}
-			catch (SQLException e1) {
+		} catch (SQLException e1) {
 			e1.printStackTrace();
-			}
+		}
 	}
 	@Override
 	public void actualizar(Notificacion notificacion) {

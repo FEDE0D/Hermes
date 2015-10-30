@@ -1,11 +1,11 @@
 {
-  "date": "2015-10-29",
-  "time": "18:59:28",
-  "idTablet": "00000000-54b3-e7c7-0000-000046bffd97",
+  "date": "2015-10-30",
+  "time": "18:10:58",
+  "idTablet": "00000000-54b3-e7c7-0000-000046bffd33",
   "type": "NOTIFICATION",
   "data": {
-    "idPaciente": 55,
-    "idContenido": 4,
-    "idContexto": 2
+    "idPaciente": 2,
+    "idContenido": 1,
+    "idContexto": 1
   }
 }

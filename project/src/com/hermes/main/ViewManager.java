@@ -1,5 +1,6 @@
 package com.hermes.main;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -67,8 +68,10 @@ public class ViewManager {
 	 * @param n Notificacion 
 	 */
 	public void showNotification(Notificacion n){
-		// TODO guardar notification
-		System.out.println("Guardar notificacion: "+n);
+		// GUARDAR NOTIFICACION
+		new NotificacionDAO().guardar(n);
+		
+		// UPDATE VIEW
 		update();
 	}
 	
@@ -80,6 +83,8 @@ public class ViewManager {
 	public void update(){
 		mainView.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
 		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel());
+		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		mainView.getComboBoxContenido().setModel(new ComboBoxModel<Contenido>(new ContenidoDAO().getAll()));
 		mainView.getComboBoxContexto().setModel(new ComboBoxModel<Contexto>(new ContextoDAO().getAll()));
 		mainView.getComboBoxCategoria().setModel(new ComboBoxModel<Categoria>(new CategoriaDAO().getAll()));
@@ -93,10 +98,10 @@ public class ViewManager {
 			Object[] columns = new String[] {"Fecha/Hora", "Niño", "Contenido", "Contexto", "Etiquetas"};
 			Object[][] data = new Object[notificaciones.size()][5];
 			for (int i= 0; i < notificaciones.size(); i++){
-				data[i][0] = notificaciones.get(i).getDate();
-				data[i][1] = notificaciones.get(i).getIdPaciente();
-				data[i][2] = notificaciones.get(i).getIdContenido();
-				data[i][3] = notificaciones.get(i).getIdContexto();
+				data[i][0] = notificaciones.get(i).getDateReceived() +" "+ notificaciones.get(i).getTimeReceived();
+				data[i][1] = new PacienteDAO().getById(notificaciones.get(i).getIdPaciente());
+				data[i][2] = new ContenidoDAO().getById(notificaciones.get(i).getIdContenido());
+				data[i][3] = new ContenidoDAO().getById(notificaciones.get(i).getIdContexto());
 				data[i][4] = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(notificaciones.get(i).getId());
 			}
 			this.setDataVector(data, columns);

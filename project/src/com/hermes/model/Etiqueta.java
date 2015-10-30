@@ -42,8 +42,7 @@ public class Etiqueta {
 			for (Etiqueta e : this) {
 				representacion += e.getDescripcion() + ", ";
 			}
-			representacion = representacion.substring(0,
-					representacion.length() - 2);
+			representacion = representacion.substring(0, Math.max(0, representacion.length() - 2));
 			return representacion;
 		}
 
