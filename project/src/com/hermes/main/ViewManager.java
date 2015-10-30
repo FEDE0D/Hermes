@@ -87,7 +87,7 @@ public class ViewManager {
 			Object[] columns = new String[] {"Fecha/Hora", "Niño", "Contenido", "Contexto", "Etiquetas"};
 			Object[][] data = new Object[notificaciones.size()][5];
 			for (int i= 0; i < notificaciones.size(); i++){
-				data[i][0] = notificaciones.get(i).getTimestamp();
+				data[i][0] = notificaciones.get(i).getDate();
 				data[i][1] = notificaciones.get(i).getIdPaciente();
 				data[i][2] = notificaciones.get(i).getIdContenido();
 				data[i][3] = notificaciones.get(i).getIdContexto();

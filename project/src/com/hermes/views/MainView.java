@@ -49,8 +49,14 @@ import javax.swing.JComboBox;
 
 import java.awt.GridBagConstraints;
 
+import com.hermes.dao.sqlite.ContextoDAO;
+import com.hermes.dao.sqlite.NotificacionDAO;
 import com.hermes.dao.sqlite.PacienteDAO;
 import com.hermes.main.ViewManager;
+import com.hermes.model.Contexto;
+import com.hermes.model.Etiqueta;
+import com.hermes.model.Notificacion;
+import com.hermes.model.Paciente;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -108,11 +114,26 @@ public class MainView {
 	 */
 	@Deprecated
 	public static void main(String[] args) {
+		Paciente pa= new Paciente();
+		pa.setApellido("Marx");
+		pa.setNombre("Carlitos");
+		pa.setSexo('F');
+		//new PacienteDAO().guardar(pa);
+		System.out.println("Listado de pacientes ");
+		for (Paciente paciente : new PacienteDAO().getAll()) {
+			System.out.println("Nombre Paciente"+paciente.getNombre());
+		}
 		
-		//traigo todos los pacientes
-//		for (Paciente paciente : new PacienteDAO().getAll()) {
-//			System.out.println(paciente.getApellido());
-//		}
+		
+		Contexto con= new ContextoDAO().getById(5);
+		con.setDescripcion("CasaQuinta");
+		new ContextoDAO().actualizar(con);
+		for (Contexto contexto : new ContextoDAO().getAll()) {
+			System.out.println("Nombre Contexto"+contexto.getDescripcion());
+		}
+		for (Notificacion notificacion : new NotificacionDAO().getAll()) {
+			System.out.println("Dispositivo "+notificacion.getIdDevice());
+		}
 		
 		//traigo un paciente por id
 		System.out.println(new PacienteDAO().getById(1).getApellido());

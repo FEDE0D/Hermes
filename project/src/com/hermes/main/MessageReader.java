@@ -56,8 +56,9 @@ public class MessageReader {
 		JSONObject data = (JSONObject) root.get("data");
 		
 		Notificacion n = new Notificacion();
-		n.setTimestamp(Timestamp.valueOf((String) root.get("timestamp")));
-		n.setIdTablet((String) root.get("idTablet"));
+		n.setDate(Date.valueOf((String) root.get("date")));
+		n.setTime(Time.valueOf((String) root.get("time")));
+		n.setIdDevice((Long) root.get("idDevice"));
 		n.setIdPaciente((Long) data.get("idPaciente"));
 		n.setIdContenido((Long) data.get("idContenido"));
 		n.setIdContexto((Long) data.get("idContexto"));

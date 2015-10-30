@@ -2,81 +2,91 @@ package com.hermes.model;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 
 public class Notificacion {
 
-	private Long id;
-	private String idTablet;
-	private Long idContenido;
-	private Long idContexto;
-	private Long idPaciente;
-	private Timestamp timestamp;
+	private Long id, idDevice, idContenido, idContexto,idPaciente;
+	private Date date;
+	private Time time;
 	private Date dateReceived;
 	private Time timeReceived;
-
+	private boolean visto;
+	public Notificacion(){}
+	public Notificacion(Long id, Long idDevice, Long idContenido, Long idContexto, Long idPaciente, Date date,
+			Time time, Date dateReceived, Time timeReceived, boolean visto) {
+		super();
+		this.id = id;
+		this.idDevice = idDevice;
+		this.idContenido = idContenido;
+		this.idContexto = idContexto;
+		this.idPaciente = idPaciente;
+		this.date = date;
+		this.time = time;
+		this.dateReceived = dateReceived;
+		this.timeReceived = timeReceived;
+		this.visto = visto;
+	}
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getIdTablet() {
-		return idTablet;
+	public Long getIdDevice() {
+		return idDevice;
 	}
-
-	public void setIdTablet(String idTablet) {
-		this.idTablet = idTablet;
+	public void setIdDevice(Long idDevice) {
+		this.idDevice = idDevice;
 	}
-
 	public Long getIdContenido() {
 		return idContenido;
 	}
-
 	public void setIdContenido(Long idContenido) {
 		this.idContenido = idContenido;
 	}
-
 	public Long getIdContexto() {
 		return idContexto;
 	}
-
 	public void setIdContexto(Long idContexto) {
 		this.idContexto = idContexto;
 	}
-
 	public Long getIdPaciente() {
 		return idPaciente;
 	}
-
 	public void setIdPaciente(Long idPaciente) {
 		this.idPaciente = idPaciente;
 	}
-
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public Time getTime() {
+		return time;
+	}
+	public void setTime(Time time) {
+		this.time = time;
+	}
 	public Date getDateReceived() {
 		return dateReceived;
 	}
-
 	public void setDateReceived(Date dateReceived) {
 		this.dateReceived = dateReceived;
 	}
-
 	public Time getTimeReceived() {
 		return timeReceived;
 	}
-
 	public void setTimeReceived(Time timeReceived) {
 		this.timeReceived = timeReceived;
 	}
-
-	public Timestamp getTimestamp() {
-		return timestamp;
+	public boolean isVisto() {
+		return visto;
 	}
-
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+	public void setVisto(boolean visto) {
+		this.visto = visto;
 	}
+	
+
 
 }

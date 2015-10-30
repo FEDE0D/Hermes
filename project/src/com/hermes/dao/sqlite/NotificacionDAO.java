@@ -3,70 +3,75 @@ package com.hermes.dao.sqlite;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.hermes.dao.Conexion;
 import com.hermes.dao.INotificacionDAO;
 import com.hermes.model.Notificacion;
 
-/**
- * @author federico
- *
- *	TODO rehacer!
- */
-@Deprecated
-public class NotificacionDAO implements INotificacionDAO {
-
+public class NotificacionDAO extends GenericDAO<Notificacion> implements INotificacionDAO {
 	private Conexion conexion;
-	
-	public NotificacionDAO() {
+	public NotificacionDAO(){
+		super();
 		this.conexion = Conexion.getConexion();
 	}
-	
 	@Override
-	public String getNameClass() {
-		return null;
-	}
-	
-	/* 
-	 * TODO BORRAR!
-	 */
-	@Override @Deprecated
-	public List<Notificacion> getAll() {
-		String sql = "SELECT * FROM notificacion";
-		Statement query = null;
-		ResultSet result = null;
-		List<Notificacion> lista = new ArrayList<Notificacion>();
+	public Notificacion createInstance(ResultSet resultado) {
+		Notificacion p=null;
 		try {
-			query = conexion.getEnlace().createStatement();
-			result = query.executeQuery(sql);
-			while (result.next()){
-				Notificacion n = new Notificacion();
-				n.setId(result.getLong("id"));
-				n.setIdTablet(result.getString("idTablet"));
-				n.setIdContenido(result.getLong("idContenido"));
-				n.setIdContexto(result.getLong("idContexto"));
-				n.setIdPaciente(result.getLong("idPaciente"));
-				n.setTimestamp(Timestamp.valueOf(result.getString("timestamp")));
-				lista.add(n);
-			}
-			query.close();
+			p = new Notificacion(resultado.getLong("id"),resultado.getLong("idDevice"),resultado.getLong("idContenido"),resultado.getLong("idContexto"),resultado.getLong("idPaciente"),
+							resultado.getDate("date"),resultado.getTime("time"),resultado.getDate("dateReceived"),resultado.getTime("timeReceived"), resultado.getBoolean("visto"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return lista;
+		return p;
 	}
 
 	@Override
-	public Notificacion getById(int id) {
-		return null;
+	public String getNameClass() {
+		return "Notificacion";
 	}
 
 	@Override
-	public boolean deteleById(int id) {
-		return false;
+	public void guardar(Notificacion notificacion) {
+		String sql= "INSERT INTO NOTIFICACION (IDDEVICE, IDCONTENIDO,IDCONTEXTO,IDPACIENTE,DATE,TIME,DATERECEIVED,TIMERECEIVED,VISTO) VALUES ( " 
+				+ "'" + notificacion.getIdDevice() + "' ," 
+				+ "'" + notificacion.getIdContenido() + "' ,"
+				+ "'" + notificacion.getIdContexto() + "' ," 
+				+ "'" + notificacion.getIdPaciente() + "' ," 
+				+ "'" + notificacion.getDate() + "' ," 
+				+ "'" + notificacion.getTime() + "' ," 
+				+ "'" + notificacion.getDateReceived() + "' ," 
+				+ "'" + notificacion.getTimeReceived() + "' ," 
+				+ "'" + notificacion.isVisto() + "' ) ";
+			try {
+			Statement consulta = this.conexion.getEnlace().createStatement();
+			consulta.executeUpdate(sql);
+			consulta.close();
+			}
+			catch (SQLException e1) {
+			e1.printStackTrace();
+			}
 	}
-
+	@Override
+	public void actualizar(Notificacion notificacion) {
+		String sql= "UPDATE NOTIFICACION SET "+
+				"IDDEVICE= " + notificacion.getIdDevice() + 
+				" IDCONTENIDO =" + notificacion.getIdContenido() + 
+				" IDCONTEXTO= "+ notificacion.getIdContexto() +
+				" IDPACIENTE= "+ notificacion.getIdPaciente() +
+				" DATE= "+ notificacion.getDate() +
+				" TIME= "+ notificacion.getTime() +
+				" DATERECEIVED= "+ notificacion.getDateReceived() +
+				" TIMERECEIVED= "+ notificacion.getTimeReceived() +
+				" VISTO= "+ notificacion.isVisto() +
+				"WHERE id= " + notificacion.getId();
+		try {
+			Statement consulta = this.conexion.getEnlace().createStatement();
+			consulta.executeUpdate(sql);
+			consulta.close();
+		}
+		catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
 }

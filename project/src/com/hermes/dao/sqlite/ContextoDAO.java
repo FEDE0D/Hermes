@@ -8,7 +8,7 @@ import com.hermes.dao.Conexion;
 import com.hermes.dao.IContextoDAO;
 import com.hermes.model.Contexto;
 
-public class ContextoDAO implements IContextoDAO{
+public class ContextoDAO  extends GenericDAO<Contexto> implements IContextoDAO{
 
 	private Conexion conexion;
 	public ContextoDAO(){
@@ -48,7 +48,7 @@ public class ContextoDAO implements IContextoDAO{
 	@Override
 	public void actualizar(Contexto contexto) {
 		String sql= "UPDATE CONTEXTO SET idEnTablet= " + contexto.getIdEnTablet() + 
-				" idTablet =" + contexto.getIdTablet() + 
+				" idTablet= " + contexto.getIdTablet() + 
 				" descripcion= "+ contexto.getDescripcion() +
 				"WHERE id= " + contexto.getId();
 		try {
