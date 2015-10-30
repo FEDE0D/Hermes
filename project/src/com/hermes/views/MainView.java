@@ -114,31 +114,6 @@ public class MainView {
 	 */
 	@Deprecated
 	public static void main(String[] args) {
-		Paciente pa= new Paciente();
-		pa.setApellido("Marx");
-		pa.setNombre("Carlitos");
-		pa.setSexo('F');
-		//new PacienteDAO().guardar(pa);
-		System.out.println("Listado de pacientes ");
-		for (Paciente paciente : new PacienteDAO().getAll()) {
-			System.out.println("Nombre Paciente"+paciente.getNombre());
-		}
-		
-		
-		Contexto con= new ContextoDAO().getById(5);
-		con.setDescripcion("CasaQuinta");
-		new ContextoDAO().actualizar(con);
-		for (Contexto contexto : new ContextoDAO().getAll()) {
-			System.out.println("Nombre Contexto"+contexto.getDescripcion());
-		}
-		for (Notificacion notificacion : new NotificacionDAO().getAll()) {
-			System.out.println("Dispositivo "+notificacion.getIdDevice());
-		}
-		
-		//traigo un paciente por id
-		System.out.println(new PacienteDAO().getById(1).getApellido());
-		
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
