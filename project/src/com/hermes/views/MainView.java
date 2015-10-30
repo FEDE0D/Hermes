@@ -433,68 +433,10 @@ public class MainView {
 		table.setFillsViewportHeight(true);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
 			},
 			new String[] {
-				"Fecha/Hora", "Ni\u00F1o", "Contenido", "Contexto", "Etiquetas"
 			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		));
 		scrollPane.setViewportView(table);
 		
 		JPopupMenu popupMenu = new JPopupMenu();
@@ -503,7 +445,9 @@ public class MainView {
 		JMenuItem mntmEditar = new JMenuItem("Cambiar etiquetas");
 		mntmEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				ViewManager.getInstance().startDialogEtiquetasNotificacion();
+				int row = getTableNotificaciones().convertRowIndexToModel(getTableNotificaciones().getSelectedRow());
+				Notificacion n = (Notificacion) getTableNotificaciones().getModel().getValueAt(row, 5);
+				ViewManager.getInstance().startDialogEtiquetasNotificacion(n);
 			}
 		});
 		popupMenu.add(mntmEditar);

@@ -1,6 +1,5 @@
 package com.hermes.main;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,6 +15,7 @@ import com.hermes.dao.sqlite.PacienteDAO;
 import com.hermes.model.Categoria;
 import com.hermes.model.Contenido;
 import com.hermes.model.Contexto;
+import com.hermes.model.Etiqueta;
 import com.hermes.model.Notificacion;
 import com.hermes.model.Paciente;
 import com.hermes.views.DialogEtiquetas;
@@ -43,7 +43,7 @@ public class ViewManager {
 		return _instance;
 	}
 	
-	public void startMainView(){
+	public void startMainView() {
 		update();
 		mainView.showView();
 	}
@@ -57,8 +57,15 @@ public class ViewManager {
 		de.setVisible(true);
 	}
 	
-	public void startDialogEtiquetasNotificacion(){
+	public void startDialogEtiquetasNotificacion(Notificacion n){
 		DialogEtiquetasNotificacion den = new DialogEtiquetasNotificacion();
+		
+		List<Etiqueta> etiquetas = new EtiquetaDAO().getAll();
+		List<Etiqueta> etiquetasN = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(n.getId());
+		
+		den.getListEtiquetas().setListData(etiquetas.toArray());
+		den.getListEtiquetasNotificacion().setListData(etiquetasN.toArray());
+		
 		den.setLocationRelativeTo(null);
 		den.setVisible(true);
 	}
@@ -81,10 +88,14 @@ public class ViewManager {
 	 * Se vuelve a cargar desde la bbdd los datos y se pide a los componentes que se dibujen.
 	 */
 	public void update(){
+		// LIST ETIQUETAS
 		mainView.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
+		// TABLA NOTIFICACIONES
 		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel());
+		mainView.getTableNotificaciones().removeColumn(mainView.getTableNotificaciones().getColumnModel().getColumn(5));
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		// COMBOBOXs FILTROS
 		mainView.getComboBoxContenido().setModel(new ComboBoxModel<Contenido>(new ContenidoDAO().getAll()));
 		mainView.getComboBoxContexto().setModel(new ComboBoxModel<Contexto>(new ContextoDAO().getAll()));
 		mainView.getComboBoxCategoria().setModel(new ComboBoxModel<Categoria>(new CategoriaDAO().getAll()));
@@ -95,14 +106,15 @@ public class ViewManager {
 		
 		public TableNotificacionesModel(){
 			List<Notificacion> notificaciones = new NotificacionDAO().getAll();
-			Object[] columns = new String[] {"Fecha/Hora", "Niño", "Contenido", "Contexto", "Etiquetas"};
-			Object[][] data = new Object[notificaciones.size()][5];
-			for (int i= 0; i < notificaciones.size(); i++){
+			Object[] columns = new String[] {"Fecha/Hora", "Paciente", "Contenido", "Contexto", "Etiquetas", "NotificacionObj"};
+			Object[][] data = new Object[notificaciones.size()][6];
+			for (int i= 0; i < notificaciones.size(); i++) {
 				data[i][0] = notificaciones.get(i).getDateReceived() +" "+ notificaciones.get(i).getTimeReceived();
 				data[i][1] = new PacienteDAO().getById(notificaciones.get(i).getIdPaciente());
 				data[i][2] = new ContenidoDAO().getById(notificaciones.get(i).getIdContenido());
 				data[i][3] = new ContenidoDAO().getById(notificaciones.get(i).getIdContexto());
 				data[i][4] = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(notificaciones.get(i).getId());
+				data[i][5] = notificaciones.get(i);
 			}
 			this.setDataVector(data, columns);
 		}

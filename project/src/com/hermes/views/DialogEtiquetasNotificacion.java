@@ -29,6 +29,8 @@ public class DialogEtiquetasNotificacion extends JDialog {
 	private JScrollPane scrollPane_1;
 	private JPanel panel;
 	private JScrollPane scrollPane;
+	private JList list_1;
+	private JList list;
 
 	/**
 	 * Create the dialog.
@@ -44,8 +46,8 @@ public class DialogEtiquetasNotificacion extends JDialog {
 		{
 			scrollPane_1 = new JScrollPane();
 			{
-				JList list = new JList();
-				list.setModel(new AbstractListModel() {
+				list_1 = new JList();
+				list_1.setModel(new AbstractListModel() {
 					String[] values = new String[] {"Charlar con padre", "Avance", "Etc1", "Etc2", "Etc3", "Etc4", "Etc5", "Etc6", "Etc7", "Etc8"};
 					public int getSize() {
 						return values.length;
@@ -54,7 +56,7 @@ public class DialogEtiquetasNotificacion extends JDialog {
 						return values[index];
 					}
 				});
-				scrollPane_1.setViewportView(list);
+				scrollPane_1.setViewportView(list_1);
 			}
 		}
 		{
@@ -89,7 +91,7 @@ public class DialogEtiquetasNotificacion extends JDialog {
 		{
 			scrollPane = new JScrollPane();
 			{
-				JList list = new JList();
+				list = new JList();
 				list.setModel(new AbstractListModel() {
 					String[] values = new String[] {"Importante"};
 					public int getSize() {
@@ -122,5 +124,11 @@ public class DialogEtiquetasNotificacion extends JDialog {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
+	}
+	public JList getListEtiquetas() {
+		return list_1;
+	}
+	public JList getListEtiquetasNotificacion() {
+		return list;
 	}
 }
