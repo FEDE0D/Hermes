@@ -42,10 +42,10 @@ public class PacienteDAO extends GenericDAO<Paciente> implements IPacienteDAO{
 	}
 	
 	public void actualizar(Paciente paciente){
-		String sql= "UPDATE PACIENTE SET NOMBRE= " + paciente.getNombre() + 
-				" APELLIDO =" + paciente.getApellido() + 
-				" SEXO= "+ paciente.getSexo() +
-				"WHERE id= " + paciente.getId();
+		String sql= "UPDATE PACIENTE SET NOMBRE= '" + paciente.getNombre() + 
+				"', APELLIDO ='" + paciente.getApellido() + 
+				"', SEXO= '"+ paciente.getSexo() +
+				"' WHERE id= " + paciente.getId();
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);

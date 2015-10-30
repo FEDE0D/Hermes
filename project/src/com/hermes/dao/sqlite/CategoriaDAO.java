@@ -47,10 +47,10 @@ public class CategoriaDAO  extends GenericDAO<Categoria> implements ICategoriaDA
 	}
 	@Override
 	public void actualizar(Categoria categoria) {
-		String sql= "UPDATE CONTEXTO SET idEnTablet= " + categoria.getIdEnTablet() + 
-				" idTablet =" + categoria.getIdTablet() + 
-				" descripcion= "+ categoria.getDescripcion() +
-				"WHERE id= " + categoria.getId();
+		String sql= "UPDATE CONTEXTO SET idEnTablet= '" + categoria.getIdEnTablet() + 
+				"', idTablet ='" + categoria.getIdTablet() + 
+				"', descripcion= '"+ categoria.getDescripcion() +
+				"' WHERE id= " + categoria.getId();
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);

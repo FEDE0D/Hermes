@@ -44,8 +44,8 @@ public class EtiquetaDAO extends GenericDAO<Etiqueta> implements IEtiquetaDAO{
 	}
 	@Override
 	public void actualizar(Etiqueta etiqueta) {
-		String sql= "UPDATE ETIQUETA SET descripcion= " + etiqueta.getDescripcion() + 
-				"WHERE id= " + etiqueta.getId();
+		String sql= "UPDATE ETIQUETA SET descripcion= '" + etiqueta.getDescripcion() + 
+				"' WHERE id= " + etiqueta.getId();
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);

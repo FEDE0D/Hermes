@@ -67,16 +67,16 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 	@Override
 	public void actualizar(Notificacion notificacion) {
 		String sql= "UPDATE NOTIFICACION SET "+
-				"IDDEVICE= " + notificacion.getIdDevice() + 
-				" IDCONTENIDO =" + notificacion.getIdContenido() + 
-				" IDCONTEXTO= "+ notificacion.getIdContexto() +
-				" IDPACIENTE= "+ notificacion.getIdPaciente() +
-				" DATE= "+ notificacion.getDate() +
-				" TIME= "+ notificacion.getTime() +
-				" DATERECEIVED= "+ notificacion.getDateReceived() +
-				" TIMERECEIVED= "+ notificacion.getTimeReceived() +
-				" VISTO= "+ notificacion.isVisto() +
-				"WHERE id= " + notificacion.getId();
+				"IDDEVICE= '" + notificacion.getIdDevice() + 
+				"', IDCONTENIDO ='" + notificacion.getIdContenido() + 
+				"', IDCONTEXTO= '"+ notificacion.getIdContexto() +
+				"', IDPACIENTE= '"+ notificacion.getIdPaciente() +
+				"', DATE= '"+ notificacion.getDate() +
+				"', TIME= '"+ notificacion.getTime() +
+				"', DATERECEIVED= '"+ notificacion.getDateReceived() +
+				"', TIMERECEIVED= '"+ notificacion.getTimeReceived() +
+				"', VISTO= '"+ notificacion.isVisto() +
+				"' WHERE id= " + notificacion.getId();
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);

@@ -51,13 +51,14 @@ public class ContenidoDAO  extends GenericDAO<Contenido> implements IContenidoDA
 	}
 	@Override
 	public void actualizar(Contenido contenido) {
-		String sql= "UPDATE CONTEXTO SET idEnTablet= " + contenido.getIdEnTablet() + 
-				" idTablet =" + contenido.getIdTablet() + 
-				" descripcion =" + contenido.getDescripcion() + 
-				" img =" + contenido.getImg() + 
-				" sonido =" + contenido.getSonido() + 
-				" idCategoria= "+ contenido.getIdCategoria() +
-				"WHERE id= " + contenido.getId();
+		String sql= "UPDATE CONTEXTO SET "	+
+				"idEnTablet= '" + contenido.getIdEnTablet() + 
+				"', idTablet ='" + contenido.getIdTablet() + 
+				"', descripcion ='" + contenido.getDescripcion() + 
+				"', img ='" + contenido.getImg() + 
+				"', sonido ='" + contenido.getSonido() + 
+				"', idCategoria= '"+ contenido.getIdCategoria() +
+				"' WHERE id= " + contenido.getId();
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);
