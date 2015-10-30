@@ -47,10 +47,11 @@ public class ContextoDAO  extends GenericDAO<Contexto> implements IContextoDAO{
 	}
 	@Override
 	public void actualizar(Contexto contexto) {
-		String sql= "UPDATE CONTEXTO SET idEnTablet= " + contexto.getIdEnTablet() + 
-				" idTablet= " + contexto.getIdTablet() + 
-				" descripcion= "+ contexto.getDescripcion() +
-				"WHERE id= " + contexto.getId();
+		String sql= "UPDATE CONTEXTO SET "+
+				"idEnTablet= '" + contexto.getIdEnTablet() + 
+				"',  idTablet= '" + contexto.getIdTablet() + 
+				"', descripcion= '"+ contexto.getDescripcion() +
+				"' WHERE id= " + contexto.getId();
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			consulta.executeUpdate(sql);
