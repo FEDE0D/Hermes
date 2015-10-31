@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.hermes.dao.Conexion;
@@ -23,7 +22,7 @@ public class NotificacionEtiquetaDAO  extends GenericDAO<NotificacionEtiqueta> i
 	public NotificacionEtiqueta createInstance(ResultSet resultado) {
 		NotificacionEtiqueta p=null;
 		try {
-			p = new NotificacionEtiqueta(resultado.getInt("idNotificacion"),resultado.getInt("idEtiqueta") );
+			p = new NotificacionEtiqueta(resultado.getLong("idNotificacion"),resultado.getLong("idEtiqueta") );
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,6 +71,48 @@ public class NotificacionEtiquetaDAO  extends GenericDAO<NotificacionEtiqueta> i
 		}
 		
 		return etiquetas;
+	}
+	
+	/**
+	 * @return objeto {@link NotificacionEtiqueta} representado por idNotificacion y idEtiqueta o null si no existe.
+	 * 
+	 * */
+	public NotificacionEtiqueta findById(Long idNotificacion, Long idEtiqueta) {
+		NotificacionEtiqueta ne = null;
+		
+		String sql = "SELECT * "
+				+ "FROM notificacionetiqueta "
+				+ "WHERE idNotificacion = ? AND idEtiqueta = ?";
+		
+		PreparedStatement query = null;
+		try {
+			query = conexion.getEnlace().prepareStatement(sql);
+			query.setLong(1, idNotificacion);
+			query.setLong(2, idEtiqueta);
+			ResultSet result = query.executeQuery();
+			ne = new NotificacionEtiquetaDAO().createInstance(result);
+			query.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return ne;
+	}
+	
+	public boolean deteleById(Long idNotificacion, Long idEtiqueta){
+		String sql= "DELETE "
+				+ "FROM notificacionetiqueta "
+				+ "WHERE idNotificacion = '"+idNotificacion+"' AND idEtiqueta = '"+idEtiqueta+"' ";
+		Statement query = null;
+		int result = -1;
+		try {
+			query = this.conexion.getEnlace().createStatement();
+			result = query.executeUpdate(sql);
+			query.close();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return result == 1;
 	}
 	
 }

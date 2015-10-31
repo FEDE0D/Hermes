@@ -3,28 +3,28 @@ package com.hermes.model;
 public class NotificacionEtiqueta {
 	
 	public NotificacionEtiqueta(){}
-	public NotificacionEtiqueta(int idNotificacion, int idEtiqueta) {
+	public NotificacionEtiqueta(Long idNotificacion, Long idEtiqueta) {
 		super();
 		this.idNotificacion = idNotificacion;
 		this.idEtiqueta = idEtiqueta;
 	}
 
-	public int getIdNotificacion() {
+	public Long getIdNotificacion() {
 		return idNotificacion;
 	}
 
-	public void setIdNotificacion(int idNotificacion) {
+	public void setIdNotificacion(Long idNotificacion) {
 		this.idNotificacion = idNotificacion;
 	}
 
-	public int getIdEtiqueta() {
+	public Long getIdEtiqueta() {
 		return idEtiqueta;
 	}
 
-	public void setIdEtiqueta(int idEtiqueta) {
+	public void setIdEtiqueta(Long idEtiqueta) {
 		this.idEtiqueta = idEtiqueta;
 	}
 
-	private int idNotificacion, idEtiqueta;
+	private Long idNotificacion, idEtiqueta;
 	
 }

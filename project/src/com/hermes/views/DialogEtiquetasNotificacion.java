@@ -1,23 +1,26 @@
 package com.hermes.views;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
 import javax.swing.AbstractListModel;
-import javax.swing.JScrollPane;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Dialog.ModalityType;
+import javax.swing.border.EmptyBorder;
+
+import com.hermes.dao.sqlite.EtiquetaDAO;
+import com.hermes.dao.sqlite.NotificacionEtiquetaDAO;
+import com.hermes.model.Etiqueta;
+import com.hermes.model.Notificacion;
+import com.hermes.model.NotificacionEtiqueta;
 
 /**
  * @author federico
@@ -31,11 +34,13 @@ public class DialogEtiquetasNotificacion extends JDialog {
 	private JScrollPane scrollPane;
 	private JList list_1;
 	private JList list;
+	private Notificacion model;
 
 	/**
 	 * Create the dialog.
 	 */
-	public DialogEtiquetasNotificacion() {
+	public DialogEtiquetasNotificacion(Notificacion model) {
+		this.model = model;
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		setTitle("Cambiar etiquetas");
 		setResizable(false);
@@ -63,26 +68,45 @@ public class DialogEtiquetasNotificacion extends JDialog {
 			panel = new JPanel();
 			
 			JButton btnAdd = new JButton(">");
+			btnAdd.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Etiqueta selected = (Etiqueta) getListEtiquetas().getSelectedValue();
+					if (selected != null){
+						NotificacionEtiqueta ne = new NotificacionEtiqueta(DialogEtiquetasNotificacion.this.model.getId(), selected.getId());
+						new NotificacionEtiquetaDAO().guardar(ne);
+						update();
+					}
+				}
+			});
 			btnAdd.setToolTipText("Agregar etiqueta");
 			
 			JButton btnRemove = new JButton("<");
+			btnRemove.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Etiqueta selected = (Etiqueta) getListEtiquetasNotificacion().getSelectedValue();
+					if (selected != null){
+						new NotificacionEtiquetaDAO().deteleById(DialogEtiquetasNotificacion.this.model.getId(), selected.getId());
+						update();
+					}
+				}
+			});
 			btnRemove.setToolTipText("Quitar etiqueta");
 			GroupLayout gl_panel = new GroupLayout(panel);
 			gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+				gl_panel.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel.createSequentialGroup()
 						.addGap(28)
 						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addComponent(btnRemove, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 61, Short.MAX_VALUE)
-							.addComponent(btnAdd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addComponent(btnAdd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+							.addComponent(btnRemove, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 61, Short.MAX_VALUE))
 						.addGap(106))
 			);
 			gl_panel.setVerticalGroup(
 				gl_panel.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_panel.createSequentialGroup()
-						.addGap(45)
+						.addGap(71)
 						.addComponent(btnAdd)
-						.addGap(93)
+						.addGap(67)
 						.addComponent(btnRemove)
 						.addContainerGap(77, Short.MAX_VALUE))
 			);
@@ -125,6 +149,15 @@ public class DialogEtiquetasNotificacion extends JDialog {
 		);
 		contentPanel.setLayout(gl_contentPanel);
 	}
+	
+	public void update(){
+		List<Etiqueta> etiquetas = new EtiquetaDAO().getAll();
+		List<Etiqueta> etiquetasN = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(model.getId());
+		
+		getListEtiquetas().setListData(etiquetas.toArray());
+		getListEtiquetasNotificacion().setListData(etiquetasN.toArray());
+	}
+	
 	public JList getListEtiquetas() {
 		return list_1;
 	}

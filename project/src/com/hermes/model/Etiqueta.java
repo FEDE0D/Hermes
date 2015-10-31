@@ -3,10 +3,10 @@ package com.hermes.model;
 import java.util.ArrayList;
 
 public class Etiqueta {
-	private int id;
+	private Long id;
 	private String descripcion;
 
-	public Etiqueta(int id, String descripcion) {
+	public Etiqueta(Long id, String descripcion) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -15,11 +15,11 @@ public class Etiqueta {
 	public Etiqueta() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

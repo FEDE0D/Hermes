@@ -18,7 +18,7 @@ public class EtiquetaDAO extends GenericDAO<Etiqueta> implements IEtiquetaDAO{
 	public Etiqueta createInstance(ResultSet resultado) {
 		Etiqueta p=null;
 		try {
-			p = new Etiqueta(resultado.getInt("id"),resultado.getString("descripcion"));
+			p = new Etiqueta(resultado.getLong("id"),resultado.getString("descripcion"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

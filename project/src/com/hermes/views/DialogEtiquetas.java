@@ -2,24 +2,23 @@ package com.hermes.views;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Dialog.ModalExclusionType;
-import java.awt.Dialog.ModalityType;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Point;
-import javax.swing.JSplitPane;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
-import javax.swing.AbstractListModel;
-import javax.swing.border.CompoundBorder;
 import javax.swing.JLabel;
-import java.awt.Dimension;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+
+import com.hermes.dao.sqlite.EtiquetaDAO;
+import com.hermes.model.Etiqueta;
 
 /**
  * @author federico
@@ -40,7 +39,7 @@ public class DialogEtiquetas extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel panel = new JPanel();
-			getContentPane().add(panel, BorderLayout.NORTH);
+			getContentPane().add(panel, BorderLayout.CENTER);
 			panel.setLayout(new BorderLayout(0, 0));
 			{
 				JPanel panel_1 = new JPanel();
@@ -75,47 +74,64 @@ public class DialogEtiquetas extends JDialog {
 				panel.add(panel_1, BorderLayout.SOUTH);
 				{
 					JButton btnAgregar = new JButton("Agregar");
+					btnAgregar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent ae) {
+							String respuesta = JOptionPane.showInputDialog("Ingrese el nombre de la nueva etiqueta");
+							if (respuesta != null && respuesta.matches("\\w+")) {
+								Etiqueta etiqueta = new Etiqueta(-1L, respuesta);
+								new EtiquetaDAO().guardar(etiqueta);
+								update();
+							} else if (respuesta != null) {
+								JOptionPane.showMessageDialog(null, "El nombre de la etiqueta es inválido.");
+							}
+						}
+					});
 					panel_1.add(btnAgregar);
 				}
 				{
 					JButton btnEliminar = new JButton("Eliminar");
+					btnEliminar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent ae) {
+							Object selected = getListEtiquetas().getSelectedValue();
+							if (selected != null) {
+								Etiqueta e = (Etiqueta) selected;
+								if (JOptionPane.showConfirmDialog(null, "¿Eliminar la etiqueta '"+e.getDescripcion()+"' ?")==JOptionPane.OK_OPTION){
+									new EtiquetaDAO().deteleById(e.getId());									
+									update();
+								}
+							}
+						}
+					});
 					panel_1.add(btnEliminar);
 				}
 				{
 					JButton btnRenombrar = new JButton("Renombrar");
+					btnRenombrar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent ae) {
+							Object selected = getListEtiquetas().getSelectedValue();
+							if (selected != null){
+								Etiqueta e = (Etiqueta) selected;
+								String respuesta = JOptionPane.showInputDialog("Ingrese el nuevo nombre para la etiqueta '"+e.getDescripcion()+"'");
+								if (respuesta != null && respuesta.matches("\\w+")){
+									e.setDescripcion(respuesta);
+									new EtiquetaDAO().actualizar(e);
+									update();
+								} else if (respuesta != null){
+									JOptionPane.showMessageDialog(null, "El nombre de la etiqueta es inválido.");
+								}
+							}
+						}
+					});
 					panel_1.add(btnRenombrar);
 				}
 			}
 		}
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						setVisible(false);
-						dispose();
-					}
-				});
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						setVisible(false);
-						dispose();
-					}
-				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
-		}
 	}
+	
+	public void update(){
+		getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
+	}
+	
 	public JList getListEtiquetas() {
 		return list;
 	}

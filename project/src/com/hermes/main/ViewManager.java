@@ -50,24 +50,18 @@ public class ViewManager {
 	
 	public void startDialogEtiquetas(){
 		DialogEtiquetas de = new DialogEtiquetas();
-		
-		de.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
-		
+		de.update();
 		de.setLocationRelativeTo(null);
 		de.setVisible(true);
+		update();
 	}
 	
 	public void startDialogEtiquetasNotificacion(Notificacion n){
-		DialogEtiquetasNotificacion den = new DialogEtiquetasNotificacion();
-		
-		List<Etiqueta> etiquetas = new EtiquetaDAO().getAll();
-		List<Etiqueta> etiquetasN = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(n.getId());
-		
-		den.getListEtiquetas().setListData(etiquetas.toArray());
-		den.getListEtiquetasNotificacion().setListData(etiquetasN.toArray());
-		
+		DialogEtiquetasNotificacion den = new DialogEtiquetasNotificacion(n);
+		den.update();
 		den.setLocationRelativeTo(null);
 		den.setVisible(true);
+		update();
 	}
 	
 	

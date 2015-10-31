@@ -82,6 +82,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Component;
+import javax.swing.ListSelectionModel;
 /**
  * @author federico
  *
@@ -110,6 +111,7 @@ public class MainView {
 	 * 
 	 * */
 	public void showView(){
+		frmHermesVMonitor.setLocation(0, 0);
 		frmHermesVMonitor.setVisible(true);
 	}
 
@@ -420,6 +422,7 @@ public class MainView {
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
