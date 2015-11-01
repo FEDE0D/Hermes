@@ -518,7 +518,7 @@ public class MainView {
 	public JTable getTableNotificaciones() {
 		return table;
 	}
-	public JComboBox getComboBoxNiño() {
+	public JComboBox getComboBoxPaciente() {
 		return comboBox_3;
 	}
 	public JComboBox getComboBoxContenido() {

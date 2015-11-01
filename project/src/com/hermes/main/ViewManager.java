@@ -1,5 +1,6 @@
 package com.hermes.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -90,10 +91,25 @@ public class ViewManager {
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		// COMBOBOXs FILTROS
-		mainView.getComboBoxContenido().setModel(new ComboBoxModel<Contenido>(new ContenidoDAO().getAll()));
-		mainView.getComboBoxContexto().setModel(new ComboBoxModel<Contexto>(new ContextoDAO().getAll()));
-		mainView.getComboBoxCategoria().setModel(new ComboBoxModel<Categoria>(new CategoriaDAO().getAll()));
-		mainView.getComboBoxNiño().setModel(new ComboBoxModel<Paciente>(new PacienteDAO().getAll()));
+		List<Contenido> contenidos = new ArrayList<Contenido>();
+		contenidos.add(new Contenido(0, 0, 0, 0, "Todos", null, null));
+		contenidos.addAll(new ContenidoDAO().getAll());
+		mainView.getComboBoxContenido().setModel(new ComboBoxModel<Contenido>(contenidos));
+		
+		List<Contexto> contextos = new ArrayList<Contexto>();
+		contextos.add(new Contexto(0, 0, 0, "Todos"));
+		contextos.addAll(new ContextoDAO().getAll());
+		mainView.getComboBoxContexto().setModel(new ComboBoxModel<Contexto>(contextos));
+		
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		categorias.add(new Categoria(0, 0, 0, "Todas"));
+		categorias.addAll(new CategoriaDAO().getAll());
+		mainView.getComboBoxCategoria().setModel(new ComboBoxModel<Categoria>(categorias));
+		
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		pacientes.add(new Paciente(0, "Todos", "", '*'));
+		pacientes.addAll(new PacienteDAO().getAll());
+		mainView.getComboBoxPaciente().setModel(new ComboBoxModel<Paciente>(pacientes));
 	}
 	
 	private class TableNotificacionesModel extends DefaultTableModel{
@@ -124,8 +140,8 @@ public class ViewManager {
 			this();
 			agregarElementos(elementos);
 		}
-		
-		public void agregarElementos(List<T> elementos){
+		public void agregarElementos(List<T> elementos){					
+			
 			for (T e : elementos){
 				addElement(e);
 			}
