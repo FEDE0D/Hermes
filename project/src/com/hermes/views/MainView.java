@@ -530,4 +530,16 @@ public class MainView {
 	public JComboBox getComboBoxCategoria() {
 		return comboBox_2;
 	}
+	public JTextField getTextFieldHoraDesde() {
+		return textField;
+	}
+	public JTextField getTextFieldHoraHasta() {
+		return textField_1;
+	}
+	public JTextField getTextFieldFechaDesde() {
+		return textField_2;
+	}
+	public JTextField getTextFieldFechaHasta() {
+		return textField_3;
+	}
 }

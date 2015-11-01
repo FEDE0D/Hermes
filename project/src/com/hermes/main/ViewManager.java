@@ -85,7 +85,7 @@ public class ViewManager {
 		// LIST ETIQUETAS
 		mainView.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
 		// TABLA NOTIFICACIONES
-		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel());
+		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(new NotificacionDAO().getAll()));
 		mainView.getTableNotificaciones().removeColumn(mainView.getTableNotificaciones().getColumnModel().getColumn(5));
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
@@ -98,8 +98,7 @@ public class ViewManager {
 	
 	private class TableNotificacionesModel extends DefaultTableModel{
 		
-		public TableNotificacionesModel(){
-			List<Notificacion> notificaciones = new NotificacionDAO().getAll();
+		public TableNotificacionesModel(List<Notificacion> notificaciones){
 			Object[] columns = new String[] {"Fecha/Hora", "Paciente", "Contenido", "Contexto", "Etiquetas", "NotificacionObj"};
 			Object[][] data = new Object[notificaciones.size()][6];
 			for (int i= 0; i < notificaciones.size(); i++) {
