@@ -83,6 +83,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Component;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
+import java.awt.event.KeyAdapter;
 /**
  * @author federico
  *
@@ -263,6 +272,11 @@ public class MainView {
 		panel_13.add(scrollPane_2);
 		
 		list = new JList();
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		scrollPane_2.setViewportView(list);
 		list.setVisibleRowCount(5);
 		list.setModel(new AbstractListModel() {
@@ -303,6 +317,11 @@ public class MainView {
 		panel_8.add(lblNio);
 		
 		comboBox_3 = new JComboBox();
+		comboBox_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Luis", "Mariela", "Juan"}));
 		panel_8.add(comboBox_3);
 		
@@ -319,6 +338,11 @@ public class MainView {
 		panel_11.add(lblDesde);
 		
 		textField = new JTextField();
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		panel_11.add(textField);
 		textField.setColumns(10);
 		
@@ -326,6 +350,11 @@ public class MainView {
 		panel_11.add(lblHasta);
 		
 		textField_1 = new JTextField();
+		textField_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		panel_11.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -342,6 +371,11 @@ public class MainView {
 		panel_12.add(lblDesde_1);
 		
 		textField_2 = new JTextField();
+		textField_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		textField_2.setColumns(10);
 		panel_12.add(textField_2);
 		
@@ -349,6 +383,11 @@ public class MainView {
 		panel_12.add(lblHasta_1);
 		
 		textField_3 = new JTextField();
+		textField_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		textField_3.setColumns(10);
 		panel_12.add(textField_3);
 		
@@ -370,6 +409,11 @@ public class MainView {
 		panel_5.add(lblContenido);
 		
 		comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		panel_5.add(comboBox);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Entusiasmado", "Contento", "Alegre", "Molesto", "*"}));
 		
@@ -382,6 +426,11 @@ public class MainView {
 		panel_6.add(lblContexto);
 		
 		comboBox_1 = new JComboBox();
+		comboBox_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		panel_6.add(comboBox_1);
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"Pista", "Establo-Terapia", "Hogar", "*"}));
 		
@@ -394,6 +443,11 @@ public class MainView {
 		panel_7.add(lblCategoria);
 		
 		comboBox_2 = new JComboBox();
+		comboBox_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtroCambio();
+			}
+		});
 		panel_7.add(comboBox_2);
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"*", "Emociones", "<Predeterminada>"}));
 		
@@ -412,7 +466,9 @@ public class MainView {
 		btnClear.setAction(actionLimpiarFiltros);
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				System.out.println("Limpiar todos los filtros");
+				// TODO
+				System.out.println("TODO: Limpiar todos los filtros");
+				ViewManager.getInstance().filtroCambio();
 			}
 		});
 		btnClear.setHorizontalAlignment(SwingConstants.TRAILING);

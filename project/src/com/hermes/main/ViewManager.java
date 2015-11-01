@@ -112,6 +112,10 @@ public class ViewManager {
 		mainView.getComboBoxPaciente().setModel(new ComboBoxModel<Paciente>(pacientes));
 	}
 	
+	public void filtroCambio(){
+		System.out.println("Cambio el filtro!");
+	}
+	
 	private class TableNotificacionesModel extends DefaultTableModel{
 		
 		public TableNotificacionesModel(List<Notificacion> notificaciones){
