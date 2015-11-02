@@ -91,7 +91,7 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 	public List<Notificacion> filtrar(int idContenido, int idContexto, int idCategoria, int idPaciente, List idsEtiquetas){
 		String contenido="idContenido", contexto= "idContexto",categoria="idCategoria",paciente="idPaciente";
 		contenido+= (idContenido== 0) ? " > 0" : "= "+idContenido;
-		contexto+= (idContexto== 0) ? " > 0" : "= "+idContexto;
+		contexto+= (idContexto== 0) ? " > 0" : "= "+(idContexto+1);
 		categoria+= (idCategoria== 0) ? " > 0" : "= "+idCategoria;
 		paciente+= (idPaciente== 0) ? " > 0" : "= "+idPaciente;
 		
@@ -110,7 +110,7 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 									 + "LEFT join NotificacionEtiqueta as NE on(NE.idNotificacion = N.id )"
 									 + "LEFT join Etiqueta as E on(E.id = NE.idEtiqueta )"
 				+ "where "+consultaEtiquetas + contenido + " AND "+ contexto + " AND "+ categoria + " AND "+ paciente;
-//		System.out.println(sql);
+		System.out.println(sql);
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			ResultSet resultado= consulta.executeQuery(sql);

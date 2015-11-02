@@ -136,7 +136,7 @@ public class ViewManager {
 				data[i][0] = notificaciones.get(i).getDateReceived() +" "+ notificaciones.get(i).getTimeReceived();
 				data[i][1] = new PacienteDAO().getById(notificaciones.get(i).getIdPaciente());
 				data[i][2] = new ContenidoDAO().getById(notificaciones.get(i).getIdContenido());
-				data[i][3] = new ContenidoDAO().getById(notificaciones.get(i).getIdContexto());
+				data[i][3] = new ContextoDAO().getById(notificaciones.get(i).getIdContexto());
 				data[i][4] = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(notificaciones.get(i).getId());
 				data[i][5] = notificaciones.get(i);
 			}
