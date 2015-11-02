@@ -21,6 +21,7 @@ import com.hermes.dao.sqlite.NotificacionEtiquetaDAO;
 import com.hermes.model.Etiqueta;
 import com.hermes.model.Notificacion;
 import com.hermes.model.NotificacionEtiqueta;
+import javax.swing.ListSelectionModel;
 
 /**
  * @author federico
@@ -52,6 +53,7 @@ public class DialogEtiquetasNotificacion extends JDialog {
 			scrollPane_1 = new JScrollPane();
 			{
 				list_1 = new JList();
+				list_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				list_1.setModel(new AbstractListModel() {
 					String[] values = new String[] {"Charlar con padre", "Avance", "Etc1", "Etc2", "Etc3", "Etc4", "Etc5", "Etc6", "Etc7", "Etc8"};
 					public int getSize() {
@@ -116,6 +118,7 @@ public class DialogEtiquetasNotificacion extends JDialog {
 			scrollPane = new JScrollPane();
 			{
 				list = new JList();
+				list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				list.setModel(new AbstractListModel() {
 					String[] values = new String[] {"Importante"};
 					public int getSize() {

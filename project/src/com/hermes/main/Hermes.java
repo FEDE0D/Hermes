@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import com.hermes.utils.FileUtils;
 
@@ -50,11 +51,9 @@ public class Hermes {
 		
 		// Copiar el archivo de base de datos inicial, si no existe
 		File dbfile = new java.io.File(getDatabaseFilePath());
-		
-		System.out.println("ACORDARSE DE CAMBIAR ESTO!");
-//		if (!dbfile.exists()){
+		if (!dbfile.exists()){
 			FileUtils.copy("database/bbdd.db", getDatabaseFilePath());
-//		}
+		}
 		
 	}
 	
@@ -69,18 +68,10 @@ public class Hermes {
 		// SIMULAR LLEGADA DE NOTIFICACIONES
 		MessageReader reader = new MessageReader();
 		
+		reader.read(new InputStreamReader(Hermes.class.getResourceAsStream("/messages-test/hermes-message_01.json")));
+		reader.read(new InputStreamReader(Hermes.class.getResourceAsStream("/messages-test/hermes-message_02.json")));
+		reader.read(new InputStreamReader(Hermes.class.getResourceAsStream("/messages-test/hermes-message_03.json")));
 		
-		FileReader freader1 = new FileReader("res/messages-test/hermes-message_01.json");
-		FileReader freader2 = new FileReader("res/messages-test/hermes-message_02.json");
-		FileReader freader3 = new FileReader("res/messages-test/hermes-message_03.json");
-		
-		reader.read(freader1);
-		reader.read(freader2);
-		reader.read(freader3);
-		
-		freader1.close();
-		freader2.close();
-		freader3.close();
 	}
 
 }

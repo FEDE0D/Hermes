@@ -44,7 +44,7 @@ public class MessageReader {
 					break;
 				}
 			}
-					
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {

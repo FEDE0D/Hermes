@@ -103,14 +103,14 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 			else consultaEtiquetas+=") AND ";
 			//System.out.println(idsEtiquetas.get(i));
 		}
-		System.out.println(consultaEtiquetas);
+//		System.out.println(consultaEtiquetas);
 		String sql= "select  N.id,  N.idDevice, N.idContenido, N.idContexto, N.idPaciente, date,time, dateReceived, timeReceived, visto"
 				+ " from Notificacion as N "
 									 + "LEFT join Contenido as C on(N.idContenido = C.id)"
 									 + "LEFT join NotificacionEtiqueta as NE on(NE.idNotificacion = N.id )"
 									 + "LEFT join Etiqueta as E on(E.id = NE.idEtiqueta )"
 				+ "where "+consultaEtiquetas + contenido + " AND "+ contexto + " AND "+ categoria + " AND "+ paciente;
-		System.out.println(sql);
+//		System.out.println(sql);
 		try {
 			Statement consulta = this.conexion.getEnlace().createStatement();
 			ResultSet resultado= consulta.executeQuery(sql);
