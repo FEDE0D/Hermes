@@ -113,7 +113,18 @@ public class ViewManager {
 	}
 	
 	public void filtroCambio(){
-		System.out.println("Cambio el filtro!");
+		int id_categoria= mainView.getComboBoxCategoria().getSelectedIndex();
+		int id_contexto= mainView.getComboBoxContexto().getSelectedIndex();
+		int id_paciente= mainView.getComboBoxPaciente().getSelectedIndex();
+		int id_contenido= mainView.getComboBoxContenido().getSelectedIndex();
+		 List id_etiquetas = mainView.getListEtiquetas().getSelectedValuesList();
+		System.out.println("Cambio el filtro!" +  mainView.getListEtiquetas().getSelectedValuesList());
+		
+		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas)));
+		mainView.getTableNotificaciones().removeColumn(mainView.getTableNotificaciones().getColumnModel().getColumn(5));
+		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		//System.out.println("Cambio el filtro!" + id_etiquetas.length);
 	}
 	
 	private class TableNotificacionesModel extends DefaultTableModel{

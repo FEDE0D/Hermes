@@ -25,7 +25,7 @@ public class GenericDAO<T> implements IGenericDAO<T>{
 	public List<T> getAll(){
 		return this.getAll("id");
 	}
-	
+
 	public List<T> getAll(String sortColumn){
 		String sql= "select * from "+ this.getNameClass()+" ORDER BY "+sortColumn;
 		try {

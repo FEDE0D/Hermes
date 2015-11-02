@@ -467,8 +467,8 @@ public class MainView {
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				// TODO
-				System.out.println("TODO: Limpiar todos los filtros");
-				ViewManager.getInstance().filtroCambio();
+				//System.out.println("TODO: Limpiar todos los filtros");
+				ViewManager.getInstance().update();
 			}
 		});
 		btnClear.setHorizontalAlignment(SwingConstants.TRAILING);
