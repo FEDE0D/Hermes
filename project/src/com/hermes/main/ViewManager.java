@@ -1,5 +1,6 @@
 package com.hermes.main;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,13 +82,17 @@ public class ViewManager {
 	 * Refresca la vista del monitor.
 	 * <br>
 	 * Se vuelve a cargar desde la bbdd los datos y se pide a los componentes que se dibujen.
+	 * FIXME Por el momento se esta usando para setear el filtro por defecto (sin filtros), en lugar de usarse para refrescar la vista de acuerdo a los filtros seleccionados.
 	 */
 	public void update(){
 		// LIST ETIQUETAS
 		mainView.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
 		// TABLA NOTIFICACIONES
 		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(new NotificacionDAO().getAll()));
-		mainView.getTableNotificaciones().removeColumn(mainView.getTableNotificaciones().getColumnModel().getColumn(5));
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMinWidth(0);
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMaxWidth(0);
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setResizable(false);
+		
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		// COMBOBOXs FILTROS
@@ -110,21 +115,31 @@ public class ViewManager {
 		pacientes.add(new Paciente(0, "Todos", "", '*'));
 		pacientes.addAll(new PacienteDAO().getAll());
 		mainView.getComboBoxPaciente().setModel(new ComboBoxModel<Paciente>(pacientes));
+		
+		mainView.getTextFieldFechaDesde().setText("");;
+		mainView.getTextFieldFechaHasta().setText("");
+		mainView.getTextFieldHoraDesde().setText("");
+		mainView.getTextFieldHoraHasta().setText("");
 	}
 	
 	public void filtroCambio(){
-		int id_categoria= mainView.getComboBoxCategoria().getSelectedIndex();
-		int id_contexto= mainView.getComboBoxContexto().getSelectedIndex();
-		int id_paciente= mainView.getComboBoxPaciente().getSelectedIndex();
-		int id_contenido= mainView.getComboBoxContenido().getSelectedIndex();
-		List id_etiquetas = mainView.getListEtiquetas().getSelectedValuesList();
-//		System.out.println("Cambio el filtro!" +  mainView.getListEtiquetas().getSelectedValuesList());
+		long id_paciente = ((Paciente) mainView.getComboBoxPaciente().getSelectedItem()).getId();
+		long id_contenido = ((Contenido) mainView.getComboBoxContenido().getSelectedItem()).getId();
+		long id_categoria = ((Categoria) mainView.getComboBoxCategoria().getSelectedItem()).getId();
+		long id_contexto = ((Contexto) mainView.getComboBoxContexto().getSelectedItem()).getId();
+		List<Long> id_etiquetas = new ArrayList<Long>(); for (Object e : mainView.getListEtiquetas().getSelectedValuesList()) id_etiquetas.add(((Etiqueta) e).getId());
+		String dateFrom = mainView.getTextFieldFechaDesde().getText();
+		String dateTo = mainView.getTextFieldFechaHasta().getText();
+		String timeFrom = mainView.getTextFieldHoraDesde().getText();
+		String timeTo = mainView.getTextFieldHoraHasta().getText();
 		
-		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas)));
-		mainView.getTableNotificaciones().removeColumn(mainView.getTableNotificaciones().getColumnModel().getColumn(5));
+		List<Notificacion> filtro = new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas, dateFrom, dateTo, timeFrom, timeTo);
+		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(filtro));
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMinWidth(0);
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMaxWidth(0);
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setResizable(false);
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
-		//System.out.println("Cambio el filtro!" + id_etiquetas.length);
 	}
 	
 	private class TableNotificacionesModel extends DefaultTableModel{
