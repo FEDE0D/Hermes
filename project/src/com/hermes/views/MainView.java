@@ -92,6 +92,7 @@ import java.awt.event.InputMethodEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.KeyAdapter;
+import javax.swing.JSeparator;
 /**
  * @author federico
  *
@@ -157,6 +158,25 @@ public class MainView {
 		mntmSalir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
 		mnMenu.add(mntmSalir);
 		
+		JMenu mnAyuda = new JMenu("Ayuda");
+		menuBar.add(mnAyuda);
+		
+		JMenuItem mntmAyuda = new JMenuItem("Ayuda");
+		mnAyuda.add(mntmAyuda);
+		
+		JSeparator separator = new JSeparator();
+		mnAyuda.add(separator);
+		
+		JMenuItem mntmSobreHermes = new JMenuItem("Sobre Hermes");
+		mntmSobreHermes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AcercaDeView ad = new AcercaDeView();
+				ad.setLocationRelativeTo(null);
+				ad.setVisible(true);
+			}
+		});
+		mnAyuda.add(mntmSobreHermes);
+		
 		JPanel panel_14 = new JPanel();
 		frmHermesVMonitor.getContentPane().add(panel_14, BorderLayout.CENTER);
 		panel_14.setLayout(new BorderLayout(0, 0));
@@ -178,7 +198,7 @@ public class MainView {
 		panelUsuario.add(lblIcon);
 		lblIcon.setIcon(new ImageIcon(MainView.class.getResource("/icons/usuario_64.png")));
 		
-		JLabel lblName = new JLabel("Federico Pacheco");
+		JLabel lblName = new JLabel("Nombre Apellido");
 		panelUsuario.add(lblName);
 		
 		JPanel panel_2 = new JPanel();
