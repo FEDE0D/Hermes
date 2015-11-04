@@ -46,7 +46,7 @@ public class ViewManager {
 	}
 	
 	public void startMainView() {
-		update();
+		clear();
 		mainView.showView();
 	}
 	
@@ -55,7 +55,7 @@ public class ViewManager {
 		de.update();
 		de.setLocationRelativeTo(null);
 		de.setVisible(true);
-		update();
+		filtro();
 	}
 	
 	public void startDialogEtiquetasNotificacion(Notificacion n){
@@ -63,7 +63,7 @@ public class ViewManager {
 		den.update();
 		den.setLocationRelativeTo(null);
 		den.setVisible(true);
-		update();
+		filtro();
 	}
 	
 	
@@ -75,7 +75,7 @@ public class ViewManager {
 		new NotificacionDAO().guardar(n);
 		
 		// UPDATE VIEW
-		update();
+		filtro();
 	}
 	
 	/**
@@ -84,7 +84,28 @@ public class ViewManager {
 	 * Se vuelve a cargar desde la bbdd los datos y se pide a los componentes que se dibujen.
 	 * FIXME Por el momento se esta usando para setear el filtro por defecto (sin filtros), en lugar de usarse para refrescar la vista de acuerdo a los filtros seleccionados.
 	 */
-	public void update(){
+	public void filtro(){
+		long id_paciente = ((Paciente) mainView.getComboBoxPaciente().getSelectedItem()).getId();
+		long id_contenido = ((Contenido) mainView.getComboBoxContenido().getSelectedItem()).getId();
+		long id_categoria = ((Categoria) mainView.getComboBoxCategoria().getSelectedItem()).getId();
+		long id_contexto = ((Contexto) mainView.getComboBoxContexto().getSelectedItem()).getId();
+		List<Long> id_etiquetas = new ArrayList<Long>(); for (Object e : mainView.getListEtiquetas().getSelectedValuesList()) id_etiquetas.add(((Etiqueta) e).getId());
+		String dateFrom = mainView.getTextFieldFechaDesde().getText();
+		String dateTo = mainView.getTextFieldFechaHasta().getText();
+		String timeFrom = mainView.getTextFieldHoraDesde().getText();
+		String timeTo = mainView.getTextFieldHoraHasta().getText();
+		
+		List<Notificacion> filtro = new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas, dateFrom, dateTo, timeFrom, timeTo);
+		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(filtro));
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMinWidth(0);
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMaxWidth(0);
+		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setResizable(false);
+		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		
+	}
+	
+	public void clear(){
 		// LIST ETIQUETAS
 		mainView.getListEtiquetas().setListData(new EtiquetaDAO().getAll().toArray());
 		// TABLA NOTIFICACIONES
@@ -122,24 +143,8 @@ public class ViewManager {
 		mainView.getTextFieldHoraHasta().setText("");
 	}
 	
-	public void filtroCambio(){
-		long id_paciente = ((Paciente) mainView.getComboBoxPaciente().getSelectedItem()).getId();
-		long id_contenido = ((Contenido) mainView.getComboBoxContenido().getSelectedItem()).getId();
-		long id_categoria = ((Categoria) mainView.getComboBoxCategoria().getSelectedItem()).getId();
-		long id_contexto = ((Contexto) mainView.getComboBoxContexto().getSelectedItem()).getId();
-		List<Long> id_etiquetas = new ArrayList<Long>(); for (Object e : mainView.getListEtiquetas().getSelectedValuesList()) id_etiquetas.add(((Etiqueta) e).getId());
-		String dateFrom = mainView.getTextFieldFechaDesde().getText();
-		String dateTo = mainView.getTextFieldFechaHasta().getText();
-		String timeFrom = mainView.getTextFieldHoraDesde().getText();
-		String timeTo = mainView.getTextFieldHoraHasta().getText();
+	public void updateFiltros(){
 		
-		List<Notificacion> filtro = new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas, dateFrom, dateTo, timeFrom, timeTo);
-		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(filtro));
-		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMinWidth(0);
-		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMaxWidth(0);
-		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setResizable(false);
-		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
-		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
 	}
 	
 	private class TableNotificacionesModel extends DefaultTableModel{

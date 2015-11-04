@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.sqlite.util.StringUtils;
 
 import com.hermes.dao.Conexion;
@@ -103,8 +105,27 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 				+ "			AND idCategoria" +	((idCategoria == 0)?" > 0":(" = "+idCategoria))
 				+ "			AND idPaciente" +	((idPaciente == 0)? " > 0":(" = "+idPaciente));
 		
+		if ((dateFrom != null && !dateFrom.isEmpty()) || (dateTo != null && !dateTo.isEmpty())){
+			try{
+				Date.valueOf(dateFrom);
+				Date.valueOf(dateTo);
+			}catch(Exception e){
+				JOptionPane.showMessageDialog(null, "La fecha ingresada no es válida");
+				return listado;
+			}
+		}
 		if (dateFrom != null && dateTo != null && !dateFrom.trim().isEmpty() && !dateTo.trim().isEmpty())
 			sql += "		AND dateReceived BETWEEN \""+ dateFrom + "\" AND \""+ dateTo +"\" ";
+		
+		if ((timeFrom != null && !timeFrom.isEmpty()) || (timeTo != null && !timeTo.isEmpty())){
+			try{
+				Time.valueOf(timeFrom);
+				Time.valueOf(timeTo);
+			}catch(Exception e){
+				JOptionPane.showMessageDialog(null, "La hora ingresada no es válida");
+				return listado;
+			}
+		}
 		if (timeFrom != null && timeTo != null && !timeFrom.trim().isEmpty() && !timeTo.trim().isEmpty())
 			sql += "		AND timeReceived BETWEEN \""+ timeFrom + "\" AND \""+ timeTo +"\" ";
 		

@@ -1,98 +1,54 @@
 package com.hermes.views;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JToolBar;
-
 import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.BoxLayout;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JScrollPane;
-
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Insets;
-
-import javax.swing.ImageIcon;
-
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.CardLayout;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JPopupMenu;
-import javax.swing.JMenuItem;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.border.CompoundBorder;
-
-import java.awt.GridBagLayout;
-
-import javax.swing.JComboBox;
-
 import java.awt.GridBagConstraints;
-
-import com.hermes.dao.sqlite.ContextoDAO;
-import com.hermes.dao.sqlite.NotificacionDAO;
-import com.hermes.dao.sqlite.PacienteDAO;
-import com.hermes.main.ViewManager;
-import com.hermes.model.Contexto;
-import com.hermes.model.Etiqueta;
-import com.hermes.model.Notificacion;
-import com.hermes.model.Paciente;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JDesktopPane;
-import javax.swing.JOptionPane;
-import javax.swing.JSplitPane;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.KeyStroke;
-
-import java.awt.event.KeyEvent;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
-import java.awt.Dialog.ModalExclusionType;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.Component;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.awt.event.KeyAdapter;
+
+import javax.swing.AbstractAction;
+import javax.swing.AbstractListModel;
+import javax.swing.Action;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
+import com.hermes.main.ViewManager;
+import com.hermes.model.Notificacion;
 /**
  * @author federico
  *
@@ -294,7 +250,7 @@ public class MainView {
 		list = new JList();
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		scrollPane_2.setViewportView(list);
@@ -339,7 +295,7 @@ public class MainView {
 		comboBox_3 = new JComboBox();
 		comboBox_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Luis", "Mariela", "Juan"}));
@@ -360,7 +316,7 @@ public class MainView {
 		textField = new JTextField();
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		panel_11.add(textField);
@@ -372,7 +328,7 @@ public class MainView {
 		textField_1 = new JTextField();
 		textField_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		panel_11.add(textField_1);
@@ -393,7 +349,7 @@ public class MainView {
 		textField_2 = new JTextField();
 		textField_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		textField_2.setColumns(10);
@@ -405,7 +361,7 @@ public class MainView {
 		textField_3 = new JTextField();
 		textField_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		textField_3.setColumns(10);
@@ -431,7 +387,7 @@ public class MainView {
 		comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		panel_5.add(comboBox);
@@ -448,7 +404,7 @@ public class MainView {
 		comboBox_1 = new JComboBox();
 		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		panel_6.add(comboBox_1);
@@ -465,7 +421,7 @@ public class MainView {
 		comboBox_2 = new JComboBox();
 		comboBox_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().filtroCambio();
+				ViewManager.getInstance().updateFiltros();
 			}
 		});
 		panel_7.add(comboBox_2);
@@ -480,7 +436,6 @@ public class MainView {
 		gbc_panel_16.gridx = 1;
 		gbc_panel_16.gridy = 1;
 		panel_10.add(panel_16, gbc_panel_16);
-		panel_16.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnClear = new JButton("Clear");
 		btnClear.setAction(actionLimpiarFiltros);
@@ -488,11 +443,20 @@ public class MainView {
 			public void actionPerformed(ActionEvent ev) {
 				// TODO
 				//System.out.println("TODO: Limpiar todos los filtros");
-				ViewManager.getInstance().update();
+				ViewManager.getInstance().clear();
 			}
 		});
+		panel_16.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+		
+		JButton btnFiltrar = new JButton("Filtrar");
+		btnFiltrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewManager.getInstance().filtro();
+			}
+		});
+		panel_16.add(btnFiltrar);
 		btnClear.setHorizontalAlignment(SwingConstants.TRAILING);
-		panel_16.add(btnClear, BorderLayout.EAST);
+		panel_16.add(btnClear);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
