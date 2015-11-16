@@ -27,6 +27,7 @@ enum ABM_TYPE {ALTA, BAJA, MODIFICACION}
 public class MessageReader {
 
 	public void read(Reader reader){
+		System.out.println(Thread.currentThread());
 		JSONParser jparser = new JSONParser();
 		try {
 			JSONObject root = (JSONObject) jparser.parse(reader);

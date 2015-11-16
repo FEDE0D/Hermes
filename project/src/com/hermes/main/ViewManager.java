@@ -85,23 +85,27 @@ public class ViewManager {
 	 * FIXME Por el momento se esta usando para setear el filtro por defecto (sin filtros), en lugar de usarse para refrescar la vista de acuerdo a los filtros seleccionados.
 	 */
 	public void filtro(){
-		long id_paciente = ((Paciente) mainView.getComboBoxPaciente().getSelectedItem()).getId();
-		long id_contenido = ((Contenido) mainView.getComboBoxContenido().getSelectedItem()).getId();
-		long id_categoria = ((Categoria) mainView.getComboBoxCategoria().getSelectedItem()).getId();
-		long id_contexto = ((Contexto) mainView.getComboBoxContexto().getSelectedItem()).getId();
-		List<Long> id_etiquetas = new ArrayList<Long>(); for (Object e : mainView.getListEtiquetas().getSelectedValuesList()) id_etiquetas.add(((Etiqueta) e).getId());
-		String dateFrom = mainView.getTextFieldFechaDesde().getText();
-		String dateTo = mainView.getTextFieldFechaHasta().getText();
-		String timeFrom = mainView.getTextFieldHoraDesde().getText();
-		String timeTo = mainView.getTextFieldHoraHasta().getText();
-		
-		List<Notificacion> filtro = new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas, dateFrom, dateTo, timeFrom, timeTo);
-		mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(filtro));
-		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMinWidth(0);
-		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMaxWidth(0);
-		mainView.getTableNotificaciones().getColumnModel().getColumn(5).setResizable(false);
-		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
-		mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		try{
+			long id_paciente = ((Paciente) mainView.getComboBoxPaciente().getSelectedItem()).getId();
+			long id_contenido = ((Contenido) mainView.getComboBoxContenido().getSelectedItem()).getId();
+			long id_categoria = ((Categoria) mainView.getComboBoxCategoria().getSelectedItem()).getId();
+			long id_contexto = ((Contexto) mainView.getComboBoxContexto().getSelectedItem()).getId();
+			List<Long> id_etiquetas = new ArrayList<Long>(); for (Object e : mainView.getListEtiquetas().getSelectedValuesList()) id_etiquetas.add(((Etiqueta) e).getId());
+			String dateFrom = mainView.getTextFieldFechaDesde().getText();
+			String dateTo = mainView.getTextFieldFechaHasta().getText();
+			String timeFrom = mainView.getTextFieldHoraDesde().getText();
+			String timeTo = mainView.getTextFieldHoraHasta().getText();
+			
+			List<Notificacion> filtro = new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas, dateFrom, dateTo, timeFrom, timeTo);
+			mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(filtro));
+			mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMinWidth(0);
+			mainView.getTableNotificaciones().getColumnModel().getColumn(5).setMaxWidth(0);
+			mainView.getTableNotificaciones().getColumnModel().getColumn(5).setResizable(false);
+			mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+			mainView.getTableNotificaciones().getRowSorter().toggleSortOrder(0);
+		} catch(Exception e) {
+			// POR ALGUNA RAZON TIRA ArrayOutOfBounds para acceder a la columa 5 de la table notificaciones (es la que guarda el objeto)
+		}
 		
 	}
 	
