@@ -87,6 +87,7 @@ public class ViewManager {
 			filtro();
 		}
 		showNotificationMessage();
+		ViewManager.playSndNotification();
 	}
 	
 	private void showNotificationMessage(){
@@ -94,7 +95,6 @@ public class ViewManager {
 			String message = "Hay ("+notificaciones_sin_mostrar+") notificaciones nuevas.";
 			mainView.getLblNotificacion().setText(message);
 			mainView.getLblNotificacion().setForeground(Color.RED);
-			ViewManager.playSndNotification();
 		}else{
 			String message = "No hay notificaciones nuevas.";
 			mainView.getLblNotificacion().setText(message);
