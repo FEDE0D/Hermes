@@ -49,11 +49,21 @@ import javax.swing.table.DefaultTableModel;
 
 import com.hermes.main.ViewManager;
 import com.hermes.model.Notificacion;
+
 import java.awt.Color;
+
 import javax.swing.UIManager;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.SystemColor;
 import java.awt.Font;
+
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
 /**
  * @author federico
  *
@@ -62,10 +72,6 @@ public class MainView {
 
 	private JFrame frmHermesVMonitor;
 	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
 	private final Action actionFiltrosAvanzados = new SwingAction();
 	private JToolBar toolBar_1;
 	private final Action actionSalir = new SwingAction_1();
@@ -78,6 +84,8 @@ public class MainView {
 	private JComboBox comboBox_2;
 	private JLabel lblNotificacion;
 	private JButton btnMore;
+	private JSpinner spinner;
+	private JSpinner spinner_1;
 
 	/**
 	 * 
@@ -320,66 +328,32 @@ public class MainView {
 		flowLayout_4.setAlignment(FlowLayout.LEFT);
 		panel_9.add(panel_11);
 		
-		JLabel lblHora = new JLabel("");
-		lblHora.setIcon(new ImageIcon(MainView.class.getResource("/icons/time_16.png")));
-		panel_11.add(lblHora);
+		JLabel lblFecha = new JLabel("");
+		panel_11.add(lblFecha);
+		lblFecha.setIcon(new ImageIcon(MainView.class.getResource("/icons/date_16.png")));
 		
-		JLabel lblDesde = new JLabel("desde:");
-		panel_11.add(lblDesde);
+		JLabel lblDesde_1 = new JLabel("desde:");
+		panel_11.add(lblDesde_1);
 		
-		textField = new JTextField();
-		textField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().updateFiltros();
-			}
-		});
-		panel_11.add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblHasta = new JLabel("hasta:");
-		panel_11.add(lblHasta);
-		
-		textField_1 = new JTextField();
-		textField_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().updateFiltros();
-			}
-		});
-		panel_11.add(textField_1);
-		textField_1.setColumns(10);
+		spinner = new JSpinner();
+		spinner.setModel(new SpinnerDateModel(new Date(1420081200000L), null, null, Calendar.DAY_OF_YEAR));
+		panel_11.add(spinner);
 		
 		JPanel panel_12 = new JPanel();
 		FlowLayout flowLayout_5 = (FlowLayout) panel_12.getLayout();
 		flowLayout_5.setAlignment(FlowLayout.LEFT);
 		panel_9.add(panel_12);
 		
-		JLabel lblFecha = new JLabel("");
-		lblFecha.setIcon(new ImageIcon(MainView.class.getResource("/icons/date_16.png")));
-		panel_12.add(lblFecha);
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(MainView.class.getResource("/icons/date_16.png")));
+		panel_12.add(label);
 		
-		JLabel lblDesde_1 = new JLabel("desde:");
-		panel_12.add(lblDesde_1);
-		
-		textField_2 = new JTextField();
-		textField_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().updateFiltros();
-			}
-		});
-		textField_2.setColumns(10);
-		panel_12.add(textField_2);
-		
-		JLabel lblHasta_1 = new JLabel("hasta:");
+		JLabel lblHasta_1 = new JLabel("hasta: ");
 		panel_12.add(lblHasta_1);
 		
-		textField_3 = new JTextField();
-		textField_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ViewManager.getInstance().updateFiltros();
-			}
-		});
-		textField_3.setColumns(10);
-		panel_12.add(textField_3);
+		spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerDateModel(new Date(4133905200000L), null, null, Calendar.DAY_OF_YEAR));
+		panel_12.add(spinner_1);
 		
 		JPanel panel_4 = new JPanel();
 		GridBagConstraints gbc_panel_4 = new GridBagConstraints();
@@ -572,22 +546,37 @@ public class MainView {
 	public JComboBox getComboBoxCategoria() {
 		return comboBox_2;
 	}
-	public JTextField getTextFieldHoraDesde() {
-		return textField;
-	}
-	public JTextField getTextFieldHoraHasta() {
-		return textField_1;
-	}
-	public JTextField getTextFieldFechaDesde() {
-		return textField_2;
-	}
-	public JTextField getTextFieldFechaHasta() {
-		return textField_3;
-	}
 	public JLabel getLblNotificacion() {
 		return lblNotificacion;
 	}
 	public JButton getBtnMore() {
 		return btnMore;
 	}
+	public JSpinner getFromSpinner() {
+		return spinner;
+	}
+	public JSpinner getToSpinner() {
+		return spinner_1;
+	}
+	
+	public String getDateFrom(){
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		return sdf.format(getFromSpinner().getValue());
+	}
+	
+	public String getDateTo(){
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+		return sdf.format(getToSpinner().getValue());
+	}
+	
+	public String getTimeFrom(){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		return sdf.format(getFromSpinner().getValue());
+	}
+	
+	public String getTimeTo(){
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		return sdf.format(getToSpinner().getValue());
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.hermes.main;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -114,10 +115,10 @@ public class ViewManager {
 			long id_categoria = ((Categoria) mainView.getComboBoxCategoria().getSelectedItem()).getId();
 			long id_contexto = ((Contexto) mainView.getComboBoxContexto().getSelectedItem()).getId();
 			List<Long> id_etiquetas = new ArrayList<Long>(); for (Object e : mainView.getListEtiquetas().getSelectedValuesList()) id_etiquetas.add(((Etiqueta) e).getId());
-			String dateFrom = mainView.getTextFieldFechaDesde().getText();
-			String dateTo = mainView.getTextFieldFechaHasta().getText();
-			String timeFrom = mainView.getTextFieldHoraDesde().getText();
-			String timeTo = mainView.getTextFieldHoraHasta().getText();
+			String dateFrom = mainView.getDateFrom();
+			String dateTo = mainView.getDateTo();
+			String timeFrom = mainView.getTimeFrom();
+			String timeTo = mainView.getTimeTo();
 			
 			List<Notificacion> filtro = new NotificacionDAO().filtrar(id_contenido, id_contexto, id_categoria,id_paciente, id_etiquetas, dateFrom, dateTo, timeFrom, timeTo);
 			mainView.getTableNotificaciones().setModel(new TableNotificacionesModel(filtro));
@@ -174,10 +175,14 @@ public class ViewManager {
 		pacientes.addAll(new PacienteDAO().getAll());
 		mainView.getComboBoxPaciente().setModel(new ComboBoxModel<Paciente>(pacientes));
 		
-		mainView.getTextFieldFechaDesde().setText("");;
-		mainView.getTextFieldFechaHasta().setText("");
-		mainView.getTextFieldHoraDesde().setText("");
-		mainView.getTextFieldHoraHasta().setText("");
+		
+		Calendar calendar = Calendar.getInstance();
+		mainView.getToSpinner().setValue(calendar.getTime());
+		calendar.set(Calendar.DAY_OF_YEAR, 1);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		mainView.getFromSpinner().setValue(calendar.getTime());
 		
 		notificaciones_sin_mostrar = 0;
 		showNotificationMessage();
