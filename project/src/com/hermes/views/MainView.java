@@ -49,6 +49,11 @@ import javax.swing.table.DefaultTableModel;
 
 import com.hermes.main.ViewManager;
 import com.hermes.model.Notificacion;
+import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.SystemColor;
+import java.awt.Font;
 /**
  * @author federico
  *
@@ -56,7 +61,6 @@ import com.hermes.model.Notificacion;
 public class MainView {
 
 	private JFrame frmHermesVMonitor;
-	private JTextField txtBuscar;
 	private JTable table;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -72,6 +76,8 @@ public class MainView {
 	private JComboBox comboBox;
 	private JComboBox comboBox_1;
 	private JComboBox comboBox_2;
+	private JLabel lblNotificacion;
+	private JButton btnMore;
 
 	/**
 	 * 
@@ -161,44 +167,52 @@ public class MainView {
 		panel_2.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		panel_1.add(panel_2, BorderLayout.CENTER);
 		
-		txtBuscar = new JTextField();
-		txtBuscar.setHorizontalAlignment(SwingConstants.LEFT);
-		txtBuscar.setToolTipText("Busca por palabras");
-		txtBuscar.setColumns(30);
-		
-		JLabel lblFiltros = new JLabel("Filtros");
-		
-		JButton btnMore = new JButton("mas filtros");
+		btnMore = new JButton("mas filtros");
+		btnMore.setForeground(UIManager.getColor("Button.foreground"));
+		btnMore.setBackground(UIManager.getColor("Button.background"));
 		btnMore.setAction(actionFiltrosAvanzados);
 		btnMore.setMargin(new Insets(2, 4, 2, 4));
 		btnMore.setHorizontalTextPosition(SwingConstants.LEFT);
 		btnMore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				getFiltrosAvanzados().setVisible(!getFiltrosAvanzados().isVisible());
+				if (getFiltrosAvanzados().isVisible()){
+					ViewManager.getInstance().clear();
+					ViewManager.getInstance().hideFilters();
+					getBtnMore().setIcon(new ImageIcon(MainView.class.getResource("/icons/more_16.png")));
+				}else{
+					ViewManager.getInstance().showFilters();
+					getBtnMore().setIcon(new ImageIcon(MainView.class.getResource("/icons/less_16.png")));
+				}
 			}
 		});
 		btnMore.setIcon(new ImageIcon(MainView.class.getResource("/icons/more_16.png")));
+		
+		JLabel lblNotifications = new JLabel("Notificaciones");
+		
+		lblNotificacion = new JLabel("No hay nuevas notificaciones.");
+		lblNotificacion.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblNotificacion.setForeground(UIManager.getColor("Label.foreground"));
+		lblNotificacion.setBackground(new Color(128, 0, 0));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblFiltros)
-						.addComponent(txtBuscar, GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+						.addComponent(lblNotifications)
+						.addComponent(lblNotificacion, GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
 						.addComponent(btnMore, Alignment.TRAILING))
 					.addContainerGap())
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGap(4)
-					.addComponent(lblFiltros)
-					.addGap(4)
-					.addComponent(txtBuscar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(4)
+					.addComponent(lblNotifications)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNotificacion)
+					.addPreferredGap(ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
 					.addComponent(btnMore, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(24, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_panel_2.setAutoCreateGaps(true);
 		gl_panel_2.setAutoCreateContainerGaps(true);
@@ -436,16 +450,6 @@ public class MainView {
 		gbc_panel_16.gridx = 1;
 		gbc_panel_16.gridy = 1;
 		panel_10.add(panel_16, gbc_panel_16);
-		
-		JButton btnClear = new JButton("Clear");
-		btnClear.setAction(actionLimpiarFiltros);
-		btnClear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ev) {
-				// TODO
-				//System.out.println("TODO: Limpiar todos los filtros");
-				ViewManager.getInstance().clear();
-			}
-		});
 		panel_16.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 		
 		JButton btnFiltrar = new JButton("Filtrar");
@@ -455,8 +459,6 @@ public class MainView {
 			}
 		});
 		panel_16.add(btnFiltrar);
-		btnClear.setHorizontalAlignment(SwingConstants.TRAILING);
-		panel_16.add(btnClear);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
@@ -581,5 +583,11 @@ public class MainView {
 	}
 	public JTextField getTextFieldFechaHasta() {
 		return textField_3;
+	}
+	public JLabel getLblNotificacion() {
+		return lblNotificacion;
+	}
+	public JButton getBtnMore() {
+		return btnMore;
 	}
 }

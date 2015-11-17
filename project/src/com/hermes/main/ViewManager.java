@@ -1,11 +1,15 @@
 package com.hermes.main;
 
-import java.sql.Date;
+import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import com.hermes.dao.sqlite.CategoriaDAO;
 import com.hermes.dao.sqlite.ContenidoDAO;
@@ -34,6 +38,7 @@ public class ViewManager {
 
 	private static ViewManager _instance;
 	private MainView mainView;
+	private int notificaciones_sin_mostrar = 0;
 	
 	private ViewManager(){
 		mainView = new MainView();
@@ -75,14 +80,32 @@ public class ViewManager {
 		new NotificacionDAO().guardar(n);
 		
 		// UPDATE VIEW
-		filtro();
+		if (mainView.getFiltrosAvanzados().isVisible()){
+			notificaciones_sin_mostrar++;
+		} else {
+			notificaciones_sin_mostrar = 0;
+			filtro();
+		}
+		showNotificationMessage();
+	}
+	
+	private void showNotificationMessage(){
+		if (notificaciones_sin_mostrar > 0){
+			String message = "Hay ("+notificaciones_sin_mostrar+") notificaciones nuevas.";
+			mainView.getLblNotificacion().setText(message);
+			mainView.getLblNotificacion().setForeground(Color.RED);
+			ViewManager.playSndNotification();
+		}else{
+			String message = "No hay notificaciones nuevas.";
+			mainView.getLblNotificacion().setText(message);
+			mainView.getLblNotificacion().setForeground(Color.BLACK);
+		}
 	}
 	
 	/**
 	 * Refresca la vista del monitor.
 	 * <br>
 	 * Se vuelve a cargar desde la bbdd los datos y se pide a los componentes que se dibujen.
-	 * FIXME Por el momento se esta usando para setear el filtro por defecto (sin filtros), en lugar de usarse para refrescar la vista de acuerdo a los filtros seleccionados.
 	 */
 	public void filtro(){
 		try{
@@ -108,6 +131,16 @@ public class ViewManager {
 		}
 		
 	}
+	
+	public void hideFilters() {
+		this.mainView.getFiltrosAvanzados().setVisible(false);
+	}
+	
+	public void showFilters(){
+		this.mainView.getFiltrosAvanzados().setVisible(true);
+	}
+	
+	
 	
 	public void clear(){
 		// LIST ETIQUETAS
@@ -145,6 +178,9 @@ public class ViewManager {
 		mainView.getTextFieldFechaHasta().setText("");
 		mainView.getTextFieldHoraDesde().setText("");
 		mainView.getTextFieldHoraHasta().setText("");
+		
+		notificaciones_sin_mostrar = 0;
+		showNotificationMessage();
 	}
 	
 	public void updateFiltros(){
@@ -186,6 +222,15 @@ public class ViewManager {
 			}
 		}
 		
+	}
+	
+	private static void playSndNotification(){
+		try {
+			AudioStream stream = new AudioStream(ViewManager.class.getResourceAsStream("/sounds/notification.wav"));
+			AudioPlayer.player.start(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
