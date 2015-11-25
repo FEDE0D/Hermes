@@ -85,7 +85,9 @@ public class ViewManager {
 			notificaciones_sin_mostrar++;
 		} else {
 			notificaciones_sin_mostrar = 0;
-			filtro();
+//			filtro();
+			ViewManager.getInstance().clear();
+			ViewManager.getInstance().hideFilters();
 		}
 		showNotificationMessage();
 		ViewManager.playSndNotification();
