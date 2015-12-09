@@ -1,9 +1,13 @@
 package com.grupo03.hermes;
 
+import android.database.Cursor;
 import android.database.DataSetObserver;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,9 +16,13 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,42 +33,38 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        try {
+            ImageView imageView = (ImageView) findViewById(R.id.cedicaLogoView);
+            InputStream is = getAssets().open("cedica.png");
+            imageView.setImageDrawable(Drawable.createFromStream(is, null));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        Database database = new Database(getApplicationContext());
+        final Cursor alumnos = database.getAlumnos();
 
         final ListView listView = (ListView) findViewById(R.id.listView);
-        String[] datos = new String[]{
-                "Juan Perez",
-                "Francisco Hormiga",
-                "Pedrito Lomas",
-                "Juan Perez",
-                "Francisco Hormiga",
-                "Pedrito Lomas",
-                "Juan Perez",
-                "Francisco Hormiga",
-                "Pedrito Lomas",
-                "Juan Perez",
-                "Francisco Hormiga",
-                "Pedrito Lomas",
-                "Juan Perez",
-                "Francisco Hormiga",
-                "Pedrito Lomas"
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, android.R.id.text1, datos);
+        ListAdapter adapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_list_item_2,
+                alumnos,
+                new String[] {"apellido", "nombre"},
+                new int[] {android.R.id.text1, android.R.id.text2});
+
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String value = (String) listView.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Se eligió al alumno "+value, Toast.LENGTH_LONG).show();
+                // TODO enganchar aca el segundo activity (Pantalla 3)
+                alumnos.moveToPosition(position);
+                String data = alumnos.getString(1) +" "+ alumnos.getString(2);
+                Toast.makeText(getApplicationContext(), "Seleccionado: "+data, Toast.LENGTH_LONG).show();
             }
         });
+
     }
 
     @Override

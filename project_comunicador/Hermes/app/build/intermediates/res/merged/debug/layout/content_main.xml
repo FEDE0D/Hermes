@@ -20,7 +20,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="300dp"
-            android:id="@+id/imageView"
+            android:id="@+id/cedicaLogoView"
             android:src="@mipmap/cedica_logo"
             android:layout_weight=".4"
             android:layout_gravity="center" />
