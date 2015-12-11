@@ -1,25 +1,22 @@
 package com.grupo03.hermes;
 
+import android.content.Intent;
 import android.database.Cursor;
-import android.database.DataSetObserver;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.grupo03.hermes.db.Database;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         try {
             ImageView imageView = (ImageView) findViewById(R.id.cedicaLogoView);
@@ -58,10 +54,17 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO enganchar aca el segundo activity (Pantalla 3)
                 alumnos.moveToPosition(position);
-                String data = alumnos.getString(1) +" "+ alumnos.getString(2);
-                Toast.makeText(getApplicationContext(), "Seleccionado: "+data, Toast.LENGTH_LONG).show();
+                int alumno_id = alumnos.getInt(0);
+                String alumno_nombre = alumnos.getString(1) +" "+ alumnos.getString(2);
+
+                Toast.makeText(getApplicationContext(), "Seleccionado: "+alumno_nombre, Toast.LENGTH_LONG).show();
+
+                // Cambiando a la Activity del alumno
+                Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
+                intent.putExtra("alumno_id", alumno_id);
+                intent.putExtra("alumno_nombre", alumno_nombre);
+                startActivity(intent);
             }
         });
 

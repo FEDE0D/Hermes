@@ -1,4 +1,4 @@
-package com.grupo03.hermes;
+package com.grupo03.hermes.db;
 
 import android.content.Context;
 import android.database.Cursor;
