@@ -35,6 +35,8 @@ public class Pictograma {
             return view;
 
         view = new ImageView(context);
+        view.setMaxWidth(64);
+        view.setMaxHeight(64);
 
         try {
             InputStream is = context.getAssets().open("pictogramas/" + tab + "/" + imgPath);
