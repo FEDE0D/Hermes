@@ -75,8 +75,19 @@ public class PistaTab extends Fragment {
         pictogramas.add(new Pictograma("Aro", "pista", "aro.png", "Aro.m4a"));
         pictogramas.add(new Pictograma("Broches", "pista", "broches.png", "broches.m4a"));
         pictogramas.add(new Pictograma("Burbujas", "pista", "burbujas.png", "Burbujas.m4a"));
-        pictogramas.add(new Pictograma("Broches", "pista", "broches.png", "broches.m4a"));
         pictogramas.add(new Pictograma("Caballo", "pista", "caballo_1.png", "Caballo.m4a"));
+
+        pictogramas.add(new Pictograma("Casco", "pista", "casco.png", "Casco.m4a"));
+        pictogramas.add(new Pictograma("Chapas", "pista", "chapas.png", "Chapas.m4a"));
+        pictogramas.add(new Pictograma("Cubos", "pista", "cubos.png", "Cubos.m4a"));
+        pictogramas.add(new Pictograma("Letras", "pista", "letras.png", "Letras.m4a"));
+        pictogramas.add(new Pictograma("Maracas", "pista", "maracas.png", "Maracas.m4a"));
+
+        pictogramas.add(new Pictograma("Palos", "pista", "palos.png", "Palos.m4a"));
+        pictogramas.add(new Pictograma("Pato", "pista", "pato.png", "Pato.m4a"));
+        pictogramas.add(new Pictograma("Pelota", "pista", "pelota.png", "Pelota.m4a"));
+        pictogramas.add(new Pictograma("Riendas", "pista", "riendas.png", "Riendas.m4a"));
+        pictogramas.add(new Pictograma("Tarima", "pista", "tarima.png", "Tarima.m4a"));
 
 
         GridAdaptor adaptor = new GridAdaptor(pictogramas);

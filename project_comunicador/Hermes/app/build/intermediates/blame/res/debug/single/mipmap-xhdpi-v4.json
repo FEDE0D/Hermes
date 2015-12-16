@@ -1,10 +1,18 @@
 [
     {
-        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/ic_launcher.png",
-        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
+        "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\cedica_logo.png",
+        "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-xhdpi\\cedica_logo.png"
     },
     {
-        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/cedica_logo.png",
-        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/src/main/res/mipmap-xhdpi/cedica_logo.png"
+        "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
+        "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi-v4\\cedica_logo.png",
+        "source": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-xhdpi\\cedica_logo.png"
     }
 ]

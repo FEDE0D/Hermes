@@ -7,8 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
+import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
+import com.grupo03.hermes.adaptors.GridAdaptor;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +70,26 @@ public class EstabloTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_establo_tab, container, false);
+        ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
+        View rootView = inflater.inflate(R.layout.fragment_establo_tab, container, false);
+        pictogramas.add(new Pictograma("Cepillo", "establo", "cepillo.png", "Cepillo.m4a"));
+        pictogramas.add(new Pictograma("Escarba vasos  ", "establo", "escarba_vasos.png", "Escarba Vasos.m4a"));
+        pictogramas.add(new Pictograma("Limpieza", "establo", "limpieza.png", "Limpieza.m4a"));
+        pictogramas.add(new Pictograma("Matra", "establo", "matra.png", "Matra.m4a"));
+        pictogramas.add(new Pictograma("Montura", "establo", "montura.png", "Montura.m4a"));
+
+        pictogramas.add(new Pictograma("Pasto", "establo", "pasto.png", "Pasto.m4a"));
+        pictogramas.add(new Pictograma("Rasqueta blanda", "establo", "raqueta_blanda.png", "Rasqueta Blanda.m4a"));
+        pictogramas.add(new Pictograma("Rasqueta dura", "establo", "raqueta_dura.png", "Rasqueta Dura.m4a"));
+        pictogramas.add(new Pictograma("Zanahoria", "establo", "zanahoria.png", "Zanahoria.m4a"));
+
+        GridAdaptor adaptor = new GridAdaptor(pictogramas);
+        GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+        grid.setAdapter(adaptor);
+
+
+        // Inflate the layout for this fragment
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
