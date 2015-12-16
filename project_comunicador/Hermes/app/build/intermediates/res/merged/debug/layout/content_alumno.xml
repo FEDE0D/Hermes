@@ -13,27 +13,29 @@
     tools:showIn="@layout/activity_alumno"
     android:padding="0px">
 
-    <GridLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnCount="2"
-        android:rowCount="1">
+        android:showDividers="middle">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
-            android:layout_width="501dp"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_columnWeight="0.7"
+            android:layout_weight=".3" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/layoutOpciones"
-            android:weightSum=".3">
+            android:layout_columnWeight="0.3"
+            android:layout_weight=".7">
 
         </LinearLayout>
-
-    </GridLayout>
+    </LinearLayout>
 
 </RelativeLayout>

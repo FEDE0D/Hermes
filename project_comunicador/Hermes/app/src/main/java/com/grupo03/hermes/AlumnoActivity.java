@@ -59,6 +59,13 @@ public class AlumnoActivity extends AppCompatActivity {
         layout.addView(iSi);
         layout.addView(iNo);
 
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) iSi.getLayoutParams();
+        params.weight = 0.5f;
+        iSi.setLayoutParams(params);
+
+        params = (LinearLayout.LayoutParams) iNo.getLayoutParams();
+        params.weight = 0.5f;
+        iNo.setLayoutParams(params);
 
     }
 
