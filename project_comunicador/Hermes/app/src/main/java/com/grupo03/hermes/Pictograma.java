@@ -55,6 +55,7 @@ public class Pictograma {
                     player.setDataSource(fileDescriptor.getFileDescriptor(), fileDescriptor.getStartOffset(), fileDescriptor.getLength());
                     player.prepare();
                     player.start();
+                    Notificacion.enviar(Pictograma.this);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -1,26 +1,10 @@
 [
     {
-        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_launcher.png",
-        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
-    },
-    {
         "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/cedica_logo.png",
         "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/src/main/res/mipmap-mdpi/cedica_logo.png"
     },
     {
-        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\cedica_logo.png",
-        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-mdpi\\cedica_logo.png"
-    },
-    {
-        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\ic_launcher.png",
-        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
-    },
-    {
         "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
         "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/src/main/res/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi-v4\\cedica_logo.png",
-        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\src\\main\\res\\mipmap-mdpi\\cedica_logo.png"
     }
 ]
