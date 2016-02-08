@@ -92,4 +92,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    public void mostrarAjustes(View view)
+    {
+        Intent intent = new Intent(this, AjustesActivity.class);
+        startActivity(intent);
+    }
 }
