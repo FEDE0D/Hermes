@@ -54,6 +54,7 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/inputNombre"
+                    android:nextFocusForward="@+id/inputApellido"
                     android:hint="ingrese nombre" />
             </LinearLayout>
 
@@ -73,6 +74,7 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:id="@+id/inputApellido"
+                    android:nextFocusForward="@+id/radioMasculino"
                     android:hint="ingrese apellido" />
             </LinearLayout>
             <LinearLayout
@@ -96,6 +98,7 @@
                         android:layout_height="wrap_content"
                         android:text="Masculino"
                         android:id="@+id/radioMasculino"
+                        android:nextFocusForward="@+id/radioFemenino"
                         android:checked="false" />
                     <RadioButton
                         android:layout_width="wrap_content"
@@ -136,6 +139,7 @@
                         android:layout_height="wrap_content"
                         android:text="Establo"
                         android:id="@+id/checkEstablo"
+                        android:nextFocusForward="@+id/checkPista"
                         android:layout_column="1"
                         android:checked="false" />
 
@@ -143,6 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pista"
+                        android:nextFocusForward="@+id/checkNecesidades"
                         android:id="@+id/checkPista"
                         android:layout_column="2"
                         android:checked="false" />
@@ -156,6 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Necesidades"
+                        android:nextFocusForward="@+id/checkEmociones"
                         android:id="@+id/checkNecesidades"
                         android:layout_column="1"
                         android:checked="false" />
@@ -263,6 +269,7 @@
                         android:inputType="textPersonName"
                         android:ems="10"
                         android:id="@+id/ip"
+                        android:nextFocusForward="@+id/puerto"
                         android:layout_column="2"
                         android:hint="ingrese ip" />
 
@@ -287,6 +294,7 @@
                         android:ems="10"
                         android:id="@+id/puerto"
                         android:layout_column="2"
+                        android:nextFocusForward="@+id/button2"
                         android:hint="ingrese puerto" />
 
                 </TableRow>

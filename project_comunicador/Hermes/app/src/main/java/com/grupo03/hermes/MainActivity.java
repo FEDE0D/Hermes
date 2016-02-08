@@ -39,7 +39,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        cargarAlumnos();
 
+
+    }
+    public void cargarAlumnos(){
         Database database = new Database(getApplicationContext());
         final Cursor alumnos = database.getAlumnos();
 
@@ -67,7 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+    }
+    @Override
+    protected void onResume (){
+        super.onResume();
+        cargarAlumnos();
     }
 
     @Override
@@ -91,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
     public void mostrarAjustes(View view)
     {

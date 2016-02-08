@@ -3,6 +3,7 @@ package com.grupo03.hermes;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,16 +28,15 @@ public class AjustesActivity extends AppCompatActivity {
         EditText inputPuerto= (EditText) findViewById(R.id.puerto);
         Database database = new Database(getApplicationContext());
         Cursor conf= database.getConfiguracion();
-        //System.out.println("aaaaaaaaaaa" + conf.getColumnIndex("clave"));
         while (conf.isAfterLast() == false) {
             String clave= conf.getString(conf.getColumnIndex("clave"));
-           if(clave== "ipMonitor"){
+           if(clave.equals( "ipMonitor")){
                String valor = conf.getString(conf.getColumnIndex("valor"));
                inputIp.setText(valor);
            }
-           else if(clave=="puertoMonitor"){
+           else if(clave.equals("puertoMonitor")){
                String valor = conf.getString(conf.getColumnIndex("valor"));
-               inputPuerto.setText(valor.toString());
+               inputPuerto.setText(valor);
 
             }
             conf.moveToNext();
@@ -78,7 +78,8 @@ public class AjustesActivity extends AppCompatActivity {
                 @Override
                 public void onDismiss(DialogInterface dialog) {
                     finish();
-                    startActivity(getIntent());
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             });
             dialog.show();
@@ -154,7 +155,8 @@ public class AjustesActivity extends AppCompatActivity {
                @Override
                public void onDismiss(DialogInterface dialog) {
                    finish();
-                   startActivity(getIntent());
+                   Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                   startActivity(intent);
                }
            });
            dialog.show();

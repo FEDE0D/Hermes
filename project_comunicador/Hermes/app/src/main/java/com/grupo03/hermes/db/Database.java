@@ -20,7 +20,7 @@ import java.io.OutputStream;
  */
 public class Database extends SQLiteAssetHelper {
 
-    public static final String DB_NAME = "hermes.db";
+    public static final String DB_NAME = "hermes88.db";
     public static final int DB_VERSION = 1;
 
     public Database(Context context){
@@ -58,8 +58,8 @@ public class Database extends SQLiteAssetHelper {
         values.put("valor", ip);
         database.insert("configuracion", null, values);
         ContentValues values2 = new ContentValues();
-        values.put("clave", "ipPuerto");
-        values.put("valor", puerto);
+        values2.put("clave", "puertoMonitor");
+        values2.put("valor", puerto);
         database.insert("configuracion", null, values2);
     }
     public Cursor getConfiguracion(){
