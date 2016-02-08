@@ -383,6 +383,8 @@
                 }
             }
         ]
+<<<<<<< HEAD
+=======
     },
     {
         "outputFile": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-is-rIS\\values-is-rIS.xml",
@@ -1538,5 +1540,6 @@
                 }
             }
         ]
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     }
 ]

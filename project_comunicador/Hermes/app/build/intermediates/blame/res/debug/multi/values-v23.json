@@ -121,6 +121,8 @@
                 }
             }
         ]
+<<<<<<< HEAD
+=======
     },
     {
         "outputFile": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-v23\\values-v23.xml",
@@ -490,5 +492,6 @@
                 }
             }
         ]
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     }
 ]

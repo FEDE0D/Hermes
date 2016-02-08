@@ -1,5 +1,17 @@
 [
     {
+<<<<<<< HEAD
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/design_snackbar_out.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_slide_out_top.xml"
+=======
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_in.xml"
     },
@@ -30,12 +42,17 @@
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_exit.xml"
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     },
     {
         "merged": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
         "source": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_out.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_fade_out.xml"
+=======
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_bottom.xml"
     },
@@ -54,12 +71,21 @@
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_snackbar_in.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_snackbar_in.xml"
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     },
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_bottom.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/design_snackbar_in.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/design_fab_out.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/anim/design_fab_out.xml"
+=======
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_out.xml"
     },
@@ -86,12 +112,25 @@
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_fab_out.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.1.1\\res\\anim\\design_fab_out.xml"
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     },
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_in.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/design_fab_in.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/anim/design_fab_in.xml"
+    },
+    {
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_shrink_fade_out_from_bottom.xml"
+=======
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_top.xml"
     },
@@ -150,12 +189,17 @@
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_out.xml"
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     },
     {
         "merged": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
         "source": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_top.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/anim/abc_slide_in_bottom.xml"
+=======
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_bottom.xml"
     },
@@ -222,5 +266,6 @@
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_out.xml"
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     }
 ]

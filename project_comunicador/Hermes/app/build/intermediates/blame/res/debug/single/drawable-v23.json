@@ -1,5 +1,9 @@
 [
     {
+<<<<<<< HEAD
+        "merged": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/drawable-v23/abc_control_background_material.xml",
+        "source": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-v23/abc_control_background_material.xml"
+=======
         "merged": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v23\\abc_control_background_material.xml",
         "source": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-v23\\abc_control_background_material.xml"
     },
@@ -14,5 +18,6 @@
     {
         "merged": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\drawable-v23\\abc_control_background_material.xml",
         "source": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-v23\\abc_control_background_material.xml"
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     }
 ]

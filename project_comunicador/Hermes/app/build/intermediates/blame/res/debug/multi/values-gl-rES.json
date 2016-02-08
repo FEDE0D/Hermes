@@ -1,5 +1,8 @@
 [
     {
+<<<<<<< HEAD
+        "outputFile": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/values-gl-rES/values-gl-rES.xml",
+=======
         "outputFile": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-gl-rES\\values-gl-rES.xml",
         "map": [
             {
@@ -771,6 +774,7 @@
     },
     {
         "outputFile": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-gl-rES\\values-gl-rES.xml",
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
         "map": [
             {
                 "to": {

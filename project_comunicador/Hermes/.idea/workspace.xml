@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+=======
   <component name="AndroidLayouts">
     <shared>
       <config>
@@ -59,8 +61,9 @@
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="HERMES" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
   <component name="ChangeListManager">
-    <list default="true" id="1f95af71-69cf-444e-a330-8f3bce7bef8c" name="Default" comment="" />
+    <list default="true" id="9fe0fe19-1e2f-46d2-ace5-e23daceb1392" name="Default" comment="" />
     <ignored path="Hermes.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -75,18 +78,18 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <projects_view />
-      </state>
-    </system>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="Hermes" />
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
+      <file leaf-file-name="Pictograma.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/Pictograma.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="57" column="57" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+=======
       <file leaf-file-name="content_alumno.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_alumno.xml">
           <provider editor-type-id="android-designer">
@@ -95,11 +98,19 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.0">
               <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="Notificacion.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/Notificacion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24913494">
+              <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+=======
       <file leaf-file-name="activity_ajustes.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_ajustes.xml">
           <provider editor-type-id="android-designer">
@@ -206,6 +217,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="11" column="32" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="32" />
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
               <folding />
             </state>
           </provider>
@@ -216,15 +228,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/../../keys/release_key.jks" />
-    <option name="KEY_ALIAS" value="release key" />
-    <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
   <component name="GradleLocalSettings">
     <option name="availableProjects">
@@ -1421,7 +1427,6 @@
     <option name="modificationStamps">
       <map>
         <entry key="$PROJECT_DIR$" value="4349313831631" />
-        <entry key="C:\Users\rami\Desktop\Hermes\Hermes\project_comunicador\Hermes" value="4350884625557" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1783,6 +1788,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/Notificacion.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/Pictograma.java" />
+=======
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/Database.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
@@ -1810,9 +1819,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/alert.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/db/Database.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/AjustesActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_ajustes.xml" />
+=======
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
+>>>>>>> d47f77074b3a85585668757f83f89e60f7090039
       </list>
     </option>
   </component>
@@ -1822,9 +1835,6 @@
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
     </option>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState />
   </component>
   <component name="NamedScopeManager">
     <order />
@@ -1858,6 +1868,10 @@
       <sortByType />
     </navigator>
     <panes>
+<<<<<<< HEAD
+      <pane id="PackagesPane" />
+=======
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1929,15 +1943,21 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+<<<<<<< HEAD
+      <pane id="Scratches" />
+=======
       <pane id="PackagesPane" />
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
       <pane id="ProjectPane" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
+<<<<<<< HEAD
+=======
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="192.168.56.101:5555" />
     <property name="FullScreen" value="false" />
     <property name="android.project.structure.last.selected" value="app" />
@@ -1973,6 +1993,7 @@
       <recent name="com.grupo03.hermes.adaptors" />
       <recent name="com.grupo03.hermes.db" />
     </key>
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
   </component>
   <component name="RunManager" selected="Android Application.app">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
@@ -2105,7 +2126,7 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="true" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
@@ -2133,24 +2154,44 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1f95af71-69cf-444e-a330-8f3bce7bef8c" name="Default" comment="" />
-      <created>1449680161149</created>
+      <changelist id="9fe0fe19-1e2f-46d2-ace5-e23daceb1392" name="Default" comment="" />
+      <created>1454963468905</created>
       <option name="number" value="Default" />
-      <updated>1449680161149</updated>
+      <updated>1454963468905</updated>
     </task>
     <servers />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+=======
+<<<<<<< HEAD
+    <frame x="-1" y="-1" width="1369" height="745" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2494331" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+=======
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+>>>>>>> d47f77074b3a85585668757f83f89e60f7090039
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289256" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2176,13 +2217,20 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32955405" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20256992" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32840723" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -2202,12 +2250,17 @@
     </ignored-roots>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="4" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/layout/EmocionesTab.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61245674">
+          <caret line="85" column="93" selection-start-line="85" selection-start-column="93" selection-end-line="85" selection-end-column="93" />
+          <folding />
+=======
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_establo_tab.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2246,11 +2299,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/AlumnoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state vertical-scroll-proportion="1.183391">
+          <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/Pictograma.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="57" selection-start-line="57" selection-start-column="57" selection-end-line="57" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/grupo03/hermes/Notificacion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24913494">
+          <caret line="8" column="61" selection-start-line="8" selection-start-column="61" selection-end-line="8" selection-end-column="61" />
+=======
         <state vertical-scroll-proportion="0.0">
           <caret line="56" column="61" selection-start-line="56" selection-start-column="61" selection-end-line="56" selection-end-column="61" />
           <folding />
@@ -2535,10 +2609,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.readystatesoftware.sqliteasset/sqliteassethelper/2.0.1/8062ce3a05743483845f9ef8b9d56123dedb93e9/sqliteassethelper-2.0.1-sources.jar!/com/readystatesoftware/sqliteasset/SQLiteAssetHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33243242">
@@ -2651,5 +2728,6 @@
         </state>
       </provider>
     </entry>
+>>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
   </component>
 </project>
