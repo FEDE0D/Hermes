@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -65,5 +68,12 @@ public class Pictograma {
         return view;
     }
 
+    public String getTab() {
+        return tab;
+    }
+
+    public String getName() {
+        return name;
+    }
 
 }
