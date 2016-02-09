@@ -94,17 +94,20 @@ public class Notificacion {
         private String getMonitorURL(){
             Database database = new Database(MainActivity.applicationContext);
             Cursor cursor = database.getConfiguracion();
-            cursor.moveToFirst();
-            if (cursor.getString(cursor.getColumnIndex("clave")).equals("ipMonitor")){
-                IP_ADRESS_MONITOR = cursor.getString(cursor.getColumnIndex("valor"));
-            } else if (cursor.getString(cursor.getColumnIndex("clave")).equals("puertoMonitor")){
-                PORT_MONITOR = cursor.getString(cursor.getColumnIndex("valor"));
+            while (!cursor.isAfterLast()) {
+                if (cursor.getString(cursor.getColumnIndex("clave")).equals("ipMonitor")) {
+                    IP_ADRESS_MONITOR = cursor.getString(cursor.getColumnIndex("valor"));
+                } else if (cursor.getString(cursor.getColumnIndex("clave")).equals("puertoMonitor")) {
+                    PORT_MONITOR = cursor.getString(cursor.getColumnIndex("valor"));
+                }
+                cursor.moveToNext();
             }
             return "http://"+IP_ADRESS_MONITOR+":"+PORT_MONITOR+"/";
         }
 
         @Override
         public void run() {
+            Log.i("HERMES", "MONITOR IP: "+getMonitorURL());
             URL obj = null; try { obj = new URL(getMonitorURL()); } catch (MalformedURLException e) { e.printStackTrace(); }
             HttpURLConnection conn = null;
             try {
