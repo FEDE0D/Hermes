@@ -294,6 +294,7 @@
                         android:ems="10"
                         android:id="@+id/puerto"
                         android:layout_column="2"
+                        android:nextFocusForward="@+id/button2"
                         android:hint="ingrese puerto" />
 
                 </TableRow>

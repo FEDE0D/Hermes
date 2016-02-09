@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
+import com.grupo03.hermes.AjustesActivity;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.FileOutputStream;
@@ -26,12 +27,24 @@ public class Database extends SQLiteAssetHelper {
     public Database(Context context){
         super(context, DB_NAME, null, 1);
     }
+    public Cursor getAlumno(int idAlumno){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
+        String[] sqlSelect = {"id", "nombre", "apellido", "sexo","tamanioPictograma", "solapasHabilitadas"};
+        String sqlTables = "alumno";
+
+        qb.setTables(sqlTables);
+        qb.appendWhere("id" + "=" + idAlumno);
+        Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
+        c.moveToFirst();
+        return c;
+    }
     public Cursor getAlumnos(){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String[] sqlSelect = {"0 _id", "nombre", "apellido", "sexo"};
+        String[] sqlSelect = {"0 _id","id", "nombre", "apellido", "sexo"};
         String sqlTables = "alumno";
 
         qb.setTables(sqlTables);
@@ -39,14 +52,25 @@ public class Database extends SQLiteAssetHelper {
         c.moveToFirst();
         return c;
     }
-    public void nuevoAlumno( String nombre, String apellido,String sexo, String tamanio, String solapas){
+    public void editarAlumno(AjustesActivity alumno){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("nombre", nombre);
-        values.put("apellido", apellido);
-        values.put("sexo", sexo);
-        values.put("tamanioPictograma", tamanio);
-        values.put("solapasHabilitadas", solapas);
+        values.put("nombre", alumno.nombre);
+        values.put("apellido", alumno.apellido);
+        values.put("sexo", alumno.sexo);
+        values.put("tamanioPictograma", alumno.tamanio);
+        values.put("solapasHabilitadas", alumno.solapas);
+        database.update("alumno", values, "id=" + alumno.idAlumno, null);
+        database.close();
+    }
+    public void nuevoAlumno( AjustesActivity alumno){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nombre", alumno.nombre);
+        values.put("apellido", alumno.apellido);
+        values.put("sexo", alumno.sexo);
+        values.put("tamanioPictograma", alumno.tamanio);
+        values.put("solapasHabilitadas", alumno.solapas);
         database.insert("alumno", null, values);
         database.close();
     }

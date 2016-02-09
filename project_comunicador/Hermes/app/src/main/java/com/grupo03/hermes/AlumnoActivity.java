@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -79,6 +80,15 @@ public class AlumnoActivity extends AppCompatActivity {
         toolbar.setTitle("Alumno");
 
         return true;
+    }
+    public void mostrarAjustes(MenuItem view)
+    {
+
+        Intent intent = new Intent(this, AjustesActivity.class);
+        int alumno_id = getIntent().getIntExtra("alumno_id", 0);
+        intent.putExtra("alumno_id", alumno_id);
+        intent.putExtra("tipo", "editarAlumno");
+        startActivity(intent);
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

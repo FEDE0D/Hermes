@@ -59,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 alumnos.moveToPosition(position);
-                int alumno_id = alumnos.getInt(0);
-                String alumno_nombre = alumnos.getString(1) +" "+ alumnos.getString(2);
-
+                int alumno_id = alumnos.getInt(1);
+                String alumno_nombre = alumnos.getString(2) +" "+ alumnos.getString(3);
+                System.out.println("ID ESSSSSSSSSSSSSSSSSSSSS"+ alumnos.getInt(1));
+                System.out.println("nombre ESSSSSSSSSSSSSSSSSSSSS"+ alumno_nombre);
                 Toast.makeText(getApplicationContext(), "Seleccionado: "+alumno_nombre, Toast.LENGTH_LONG).show();
 
                 // Cambiando a la Activity del alumno
@@ -102,7 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void mostrarAjustes(View view)
     {
+
         Intent intent = new Intent(this, AjustesActivity.class);
+        intent.putExtra("tipo", "nuevoAlumno");
         startActivity(intent);
     }
 }

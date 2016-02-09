@@ -1,83 +1,5 @@
 [
     {
-<<<<<<< HEAD
-        "outputFile": "/home/federico/Documentos/Hermes/project_comunicador/Hermes/app/build/intermediates/res/merged/debug/values-ldrtl-v23/values-ldrtl-v23.xml",
-=======
-        "outputFile": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-ldrtl-v23\\values-ldrtl-v23.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 112,
-                    "endOffset": 163
-                },
-                "from": {
-                    "file": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-ldrtl-v23\\values-ldrtl-v23.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 240,
-                        "endColumn": 112,
-                        "endOffset": 348
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-ldrtl-v23\\values-ldrtl-v23.xml",
->>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 112,
-                    "endOffset": 163
-                },
-                "from": {
-                    "file": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-ldrtl-v23\\values-ldrtl-v23.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 240,
-                        "endColumn": 112,
-                        "endOffset": 348
-                    }
-                }
-            }
-        ]
-<<<<<<< HEAD
-=======
-    },
-    {
-        "outputFile": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-ldrtl-v23\\values-ldrtl-v23.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 112,
-                    "endOffset": 163
-                },
-                "from": {
-                    "file": "C:\\home\\federico\\Documentos\\Hermes\\project_comunicador\\Hermes\\C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\values-ldrtl-v23\\values-ldrtl-v23.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 240,
-                        "endColumn": 112,
-                        "endOffset": 348
-                    }
-                }
-            }
-        ]
-    },
-    {
         "outputFile": "C:\\Users\\rami\\Desktop\\Hermes\\Hermes\\project_comunicador\\Hermes\\app\\build\\intermediates\\res\\merged\\debug\\values-ldrtl-v23\\values-ldrtl-v23.xml",
         "map": [
             {
@@ -100,6 +22,5 @@
                 }
             }
         ]
->>>>>>> 736c3b25c3df3289e01fb746e37765fc2a721257
     }
 ]

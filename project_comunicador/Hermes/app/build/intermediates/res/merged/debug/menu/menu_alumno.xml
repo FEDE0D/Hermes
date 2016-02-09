@@ -19,6 +19,7 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
+        android:onClick="mostrarAjustes"
         android:title="Ajustes"
         app:showAsAction="never" />
 </menu>
