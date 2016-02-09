@@ -52,6 +52,8 @@ public class Server {
 			requestBody = s.hasNext()? s.next() : "...";
 			s.close();
 			
+			System.out.println("REQUEST BODY: "+requestBody);
+			
 			int statusCode = 200;
 			String responseBody = "...";
 			

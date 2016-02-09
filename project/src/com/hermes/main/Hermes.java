@@ -74,7 +74,7 @@ public class Hermes {
 		}
 		
 		Properties p = new Properties();
-		String serverContextName = "hermes";
+		String serverContextName = "";
 		int serverListenPort = -1;
 		try {
 			p.load(Hermes.class.getResourceAsStream("/config/conf.properties"));
