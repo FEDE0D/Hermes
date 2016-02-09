@@ -76,7 +76,7 @@ public class Database extends SQLiteAssetHelper {
     }
     public void guardarConfiguracion(String ip, String puerto){
         SQLiteDatabase database = this.getWritableDatabase();
-        database.delete("configuracion",null,null);
+        database.delete("configuracion", null, null);
         ContentValues values = new ContentValues();
         values.put("clave", "ipMonitor");
         values.put("valor", ip);
@@ -95,6 +95,39 @@ public class Database extends SQLiteAssetHelper {
 
         qb.setTables(sqlTables);
         Cursor c = qb.query(db, sqlSelect, null, null, null, null, null);
+        c.moveToFirst();
+        return c;
+    }
+
+    public void addPendiente(String nombre, String apellido, String sexo, String idPictograma, String idContexto, String fecha, String hora){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("nombreAlumno", nombre);
+        cv.put("apellidoAlumno", apellido);
+        cv.put("sexoAlumno", sexo);
+        cv.put("idPictograma", idPictograma);
+        cv.put("idContexto", idContexto);
+        cv.put("fecha", fecha);
+        cv.put("hora", hora);
+        cv.put("enviado", "false");
+
+        db.insert("notificacionespendientes", null, cv);
+    }
+
+    public void setPendienteAsSent(String idPendiente) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE notificacionespendietes SET enviado = 'true' WHERE id="+idPendiente);
+    }
+
+    public Cursor getPendientes(){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect = {"id", "nombreAlumno", "apellidoAlumno", "sexoAlumno", "idPictograma", "idContexto", "fecha", "hora", "enviado"};
+        String sqlTables = "notificacionespendientes";
+
+        qb.setTables(sqlTables);
+        Cursor c = qb.query(db, sqlSelect, "enviado = false", null, null, null, null);
         c.moveToFirst();
         return c;
     }
