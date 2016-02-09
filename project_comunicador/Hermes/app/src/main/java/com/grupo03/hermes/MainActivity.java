@@ -1,5 +1,6 @@
 package com.grupo03.hermes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
@@ -23,12 +24,16 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Context applicationContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        applicationContext = getApplicationContext();
 
         try {
             ImageView imageView = (ImageView) findViewById(R.id.cedicaLogoView);
