@@ -5,6 +5,10 @@ import android.util.Log;
 
 import com.grupo03.hermes.db.Database;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -39,41 +43,58 @@ public class Notificacion {
         Time time = new Time(0L);
 
         // TODO store in database
-        // database.addPendiente(a, b, c, d, e, f);
+        Database db = new Database(MainActivity.applicationContext);
+        db.addPendiente(nombre, apellido, sexo,idPictograma+"", idContexto+"", date.toString(), time.toString());
 
         sendPendientes();
     }
     private static void sendPendientes(){
-        // TODO recover from database all the notificacions that are marked as !sent.
-        // TODO make the JSON array object.
-        /*
-            cursor = database.getPendientes();
-            for elementos del cursor {
-                JSON object = new JsonObject();
-                object.put("id", cursor.getString(cursor.getColumnIndex("id"));
-                object.put("nombre", cursor.getString(cursor.getColumnIndex("nombre"));
-                object.put("apellido", cursor.getString(cursor.getColumnIndex("apellido"));
-                object.put("sexo", cursor.getString(cursor.getColumnIndex("sexo"));
-                object.put("idPictograma", cursor.getString(cursor.getColumnIndex("idPictograma"));
-                object.put("idContexto", cursor.getString(cursor.getColumnIndex("idContexto"));
-                object.put("fecha", cursor.getString(cursor.getColumnIndex("fecha"));
-                object.put("hora", cursor.getString(cursor.getColumnIndex("hora"));
+        // recover from database all the notificacions that are marked as !sent.
+        // make the JSON array object.
 
-                jsonarray.add(object);
+        String message = "";
+        Cursor cursor = new Database(MainActivity.applicationContext).getPendientes();
+        try {
+            JSONObject jsonObject = new JSONObject();
+            JSONArray notifications = new JSONArray();
+            while (!cursor.isAfterLast()){
+                JSONObject row = new JSONObject();
+
+                row.put("date", cursor.getString(cursor.getColumnIndex("fecha")));
+                row.put("time", cursor.getString(cursor.getColumnIndex("hora")));
+                row.put("idTablet", "ASD-123");
+                row.put("type", "NOTIFICATION");
+                row.put("date", cursor.getString(cursor.getColumnIndex("fecha")));
+
+                JSONObject data = new JSONObject();
+                data.put("idPaciente", 1);
+                data.put("idContenido", 1);
+                data.put("idContexto", 1);
+
+                row.put("data", data);
+                notifications.put(row);
+
+                Log.i("HERMES", "Pendiente: " + cursor.getString(cursor.getColumnIndex("id")) + cursor.getString(cursor.getColumnIndex("nombreAlumno")));
+                cursor.moveToNext();
             }
-         */
+            jsonObject.put("notifications", notifications);
+            message = jsonObject.toString();
+        } catch (JSONException e) { e.printStackTrace(); }
 
-        String json_message = "{\"notifications\":[{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":3,\"idContenido\":1,\"idContexto\":2},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":2,\"idContexto\":3},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":2,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":2},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":2,\"idContexto\":2},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":2,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":2,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":3,\"idContenido\":1,\"idContexto\":2},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":2,\"idContexto\":3},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":2,\"idContexto\":1},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":3,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":2,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":2,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":2},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":2},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":2},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":3,\"idContenido\":2,\"idContexto\":2},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":2,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":2,\"idContexto\":2},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":2,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":3,\"idContenido\":1,\"idContexto\":2},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":3,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":2,\"idContexto\":3},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":2,\"idContexto\":3},\"idTablet\":\"3232322\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":2,\"idContenido\":1,\"idContexto\":3},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"},{\"date\":\"1969-12-31\",\"data\":{\"idPaciente\":1,\"idContenido\":1,\"idContexto\":1},\"idTablet\":\"130230212\",\"time\":\"21:00:00\",\"type\":\"NOTIFICATION\"}]}";
+        // send the message to the monitor
+        Sender sender = new Sender(message);
+        Thread senderThread = new Thread(sender);
+        senderThread.start();
+        while(senderThread.isAlive()){ }
 
-        // TODO send the message to the monitor
-        Sender sender = new Sender(json_message);
-        new Thread(sender).start();
         if (sender.isSent()){
-        // TODO mark the notifications as 'sent'.
-        //    cursor.reset();
-        //    for elementos del cursor {
-        //        database.markAsSent(cursor.getString(cursor.getColumnIndex("id"));
-        //    }
+            // mark the notifications as 'sent'.
+            cursor.moveToFirst();
+            Database dbUpdate = new Database(MainActivity.applicationContext);
+            while (!cursor.isAfterLast()) {
+                dbUpdate.setPendienteAsSent(cursor.getString(cursor.getColumnIndex("id")));
+                cursor.moveToNext();
+            }
         }
 
     }
@@ -107,7 +128,7 @@ public class Notificacion {
 
         @Override
         public void run() {
-            Log.i("HERMES", "MONITOR IP: "+getMonitorURL());
+            Log.i("HERMES", "MONITOR IP: " + getMonitorURL());
             URL obj = null; try { obj = new URL(getMonitorURL()); } catch (MalformedURLException e) { e.printStackTrace(); }
             HttpURLConnection conn = null;
             try {
@@ -130,9 +151,10 @@ public class Notificacion {
 
                     if (conn.getResponseCode() > 0){
                         sent = true;
-                        Log.i("HERMES", "SENT: " + message);
-                        Log.i("HERMES", "RESPONSE CODE: "+conn.getResponseCode());
                     }
+
+                    Log.i("HERMES", "SENT: " + message);
+                    Log.i("HERMES", "RESPONSE CODE: "+conn.getResponseCode());
 
                 }
             } catch (IOException e) {

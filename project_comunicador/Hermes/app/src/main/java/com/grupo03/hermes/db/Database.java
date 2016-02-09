@@ -115,8 +115,9 @@ public class Database extends SQLiteAssetHelper {
     }
 
     public void setPendienteAsSent(String idPendiente) {
+        Log.i("HERMES", "Setting as sent: "+idPendiente);
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE notificacionespendietes SET enviado = 'true' WHERE id="+idPendiente);
+        db.execSQL("UPDATE notificacionespendientes SET enviado = 'true' WHERE id="+idPendiente);
     }
 
     public Cursor getPendientes(){
@@ -127,7 +128,7 @@ public class Database extends SQLiteAssetHelper {
         String sqlTables = "notificacionespendientes";
 
         qb.setTables(sqlTables);
-        Cursor c = qb.query(db, sqlSelect, "enviado = false", null, null, null, null);
+        Cursor c = qb.query(db, sqlSelect, "enviado = 'false'", null, null, null, null);
         c.moveToFirst();
         return c;
     }
