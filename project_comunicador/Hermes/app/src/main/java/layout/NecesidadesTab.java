@@ -12,6 +12,7 @@ import android.widget.GridView;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
 import com.grupo03.hermes.adaptors.GridAdaptor;
+import com.grupo03.hermes.db.Database;
 
 import java.util.ArrayList;
 
@@ -72,11 +73,8 @@ public class NecesidadesTab extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_necesidades_tab, container, false);
         ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
-        pictogramas.add(new Pictograma("Banio", "necesidades", "banio.png", "Banio.m4a"));
-        pictogramas.add(new Pictograma("Dolorido", "necesidades", "dolorido.png", "Me Duele.m4a"));
-        pictogramas.add(new Pictograma("Dolorida", "necesidades", "dolorida.png", "Me Duele.m4a"));
-        pictogramas.add(new Pictograma("Sed", "necesidades", "sed_f.png", "Sed.m4a"));
-        pictogramas.add(new Pictograma("Sed", "necesidades", "sed_m.png", "Sed.m4a"));
+        Database database = new Database(getActivity().getApplicationContext());
+        pictogramas = database.getPictogramasCategory("necesidades");
 
         GridAdaptor adaptor = new GridAdaptor(pictogramas);
         GridView grid = (GridView) rootView.findViewById(R.id.gridView);

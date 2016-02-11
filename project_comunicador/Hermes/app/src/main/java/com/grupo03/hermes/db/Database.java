@@ -159,4 +159,32 @@ public class Database extends SQLiteAssetHelper {
 
         return seleccionados;
     }
+    public ArrayList<Pictograma> getPictogramasCategory(String categoria){
+        ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String sql="SELECT p.id, p.nombre, p.carpeta " +
+                "from pictograma p " +
+                " where p.carpeta=?";
+
+        Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
+        c.moveToFirst();
+        System.out.println("Pictogramas:");
+        while (c.isAfterLast() == false) {
+            String carpeta=(c.getString(c.getColumnIndex("carpeta")));
+            String nombre= (c.getString(c.getColumnIndex("nombre")));
+            String m= nombre.charAt(0)+""; m=m.toUpperCase();
+            String nombre2=nombre.replaceFirst(nombre.charAt(0) + "", m);
+            if (nombre.equals("triste")) nombre= "triste_f";
+            if (nombre.contains("sed")) nombre2= "Sed";
+            nombre2 = nombre2.replace(" ", "_");
+            seleccionados.add(new Pictograma(nombre, carpeta, nombre+".png", nombre2+".m4a"));
+            System.out.println(carpeta);
+            System.out.println(nombre + ".png");
+            System.out.println(nombre2 + ".m4a");
+            c.moveToNext();
+        }
+
+        return seleccionados;
+    }
 }

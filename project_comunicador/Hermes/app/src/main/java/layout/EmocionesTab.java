@@ -12,6 +12,7 @@ import android.widget.GridView;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
 import com.grupo03.hermes.adaptors.GridAdaptor;
+import com.grupo03.hermes.db.Database;
 
 import java.util.ArrayList;
 
@@ -72,18 +73,8 @@ public class EmocionesTab extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_emociones_tab, container, false);
         ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
-        pictogramas.add(new Pictograma("Asustada", "emociones", "asustada.png", "Asustada.m4a"));
-        pictogramas.add(new Pictograma("Asustado", "emociones", "asustado.png", "Asustado.m4a"));
-        pictogramas.add(new Pictograma("Cansada", "emociones", "cansada.png", "Cansada.m4a"));
-        pictogramas.add(new Pictograma("Cansado", "emociones", "cansado.png", "Cansado.m4a"));
-        pictogramas.add(new Pictograma("Contenta", "emociones", "contenta.png", "Contenta.m4a"));
-        pictogramas.add(new Pictograma("Contento", "emociones", "contento.png", "Contento.m4a"));
-        pictogramas.add(new Pictograma("Enojada", "emociones", "enojada.png", "Enojada.m4a"));
-        pictogramas.add(new Pictograma("Enojado", "emociones", "enojado.png", "Enojado.m4a"));
-        pictogramas.add(new Pictograma("Sorprendida", "emociones", "sorprendida.png", "Sorprendida.m4a"));
-        pictogramas.add(new Pictograma("Sorprendido", "emociones", "sorprendida.png", "Sorprendida.m4a"));
-        pictogramas.add(new Pictograma("Triste", "emociones", "triste_f.png", "Triste.m4a"));
-        pictogramas.add(new Pictograma("Triste", "emociones", "triste_m.png", "Triste.m4a"));
+        Database database = new Database(getActivity().getApplicationContext());
+        pictogramas = database.getPictogramasCategory("emociones");
         GridAdaptor adaptor = new GridAdaptor(pictogramas);
         GridView grid = (GridView) rootView.findViewById(R.id.gridView);
         grid.setAdapter(adaptor);

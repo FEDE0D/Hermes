@@ -12,6 +12,7 @@ import android.widget.GridView;
 import com.grupo03.hermes.adaptors.GridAdaptor;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
+import com.grupo03.hermes.db.Database;
 
 import java.util.ArrayList;
 
@@ -72,22 +73,8 @@ public class PistaTab extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_pista_tab, container, false);
 
         ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
-        pictogramas.add(new Pictograma("Aro", "pista", "aro.png", "Aro.m4a"));
-        pictogramas.add(new Pictograma("Broches", "pista", "broches.png", "broches.m4a"));
-        pictogramas.add(new Pictograma("Burbujas", "pista", "burbujas.png", "Burbujas.m4a"));
-        pictogramas.add(new Pictograma("Caballo", "pista", "caballo_1.png", "Caballo.m4a"));
-
-        pictogramas.add(new Pictograma("Casco", "pista", "casco.png", "Casco.m4a"));
-        pictogramas.add(new Pictograma("Chapas", "pista", "chapas.png", "Chapas.m4a"));
-        pictogramas.add(new Pictograma("Cubos", "pista", "cubos.png", "Cubos.m4a"));
-        pictogramas.add(new Pictograma("Letras", "pista", "letras.png", "Letras.m4a"));
-        pictogramas.add(new Pictograma("Maracas", "pista", "maracas.png", "Maracas.m4a"));
-
-        pictogramas.add(new Pictograma("Palos", "pista", "palos.png", "Palos.m4a"));
-        pictogramas.add(new Pictograma("Pato", "pista", "pato.png", "Pato.m4a"));
-        pictogramas.add(new Pictograma("Pelota", "pista", "pelota.png", "Pelota.m4a"));
-        pictogramas.add(new Pictograma("Riendas", "pista", "riendas.png", "Riendas.m4a"));
-        pictogramas.add(new Pictograma("Tarima", "pista", "tarima.png", "Tarima.m4a"));
+        Database database = new Database(getActivity().getApplicationContext());
+        pictogramas = database.getPictogramasCategory("pista");
 
 
         GridAdaptor adaptor = new GridAdaptor(pictogramas);

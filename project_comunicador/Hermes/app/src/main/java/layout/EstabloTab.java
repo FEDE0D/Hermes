@@ -12,6 +12,7 @@ import android.widget.GridView;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
 import com.grupo03.hermes.adaptors.GridAdaptor;
+import com.grupo03.hermes.db.Database;
 
 import java.util.ArrayList;
 
@@ -72,16 +73,8 @@ public class EstabloTab extends Fragment {
         // Inflate the layout for this fragment
         ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
         View rootView = inflater.inflate(R.layout.fragment_establo_tab, container, false);
-        pictogramas.add(new Pictograma("Cepillo", "establo", "cepillo.png", "Cepillo.m4a"));
-        pictogramas.add(new Pictograma("Escarba vasos  ", "establo", "escarba_vasos.png", "Escarba Vasos.m4a"));
-        pictogramas.add(new Pictograma("Limpieza", "establo", "limpieza.png", "Limpieza.m4a"));
-        pictogramas.add(new Pictograma("Matra", "establo", "matra.png", "Matra.m4a"));
-        pictogramas.add(new Pictograma("Montura", "establo", "montura.png", "Montura.m4a"));
-
-        pictogramas.add(new Pictograma("Pasto", "establo", "pasto.png", "Pasto.m4a"));
-        pictogramas.add(new Pictograma("Rasqueta blanda", "establo", "raqueta_blanda.png", "Rasqueta Blanda.m4a"));
-        pictogramas.add(new Pictograma("Rasqueta dura", "establo", "raqueta_dura.png", "Rasqueta Dura.m4a"));
-        pictogramas.add(new Pictograma("Zanahoria", "establo", "zanahoria.png", "Zanahoria.m4a"));
+        Database database = new Database(getActivity().getApplicationContext());
+        pictogramas = database.getPictogramasCategory("establo");
 
         GridAdaptor adaptor = new GridAdaptor(pictogramas);
         GridView grid = (GridView) rootView.findViewById(R.id.gridView);
