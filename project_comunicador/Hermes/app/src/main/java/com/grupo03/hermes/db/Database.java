@@ -9,12 +9,14 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 import com.grupo03.hermes.AjustesActivity;
+import com.grupo03.hermes.Pictograma;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 /**
  * Created by federico on 09/12/15.
@@ -115,9 +117,9 @@ public class Database extends SQLiteAssetHelper {
     }
 
     public void setPendienteAsSent(String idPendiente) {
-        Log.i("HERMES", "Setting as sent: "+idPendiente);
+        Log.i("HERMES", "Setting as sent: " + idPendiente);
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE notificacionespendientes SET enviado = 'true' WHERE id="+idPendiente);
+        db.execSQL("UPDATE notificacionespendientes SET enviado = 'true' WHERE id=" + idPendiente);
     }
 
     public Cursor getPendientes(){
@@ -132,5 +134,29 @@ public class Database extends SQLiteAssetHelper {
         c.moveToFirst();
         return c;
     }
+    public ArrayList<Pictograma> getPictogramasFrom(int idAlumno){
+        ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String sql="SELECT p.nombre, p.carpeta " +
+                   "from pictograma_alumno p_a INNER JOIN pictograma p on (p_a.idPictograma = p.id)" +
+                  " where p_a.idAlumno=?";
 
+        Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idAlumno)});
+        c.moveToFirst();
+        System.out.println("Pictogramas:");
+        while (c.isAfterLast() == false) {
+            String carpeta=(c.getString(c.getColumnIndex("carpeta")));
+            String nombre= (c.getString(c.getColumnIndex("nombre")));
+            String m= nombre.charAt(0)+""; m=m.toUpperCase();
+            String nombre2=nombre.replaceFirst(nombre.charAt(0) + "", m);
+            seleccionados.add(new Pictograma(nombre, carpeta, nombre+".png", nombre2+".m4a"));
+            System.out.println(carpeta);
+            System.out.println(nombre + ".png");
+            System.out.println(nombre2+".m4a");
+            c.moveToNext();
+        }
+
+        return seleccionados;
+    }
 }

@@ -110,10 +110,10 @@ public class AlumnoActivity extends AppCompatActivity {
                 case 3:
                     return NecesidadesTab.newInstance("", "");
                 case 4:
-                    return AlumnoTab.newInstance("", "");
+                    return AlumnoTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "");
             }
 
-            return AlumnoTab.newInstance("asd1", "asd2");
+            return AlumnoTab.newInstance(1, "asd2");
 
             //return PlaceholderFragment.newInstance(position);
         }

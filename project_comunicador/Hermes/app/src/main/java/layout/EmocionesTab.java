@@ -75,7 +75,7 @@ public class EmocionesTab extends Fragment {
         pictogramas.add(new Pictograma("Asustada", "emociones", "asustada.png", "Asustada.m4a"));
         pictogramas.add(new Pictograma("Asustado", "emociones", "asustado.png", "Asustado.m4a"));
         pictogramas.add(new Pictograma("Cansada", "emociones", "cansada.png", "Cansada.m4a"));
-        pictogramas.add(new Pictograma("Cansado", "emociones", "Cansado.png", "Cansado.m4a"));
+        pictogramas.add(new Pictograma("Cansado", "emociones", "cansado.png", "Cansado.m4a"));
         pictogramas.add(new Pictograma("Contenta", "emociones", "contenta.png", "Contenta.m4a"));
         pictogramas.add(new Pictograma("Contento", "emociones", "contento.png", "Contento.m4a"));
         pictogramas.add(new Pictograma("Enojada", "emociones", "enojada.png", "Enojada.m4a"));

@@ -7,8 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
+import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
+import com.grupo03.hermes.adaptors.GridAdaptor;
+import com.grupo03.hermes.db.Database;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +31,7 @@ public class AlumnoTab extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private int mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -43,10 +49,10 @@ public class AlumnoTab extends Fragment {
      * @return A new instance of fragment AlumnoTab.
      */
     // TODO: Rename and change types and number of parameters
-    public static AlumnoTab newInstance(String param1, String param2) {
+    public static AlumnoTab newInstance(int param1, String param2) {
         AlumnoTab fragment = new AlumnoTab();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -56,16 +62,26 @@ public class AlumnoTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alumno_tab, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_alumno_tab, container, false);
+        Database database = new Database(getActivity().getApplicationContext());
+        ArrayList<Pictograma> pictogramas = database.getPictogramasFrom(mParam1);
+        GridAdaptor adaptor = new GridAdaptor(pictogramas);
+        GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+        grid.setAdapter(adaptor);
+
+
+        // Inflate the layout for this fragment
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
