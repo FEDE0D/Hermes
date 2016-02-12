@@ -28,7 +28,11 @@
             android:label="@string/title_activity_alumno"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AjustesActivity"></activity>
+        <activity android:name=".AjustesActivity" />
+        <activity
+            android:name=".ModoAlumnoActivity"
+            android:label="@string/title_activity_modo_alumno"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

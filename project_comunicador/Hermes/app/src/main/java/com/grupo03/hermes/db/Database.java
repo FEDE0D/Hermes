@@ -134,8 +134,24 @@ public class Database extends SQLiteAssetHelper {
         c.moveToFirst();
         return c;
     }
-    public ArrayList<Pictograma> getPictogramasFrom(int idAlumno){
+    public ArrayList<Pictograma> recorrerCursor(Cursor c){
+        c.moveToFirst();
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
+        while (c.isAfterLast() == false) {
+            String carpeta=(c.getString(c.getColumnIndex("carpeta")));
+            String nombre= (c.getString(c.getColumnIndex("nombre")));
+            String m= nombre.charAt(0)+""; m=m.toUpperCase();
+            String nombre2=nombre.replaceFirst(nombre.charAt(0) + "", m);
+            if (nombre.equals("triste")) nombre= "triste_f";
+            if (nombre.contains("sed")) nombre2= "Sed";
+            nombre2 = nombre2.replace(" ", "_");
+            seleccionados.add(new Pictograma(nombre, carpeta, nombre + ".png", nombre2 + ".m4a"));
+
+            c.moveToNext();
+        }
+        return seleccionados;
+    }
+    public ArrayList<Pictograma> getPictogramasFrom(int idAlumno){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String sql="SELECT p.nombre, p.carpeta " +
@@ -143,21 +159,19 @@ public class Database extends SQLiteAssetHelper {
                   " where p_a.idAlumno=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idAlumno)});
-        c.moveToFirst();
-        System.out.println("Pictogramas:");
-        while (c.isAfterLast() == false) {
-            String carpeta=(c.getString(c.getColumnIndex("carpeta")));
-            String nombre= (c.getString(c.getColumnIndex("nombre")));
-            String m= nombre.charAt(0)+""; m=m.toUpperCase();
-            String nombre2=nombre.replaceFirst(nombre.charAt(0) + "", m);
-            seleccionados.add(new Pictograma(nombre, carpeta, nombre+".png", nombre2+".m4a"));
-            System.out.println(carpeta);
-            System.out.println(nombre + ".png");
-            System.out.println(nombre2+".m4a");
-            c.moveToNext();
-        }
-
-        return seleccionados;
+        return recorrerCursor(c);
+    }
+    public ArrayList<Pictograma> getPictogramasCategoryAndIdAlumno(String categoria, int idAlumno){
+        ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String sql="SELECT p.id, p.nombre, p.carpeta " +
+                "from pictograma p " +
+                "left join pictograma_alumno p_a on (p_a.idPictograma = p.id)" +
+                ""+
+                " where p.carpeta=? and p_a.idAlumno=" + idAlumno;
+        Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
+        return recorrerCursor(c);
     }
     public ArrayList<Pictograma> getPictogramasCategory(String categoria){
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
@@ -168,23 +182,17 @@ public class Database extends SQLiteAssetHelper {
                 " where p.carpeta=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
-        c.moveToFirst();
-        System.out.println("Pictogramas:");
-        while (c.isAfterLast() == false) {
-            String carpeta=(c.getString(c.getColumnIndex("carpeta")));
-            String nombre= (c.getString(c.getColumnIndex("nombre")));
-            String m= nombre.charAt(0)+""; m=m.toUpperCase();
-            String nombre2=nombre.replaceFirst(nombre.charAt(0) + "", m);
-            if (nombre.equals("triste")) nombre= "triste_f";
-            if (nombre.contains("sed")) nombre2= "Sed";
-            nombre2 = nombre2.replace(" ", "_");
-            seleccionados.add(new Pictograma(nombre, carpeta, nombre+".png", nombre2+".m4a"));
-            System.out.println(carpeta);
-            System.out.println(nombre + ".png");
-            System.out.println(nombre2 + ".m4a");
-            c.moveToNext();
-        }
+        return recorrerCursor(c);
+    }
 
-        return seleccionados;
+    public String getSolapasHabilitadas(int idAlumno){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        String sql="SELECT a.solapasHabilitadas " +
+                "from alumno a " +
+                " where a.id=?";
+        Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idAlumno)});
+        c.moveToFirst();
+        return   (c.getString(c.getColumnIndex("solapasHabilitadas")));
     }
 }

@@ -31,7 +31,7 @@ public class PistaTab extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private int mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -49,10 +49,10 @@ public class PistaTab extends Fragment {
      * @return A new instance of fragment PistaTab.
      */
     // TODO: Rename and change types and number of parameters
-    public static PistaTab newInstance(String param1, String param2) {
+    public static PistaTab newInstance(int param1, String param2) {
         PistaTab fragment = new PistaTab();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -62,7 +62,7 @@ public class PistaTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -74,7 +74,8 @@ public class PistaTab extends Fragment {
 
         ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
         Database database = new Database(getActivity().getApplicationContext());
-        pictogramas = database.getPictogramasCategory("pista");
+        if (mParam1==0) pictogramas = database.getPictogramasCategory("pista");
+        else pictogramas = database.getPictogramasCategoryAndIdAlumno("pista",mParam1);
 
 
         GridAdaptor adaptor = new GridAdaptor(pictogramas);

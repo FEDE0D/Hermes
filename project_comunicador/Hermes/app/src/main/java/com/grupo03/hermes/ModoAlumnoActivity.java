@@ -1,7 +1,7 @@
 package com.grupo03.hermes;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,10 +17,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
+import com.grupo03.hermes.db.Database;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import layout.AlumnoTab;
 import layout.EmocionesTab;
@@ -28,22 +29,32 @@ import layout.EstabloTab;
 import layout.NecesidadesTab;
 import layout.PistaTab;
 
-public class AlumnoActivity extends AppCompatActivity {
+public class ModoAlumnoActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alumno);
+        setContentView(R.layout.activity_modo_alumno);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_alumno);
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
 
         // TABS
-
+        Database database = new Database(getApplicationContext());
+        String solapas= database.getSolapasHabilitadas(getIntent().getIntExtra("alumno_id", 0));
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        if(solapas.contains("Necesidades"))
+            mSectionsPagerAdapter.addFragment(NecesidadesTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Necesidades");
+        if(solapas.contains("Emociones"))
+            mSectionsPagerAdapter.addFragment(EmocionesTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Emociones");
+        if(solapas.contains("Establo"))
+            mSectionsPagerAdapter.addFragment(EstabloTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Establo");
+        if(solapas.contains("Pista"))
+            mSectionsPagerAdapter.addFragment(PistaTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Pista");
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(mSectionsPagerAdapter);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -68,6 +79,9 @@ public class AlumnoActivity extends AppCompatActivity {
         params.weight = 0.5f;
         iNo.setLayoutParams(params);
 
+
+
+
     }
 
     @Override
@@ -77,76 +91,74 @@ public class AlumnoActivity extends AppCompatActivity {
         String alumn_name = getIntent().getStringExtra("alumno_nombre");
         menu.findItem(R.id.alumn_name).setTitle(alumn_name);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_alumno);
-        toolbar.setTitle("Alumno");
+        toolbar.setTitle("Alumno ");
+        menu.findItem(R.id.edit_mode).setTitle("Modo terapeuta");
 
         return true;
     }
     public void mostrarAjustes(MenuItem view)
     {
-
         Intent intent = new Intent(this, AjustesActivity.class);
         int alumno_id = getIntent().getIntExtra("alumno_id", 0);
         intent.putExtra("alumno_id", alumno_id);
         intent.putExtra("tipo", "editarAlumno");
         startActivity(intent);
     }
-
     public void mostrarModoAlumno(MenuItem view)
     {
         int alumno_id = getIntent().getIntExtra("alumno_id", 0);
         String alumno_nombre = getIntent().getStringExtra("alumno_nombre");
-        Intent intent = new Intent(this, ModoAlumnoActivity.class);
-        intent.putExtra("alumno_nombre", alumno_nombre);
+        Intent intent = new Intent(this, AlumnoActivity.class);
         intent.putExtra("alumno_id", alumno_id);
+        intent.putExtra("alumno_nombre", alumno_nombre);
         startActivity(intent);
     }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
+        /**
+         * Contains all the fragments.
+         */
+        private List<Fragment> fragments = new ArrayList<>();
 
-        @Override
-        public Fragment getItem(int position) {
+        /**
+         * Contains all the tab titles.
+         */
+        private List<String> tabTitles = new ArrayList<>();
 
-            switch (position){
-                case 0:
-                    return PistaTab.newInstance(0, "");
-                case 1:
-                    return EstabloTab.newInstance(0,"");
-                case 2:
-                    return EmocionesTab.newInstance(0,"");
-                case 3:
-                    return NecesidadesTab.newInstance(0, "");
-                case 4:
-                    return AlumnoTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "");
-            }
-
-            return AlumnoTab.newInstance(1, "asd2");
-
-            //return PlaceholderFragment.newInstance(position);
+        /**
+         * Creates a new PagerAdapter instance.
+         *
+         * @param fragmentManager The FragmentManager.
+         */
+        public SectionsPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return fragments.size();
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "Pista";
-                case 1:
-                    return "Establo";
-                case 2:
-                    return "Emociones";
-                case 3:
-                    return "Necesidades";
-                case 4:
-                    return "Alumno";
-            }
-            return null;
+            return tabTitles.get(position);
+        }
+
+        /**
+         * Adds the fragment to the list, also adds the fragment's tab title.
+         *
+         * @param fragment New instance of the Fragment to be associated with this tab.
+         * @param tabTitle A String containing the tab title for this Fragment.
+         */
+        public void addFragment(Fragment fragment, String tabTitle) {
+            fragments.add(fragment);
+            tabTitles.add(tabTitle);
         }
 
     }

@@ -31,7 +31,7 @@ public class NecesidadesTab extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private int mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -49,10 +49,10 @@ public class NecesidadesTab extends Fragment {
      * @return A new instance of fragment NecesidadesTab.
      */
     // TODO: Rename and change types and number of parameters
-    public static NecesidadesTab newInstance(String param1, String param2) {
+    public static NecesidadesTab newInstance(int param1, String param2) {
         NecesidadesTab fragment = new NecesidadesTab();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -62,7 +62,7 @@ public class NecesidadesTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -74,8 +74,8 @@ public class NecesidadesTab extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_necesidades_tab, container, false);
         ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
         Database database = new Database(getActivity().getApplicationContext());
-        pictogramas = database.getPictogramasCategory("necesidades");
-
+        if (mParam1==0) pictogramas = database.getPictogramasCategory("necesidades");
+        else pictogramas = database.getPictogramasCategoryAndIdAlumno("necesidades",mParam1);
         GridAdaptor adaptor = new GridAdaptor(pictogramas);
         GridView grid = (GridView) rootView.findViewById(R.id.gridView);
         grid.setAdapter(adaptor);

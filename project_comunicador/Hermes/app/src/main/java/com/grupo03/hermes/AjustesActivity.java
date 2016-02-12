@@ -19,7 +19,7 @@ import android.widget.RadioGroup;
 import com.grupo03.hermes.db.Database;
 
 public class AjustesActivity extends AppCompatActivity {
-    public String nombre, apellido, sexo, tamanio,  solapas;
+    public String nombre, apellido, sexo, tamanio="",  solapas="";
    public int idAlumno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +86,7 @@ public class AjustesActivity extends AppCompatActivity {
     public void mostrarAlerta(String tipo, String nombre, String apellido){
         final Dialog dialog = new Dialog(this); // Context, this, etc.
         dialog.setContentView(R.layout.alert);
-        dialog.setTitle("Se ha "+ tipo+ " correctamente a " + nombre + apellido);
+        dialog.setTitle("Se ha "+ tipo+ " correctamente a " + nombre +" "+ apellido);
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 
             @Override
