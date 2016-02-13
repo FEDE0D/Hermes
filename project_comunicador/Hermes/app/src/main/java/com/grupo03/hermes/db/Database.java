@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class Database extends SQLiteAssetHelper {
 
     public static final String DB_NAME = "hermes.db";
-    public static final int DB_VERSION = 4;
+    public static final int DB_VERSION = 6;
 
     public Database(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -148,10 +148,11 @@ public class Database extends SQLiteAssetHelper {
             String nombre2=nombre.replaceFirst(nombre.charAt(0) + "", m);
             int id = c.getInt(c.getColumnIndex("id"));
             int idCategoria = c.getInt(c.getColumnIndex("idCategoria"));
+            int idContexto = c.getInt(c.getColumnIndex("idContexto"));
             if (nombre.equals("triste")) nombre= "triste_f";
             if (nombre.contains("sed")) nombre2= "Sed";
             nombre2 = nombre2.replace(" ", "_");
-            seleccionados.add(new Pictograma(id, idCategoria, nombre, carpeta, nombre + ".png", nombre2 + ".m4a"));
+            seleccionados.add(new Pictograma(id, idCategoria, idContexto, nombre, carpeta, nombre + ".png", nombre2 + ".m4a"));
 
             c.moveToNext();
         }
@@ -160,7 +161,7 @@ public class Database extends SQLiteAssetHelper {
     public ArrayList<Pictograma> getPictogramasFrom(int idAlumno){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, p.nombre, p.idCategoria, c.nombre as carpeta " +
+        String sql="SELECT p.id, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta " +
                    "from pictograma_alumno p_a INNER JOIN pictograma p on (p_a.idPictograma = p.id)" +
                 "LEFT JOIN categoria c ON (p.idCategoria = c.id)"+
                   " where p_a.idAlumno=?";
@@ -172,7 +173,7 @@ public class Database extends SQLiteAssetHelper {
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, c.id as idCategoria, p.nombre, p.idCategoria, c.nombre as carpeta" +
+        String sql="SELECT p.id, c.id as idCategoria, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta" +
                 "from pictograma p " +
                 "left join pictograma_alumno p_a on (p_a.idPictograma = p.id)" +
                 "LEFT JOIN categoria c ON (p.idCategoria = c.id) "+
@@ -184,7 +185,7 @@ public class Database extends SQLiteAssetHelper {
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, c.id as idCategoria, p.nombre, c.nombre as carpeta " +
+        String sql="SELECT p.id, c.id as idCategoria, p.idContexto, p.nombre, c.nombre as carpeta " +
                 "from pictograma p " +
                 "LEFT JOIN categoria c ON (p.idCategoria = c.id)"+
                 " where carpeta=?";

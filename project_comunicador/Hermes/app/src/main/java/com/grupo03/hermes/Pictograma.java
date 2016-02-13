@@ -19,16 +19,17 @@ import java.io.InputStream;
  */
 public class Pictograma {
 
-    private int id, idCategoria;
+    private int id, idCategoria, idContexto;
     private String name;
     private String tab;
     private String imgPath, soundPath;
     private ImageView view;
     private AssetFileDescriptor fileDescriptor;
 
-    public Pictograma(int id, int idCategoria, String name, String tab, String imgPath, String soundPath){
+    public Pictograma(int id, int idCategoria, int idContexto, String name, String tab, String imgPath, String soundPath){
         this.id = id;
         this.idCategoria = idCategoria;
+        this.idContexto = idContexto;
         this.name = name;
         this.tab = tab;
         this.imgPath = imgPath;
@@ -92,6 +93,10 @@ public class Pictograma {
 
     public int getIdCategoria() {
         return idCategoria;
+    }
+
+    public int getIdContexto() {
+        return idContexto;
     }
 
 }

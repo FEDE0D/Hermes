@@ -40,6 +40,7 @@ public class Notificacion {
         int idPaciente = AlumnoActivity._instance.getIntent().getIntExtra("alumno_id", -1);
         int idPictograma = pictograma.getId();
         int idCategoria = pictograma.getIdCategoria();
+        int idContexto = pictograma.getIdContexto();
 
         // get info alumno
         Cursor cursor = new Database(MainActivity.applicationContext).getAlumno(idPaciente);
@@ -47,9 +48,6 @@ public class Notificacion {
         String apellido = cursor.getString(cursor.getColumnIndex("apellido"));
         String sexo = cursor.getString(cursor.getColumnIndex("sexo"));
         cursor.close();
-
-        // get Contexto info
-        int idContexto = 1;
 
         // get datetime info
         Date date = new Date(0L);
