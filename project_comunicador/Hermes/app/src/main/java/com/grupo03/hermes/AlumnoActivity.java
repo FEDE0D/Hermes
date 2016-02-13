@@ -30,6 +30,7 @@ import layout.PistaTab;
 
 public class AlumnoActivity extends AppCompatActivity {
 
+    public static AlumnoActivity _instance = null;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
@@ -39,6 +40,7 @@ public class AlumnoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_alumno);
         setSupportActionBar(toolbar);
 
+        _instance = this;
         Intent intent = getIntent();
 
         // TABS
@@ -50,8 +52,8 @@ public class AlumnoActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         // SI-NO
-        Pictograma psi = new Pictograma("Si", "opciones", "si.png", "Si.m4a");
-        Pictograma pno = new Pictograma("No", "opciones", "no.png", "No.m4a");
+        Pictograma psi = new Pictograma(0, 0, "Si", "opciones", "si.png", "Si.m4a");
+        Pictograma pno = new Pictograma(0, 0, "No", "opciones", "no.png", "No.m4a");
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.layoutOpciones);
         ImageView iSi = psi.getView(getApplicationContext());

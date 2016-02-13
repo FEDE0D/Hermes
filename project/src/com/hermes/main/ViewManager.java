@@ -173,7 +173,7 @@ public class ViewManager {
 		mainView.getComboBoxCategoria().setModel(new ComboBoxModel<Categoria>(categorias));
 		
 		List<Paciente> pacientes = new ArrayList<Paciente>();
-		pacientes.add(new Paciente(0, "Todos", "", '*'));
+		pacientes.add(new Paciente(0, "", "Todos", "", '*'));
 		pacientes.addAll(new PacienteDAO().getAll());
 		mainView.getComboBoxPaciente().setModel(new ComboBoxModel<Paciente>(pacientes));
 		
@@ -201,7 +201,7 @@ public class ViewManager {
 			Object[][] data = new Object[notificaciones.size()][6];
 			for (int i= 0; i < notificaciones.size(); i++) {
 				data[i][0] = notificaciones.get(i).getDateReceived() +" "+ notificaciones.get(i).getTimeReceived();
-				data[i][1] = new PacienteDAO().getById(notificaciones.get(i).getIdPaciente());
+				data[i][1] = new PacienteDAO().getById(notificaciones.get(i).getIdPaciente(), notificaciones.get(i).getIdDevice());
 				data[i][2] = new ContenidoDAO().getById(notificaciones.get(i).getIdContenido());
 				data[i][3] = new ContextoDAO().getById(notificaciones.get(i).getIdContexto());
 				data[i][4] = new NotificacionEtiquetaDAO().getEtiquetasParaNotificacion(notificaciones.get(i).getId());

@@ -2,13 +2,15 @@ package com.hermes.model;
 
 public class Paciente {
 	private int id;
+	private String idDevice;
 	private String nombre;
 	private String apellido;
 	private char sexo;
 
-	public Paciente(int id, String nombre, String apellido, char sexo) {
+	public Paciente(int id, String idDevice, String nombre, String apellido, char sexo) {
 		super();
 		this.id = id;
+		this.idDevice = idDevice;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.sexo = sexo;
@@ -23,6 +25,14 @@ public class Paciente {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getIdDevice() {
+		return idDevice;
+	}
+
+	public void setIdDevice(String idDevice) {
+		this.idDevice = idDevice;
 	}
 
 	public String getNombre() {

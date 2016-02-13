@@ -10,7 +10,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.hermes.dao.sqlite.PacienteDAO;
 import com.hermes.model.Notificacion;
+import com.hermes.model.Paciente;
 
 enum TYPE {NOTIFICATION, ABM_CONTENIDO, ABM_CATEGORIA, ABM_CONTEXTO}
 enum ABM_TYPE {ALTA, BAJA, MODIFICACION}
@@ -58,12 +60,21 @@ public class MessageReader {
 		Notificacion n = new Notificacion();
 		n.setDate(Date.valueOf((String) root.get("date")));
 		n.setTime(Time.valueOf((String) root.get("time")));
-		n.setIdDevice((Long) root.get("idDevice"));
+		n.setIdDevice((String) root.get("idDevice"));
 		n.setIdPaciente((Long) data.get("idPaciente"));
-		n.setIdContenido((Long) data.get("idContenido"));
+		n.setIdContenido((Long) data.get("idPictograma"));
 		n.setIdContexto((Long) data.get("idContexto"));
 		
-		// TODO guardar la nueva notificacion
+		// TODO si no existe el alumno con id/idDevice de la notificación, guardarlo
+		Paciente paciente = new PacienteDAO().getById(n.getIdPaciente(), n.getIdDevice());
+		if (paciente == null) {
+			paciente = new Paciente(n.getIdPaciente().intValue(),
+					n.getIdDevice(), 
+					(String) data.get("nombre"), 
+					(String) data.get("apellido"),
+					((String) data.get("sexo")).charAt(0));
+			new PacienteDAO().guardar(paciente);
+		}
 		
 		ViewManager.getInstance().showNotification(n);
 		

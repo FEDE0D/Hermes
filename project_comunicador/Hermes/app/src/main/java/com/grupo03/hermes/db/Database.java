@@ -23,12 +23,14 @@ import java.util.ArrayList;
  */
 public class Database extends SQLiteAssetHelper {
 
-    public static final String DB_NAME = "hermes88.db";
-    public static final int DB_VERSION = 1;
+    public static final String DB_NAME = "hermes.db";
+    public static final int DB_VERSION = 4;
 
     public Database(Context context){
-        super(context, DB_NAME, null, 1);
+        super(context, DB_NAME, null, DB_VERSION);
+        setForcedUpgrade();
     }
+
     public Cursor getAlumno(int idAlumno){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
@@ -101,14 +103,16 @@ public class Database extends SQLiteAssetHelper {
         return c;
     }
 
-    public void addPendiente(String nombre, String apellido, String sexo, String idPictograma, String idContexto, String fecha, String hora){
+    public void addPendiente(int idPaciente, int idPictograma, int idCategoria, int idContexto, String nombre, String apellido, String sexo, String fecha, String hora){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("nombreAlumno", nombre);
-        cv.put("apellidoAlumno", apellido);
-        cv.put("sexoAlumno", sexo);
         cv.put("idPictograma", idPictograma);
+        cv.put("idCategoria", idCategoria);
         cv.put("idContexto", idContexto);
+        cv.put("idPaciente", idPaciente);
+        cv.put("nombre", nombre);
+        cv.put("apellido", apellido);
+        cv.put("sexo", sexo);
         cv.put("fecha", fecha);
         cv.put("hora", hora);
         cv.put("enviado", "false");
@@ -126,7 +130,7 @@ public class Database extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String[] sqlSelect = {"id", "nombreAlumno", "apellidoAlumno", "sexoAlumno", "idPictograma", "idContexto", "fecha", "hora", "enviado"};
+        String[] sqlSelect = {"id", "idPaciente", "nombre", "apellido", "sexo", "idPictograma", "idCategoria", "idContexto", "fecha", "hora", "enviado"};
         String sqlTables = "notificacionespendientes";
 
         qb.setTables(sqlTables);
@@ -142,10 +146,12 @@ public class Database extends SQLiteAssetHelper {
             String nombre= (c.getString(c.getColumnIndex("nombre")));
             String m= nombre.charAt(0)+""; m=m.toUpperCase();
             String nombre2=nombre.replaceFirst(nombre.charAt(0) + "", m);
+            int id = c.getInt(c.getColumnIndex("id"));
+            int idCategoria = c.getInt(c.getColumnIndex("idCategoria"));
             if (nombre.equals("triste")) nombre= "triste_f";
             if (nombre.contains("sed")) nombre2= "Sed";
             nombre2 = nombre2.replace(" ", "_");
-            seleccionados.add(new Pictograma(nombre, carpeta, nombre + ".png", nombre2 + ".m4a"));
+            seleccionados.add(new Pictograma(id, idCategoria, nombre, carpeta, nombre + ".png", nombre2 + ".m4a"));
 
             c.moveToNext();
         }
@@ -154,8 +160,9 @@ public class Database extends SQLiteAssetHelper {
     public ArrayList<Pictograma> getPictogramasFrom(int idAlumno){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.nombre, p.carpeta " +
+        String sql="SELECT p.id, p.nombre, p.idCategoria, c.nombre as carpeta " +
                    "from pictograma_alumno p_a INNER JOIN pictograma p on (p_a.idPictograma = p.id)" +
+                "LEFT JOIN categoria c ON (p.idCategoria = c.id)"+
                   " where p_a.idAlumno=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idAlumno)});
@@ -165,11 +172,11 @@ public class Database extends SQLiteAssetHelper {
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, p.nombre, p.carpeta " +
+        String sql="SELECT p.id, c.id as idCategoria, p.nombre, p.idCategoria, c.nombre as carpeta" +
                 "from pictograma p " +
                 "left join pictograma_alumno p_a on (p_a.idPictograma = p.id)" +
-                ""+
-                " where p.carpeta=? and p_a.idAlumno=" + idAlumno;
+                "LEFT JOIN categoria c ON (p.idCategoria = c.id) "+
+                " where carpeta=? and p_a.idAlumno=" + idAlumno;
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
         return recorrerCursor(c);
     }
@@ -177,9 +184,10 @@ public class Database extends SQLiteAssetHelper {
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, p.nombre, p.carpeta " +
+        String sql="SELECT p.id, c.id as idCategoria, p.nombre, c.nombre as carpeta " +
                 "from pictograma p " +
-                " where p.carpeta=?";
+                "LEFT JOIN categoria c ON (p.idCategoria = c.id)"+
+                " where carpeta=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
         return recorrerCursor(c);

@@ -1,6 +1,7 @@
 package com.grupo03.hermes;
 
 import android.database.Cursor;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.grupo03.hermes.db.Database;
@@ -29,22 +30,34 @@ import java.sql.Time;
  */
 public class Notificacion {
 
-    private static String IP_ADRESS_MONITOR = "";
-    private static String PORT_MONITOR = "";
-
     public static void enviar(final Pictograma pictograma) {
-        // TODO get data for the pictograma from database
-        String nombre = "Juanito";
-        String apellido = "Arcoiris";
-        String sexo = "M";
-        int idPictograma = 1;
+
+        // no procesar los pictogramas SI/NO
+        if (pictograma.getId() == 0)
+            return;
+
+        // notificacion info
+        int idPaciente = AlumnoActivity._instance.getIntent().getIntExtra("alumno_id", -1);
+        int idPictograma = pictograma.getId();
+        int idCategoria = pictograma.getIdCategoria();
+
+        // get info alumno
+        Cursor cursor = new Database(MainActivity.applicationContext).getAlumno(idPaciente);
+        String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
+        String apellido = cursor.getString(cursor.getColumnIndex("apellido"));
+        String sexo = cursor.getString(cursor.getColumnIndex("sexo"));
+        cursor.close();
+
+        // get Contexto info
         int idContexto = 1;
+
+        // get datetime info
         Date date = new Date(0L);
         Time time = new Time(0L);
 
-        // TODO store in database
+        // store in database
         Database db = new Database(MainActivity.applicationContext);
-        db.addPendiente(nombre, apellido, sexo,idPictograma+"", idContexto+"", date.toString(), time.toString());
+        db.addPendiente(idPaciente, idPictograma, idCategoria, idContexto, nombre, apellido, sexo, date.toString(), time.toString());
 
         sendPendientes();
     }
@@ -54,27 +67,31 @@ public class Notificacion {
 
         String message = "";
         Cursor cursor = new Database(MainActivity.applicationContext).getPendientes();
+        cursor.moveToFirst();
         try {
             JSONObject jsonObject = new JSONObject();
             JSONArray notifications = new JSONArray();
             while (!cursor.isAfterLast()){
                 JSONObject row = new JSONObject();
 
+                row.put("type", "NOTIFICATION");
+                row.put("idDevice", Settings.Secure.getString(MainActivity.applicationContext.getContentResolver(), Settings.Secure.ANDROID_ID));
                 row.put("date", cursor.getString(cursor.getColumnIndex("fecha")));
                 row.put("time", cursor.getString(cursor.getColumnIndex("hora")));
-                row.put("idTablet", "ASD-123");
-                row.put("type", "NOTIFICATION");
-                row.put("date", cursor.getString(cursor.getColumnIndex("fecha")));
 
                 JSONObject data = new JSONObject();
-                data.put("idPaciente", 1);
-                data.put("idContenido", 1);
-                data.put("idContexto", 1);
+                data.put("idPictograma", cursor.getLong(cursor.getColumnIndex("idPictograma")));
+                data.put("idCategoria", cursor.getLong(cursor.getColumnIndex("idCategoria")));
+                data.put("idContexto", cursor.getLong(cursor.getColumnIndex("idContexto")));
+                data.put("idPaciente", cursor.getLong(cursor.getColumnIndex("idPaciente")));
+                data.put("nombre", cursor.getString(cursor.getColumnIndex("nombre")));
+                data.put("apellido", cursor.getString(cursor.getColumnIndex("apellido")));
+                data.put("sexo", cursor.getString(cursor.getColumnIndex("sexo")));
 
                 row.put("data", data);
                 notifications.put(row);
 
-                Log.i("HERMES", "Pendiente: " + cursor.getString(cursor.getColumnIndex("id")) + cursor.getString(cursor.getColumnIndex("nombreAlumno")));
+                Log.i("HERMES", "Pendiente: " + cursor.getString(cursor.getColumnIndex("id")) + cursor.getString(cursor.getColumnIndex("nombre")));
                 cursor.moveToNext();
             }
             jsonObject.put("notifications", notifications);
@@ -85,7 +102,11 @@ public class Notificacion {
         Sender sender = new Sender(message);
         Thread senderThread = new Thread(sender);
         senderThread.start();
-        while(senderThread.isAlive()){ }
+        try {
+            senderThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         if (sender.isSent()){
             // mark the notifications as 'sent'.
@@ -113,6 +134,7 @@ public class Notificacion {
         }
 
         private String getMonitorURL(){
+            String IP_ADRESS_MONITOR = "", PORT_MONITOR = "";
             Database database = new Database(MainActivity.applicationContext);
             Cursor cursor = database.getConfiguracion();
             while (!cursor.isAfterLast()) {

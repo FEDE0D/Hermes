@@ -30,7 +30,7 @@ public class NotificacionDAO extends GenericDAO<Notificacion> implements INotifi
 		try {
 			p = new Notificacion(
 					resultado.getLong("id"),
-					resultado.getLong("idDevice"),
+					resultado.getString("idDevice"),
 					resultado.getLong("idContenido"),
 					resultado.getLong("idContexto"),
 					resultado.getLong("idPaciente"),

@@ -5,7 +5,8 @@ import java.sql.Time;
 
 public class Notificacion {
 
-	private Long id, idDevice, idContenido, idContexto, idPaciente;
+	private Long id, idContenido, idContexto, idPaciente;
+	private String idDevice;
 	private Date date;
 	private Time time;
 	private Date dateReceived;
@@ -15,7 +16,7 @@ public class Notificacion {
 	public Notificacion() {
 	}
 
-	public Notificacion(Long id, Long idDevice, Long idContenido,
+	public Notificacion(Long id, String idDevice, Long idContenido,
 			Long idContexto, Long idPaciente, Date date, Time time,
 			Date dateReceived, Time timeReceived, boolean visto) {
 		super();
@@ -39,11 +40,11 @@ public class Notificacion {
 		this.id = id;
 	}
 
-	public Long getIdDevice() {
+	public String getIdDevice() {
 		return idDevice;
 	}
 
-	public void setIdDevice(Long idDevice) {
+	public void setIdDevice(String idDevice) {
 		this.idDevice = idDevice;
 	}
 
