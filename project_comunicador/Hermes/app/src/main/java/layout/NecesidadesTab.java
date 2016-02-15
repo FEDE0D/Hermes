@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.grupo03.hermes.AlumnoActivity;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
 import com.grupo03.hermes.adaptors.GridAdaptor;
@@ -92,6 +93,7 @@ public class NecesidadesTab extends Fragment {
         }
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -108,6 +110,7 @@ public class NecesidadesTab extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this

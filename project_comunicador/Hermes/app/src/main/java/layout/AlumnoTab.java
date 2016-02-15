@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.grupo03.hermes.AlumnoActivity;
+import com.grupo03.hermes.MainActivity;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
 import com.grupo03.hermes.adaptors.GridAdaptor;
@@ -78,7 +80,6 @@ public class AlumnoTab extends Fragment {
         GridAdaptor adaptor = new GridAdaptor(pictogramas);
         GridView grid = (GridView) rootView.findViewById(R.id.gridView);
         grid.setAdapter(adaptor);
-
 
         // Inflate the layout for this fragment
         return rootView;

@@ -33,6 +33,7 @@ public class AlumnoActivity extends AppCompatActivity {
     public static AlumnoActivity _instance = null;
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +55,21 @@ public class AlumnoActivity extends AppCompatActivity {
 
 
     }
+     boolean activa;
+    public boolean getActiva(){
+        return activa;
+    }
 
+    @Override
+    public void onResume(){
+        this.activa= true;
+        super.onResume();
+    }
+    @Override
+    public void onStop(){
+        this.activa= false;
+        super.onStop();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_alumno, menu);
@@ -96,15 +111,15 @@ public class AlumnoActivity extends AppCompatActivity {
 
             switch (position){
                 case 0:
-                    return PistaTab.newInstance(0, "");
+                    return PistaTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "mTerapeuta");
                 case 1:
-                    return EstabloTab.newInstance(0,"");
+                    return EstabloTab.newInstance(getIntent().getIntExtra("alumno_id", 0),"mTerapeuta");
                 case 2:
-                    return EmocionesTab.newInstance(0,"");
+                    return EmocionesTab.newInstance(getIntent().getIntExtra("alumno_id", 0),"mTerapeuta");
                 case 3:
-                    return NecesidadesTab.newInstance(0, "");
+                    return NecesidadesTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "mTerapeuta");
                 case 4:
-                    return AlumnoTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "");
+                    return AlumnoTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "mTerapeuta");
             }
 
             return AlumnoTab.newInstance(1, "asd2");

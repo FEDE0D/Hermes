@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.grupo03.hermes.AlumnoActivity;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
 import com.grupo03.hermes.adaptors.GridAdaptor;
@@ -60,7 +61,11 @@ public class EmocionesTab extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+    @Override
+    public void onResume(){
+        Log.i("HERMES","en resumen");
+        super.onResume();
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

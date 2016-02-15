@@ -1,13 +1,19 @@
 package com.grupo03.hermes;
 
+import android.app.Activity;
+import android.app.AliasActivity;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.grupo03.hermes.db.Database;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,9 +31,10 @@ public class Pictograma {
     private String tab;
     private String imgPath, soundPath;
     private ImageView view;
+    private boolean istabAlumno=false;
     private AssetFileDescriptor fileDescriptor;
 
-    public Pictograma(int id, int idCategoria, int idContexto, String name, String tab, String imgPath, String soundPath){
+    public Pictograma(int id, int idCategoria, int idContexto, String name, String tab, String imgPath, String soundPath, boolean isTabAlumno){
         this.id = id;
         this.idCategoria = idCategoria;
         this.idContexto = idContexto;
@@ -35,6 +42,7 @@ public class Pictograma {
         this.tab = tab;
         this.imgPath = imgPath;
         this.soundPath = soundPath;
+        this.istabAlumno= isTabAlumno;
     }
 
     public ImageView getView(Context context){
@@ -80,9 +88,22 @@ public class Pictograma {
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(MainActivity.applicationContext, "LONG PRESS", Toast.LENGTH_SHORT).show();
-                Log.i("HERMES", "Long Press!");
-                return true;
+                if (AlumnoActivity._instance.getActiva()) {
+                    if (!istabAlumno) {
+                        Toast.makeText(MainActivity.applicationContext, "Pictograma agregado !", Toast.LENGTH_SHORT).show();
+                        int idAlumno = AlumnoActivity._instance.getIntent().getIntExtra("alumno_id", 0);
+                        Database db = new Database(MainActivity.applicationContext);
+                        db.asignarPictograma(idAlumno, getId());
+                        return true;
+                    }
+                    else{
+                        Toast.makeText(MainActivity.applicationContext, "Pictograma eliminado !", Toast.LENGTH_SHORT).show();
+                        int idAlumno = AlumnoActivity._instance.getIntent().getIntExtra("alumno_id", 0);
+                        Database db = new Database(MainActivity.applicationContext);
+                        db.eliminarPictogramaAsignado(idAlumno, getId());
+                        return true;
+                    }
+                } return false;
             }
         });
 

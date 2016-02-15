@@ -138,7 +138,7 @@ public class Database extends SQLiteAssetHelper {
         c.moveToFirst();
         return c;
     }
-    public ArrayList<Pictograma> recorrerCursor(Cursor c){
+    public ArrayList<Pictograma> recorrerCursor(Cursor c, boolean isTabAlumno){
         c.moveToFirst();
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
         while (c.isAfterLast() == false) {
@@ -152,8 +152,7 @@ public class Database extends SQLiteAssetHelper {
             if (nombre.equals("triste")) nombre= "triste_f";
             if (nombre.contains("sed")) nombre2= "Sed";
             nombre2 = nombre2.replace(" ", "_");
-            seleccionados.add(new Pictograma(id, idCategoria, idContexto, nombre, carpeta, nombre + ".png", nombre2 + ".m4a"));
-
+            seleccionados.add(new Pictograma(id, idCategoria, idContexto, nombre, carpeta, nombre + ".png", nombre2 + ".m4a", isTabAlumno));
             c.moveToNext();
         }
         return seleccionados;
@@ -167,7 +166,7 @@ public class Database extends SQLiteAssetHelper {
                   " where p_a.idAlumno=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idAlumno)});
-        return recorrerCursor(c);
+        return recorrerCursor(c,true);
     }
     public ArrayList<Pictograma> getPictogramasCategoryAndIdAlumno(String categoria, int idAlumno){
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
@@ -179,7 +178,7 @@ public class Database extends SQLiteAssetHelper {
                 " LEFT JOIN Categoria c on (p.idCategoria = c.id) "+
                 " where c.nombre=? and p_a.idAlumno=" + idAlumno;
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
-        return recorrerCursor(c);
+        return recorrerCursor(c,false);
     }
     public ArrayList<Pictograma> getPictogramasCategory(String categoria){
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
@@ -191,7 +190,7 @@ public class Database extends SQLiteAssetHelper {
                 " where c.nombre=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
-        return recorrerCursor(c);
+        return recorrerCursor(c,false);
     }
 
     public String getSolapasHabilitadas(int idAlumno){
@@ -203,5 +202,19 @@ public class Database extends SQLiteAssetHelper {
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idAlumno)});
         c.moveToFirst();
         return   (c.getString(c.getColumnIndex("solapasHabilitadas")));
+    }
+
+    public void asignarPictograma(int idAlumno, int idPictograma){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("idAlumno", idAlumno);
+        cv.put("idPictograma", idPictograma);
+        db.insert("pictograma_alumno", null, cv);
+        db.close();
+    }
+    public void eliminarPictogramaAsignado(int idAlumno, int idPictograma){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM pictograma_alumno where idAlumno="+idAlumno+ " and idPictograma="+idPictograma); //delete all rows in a table
+        db.close();
     }
 }

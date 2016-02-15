@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.grupo03.hermes.AlumnoActivity;
 import com.grupo03.hermes.adaptors.GridAdaptor;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
@@ -31,8 +32,8 @@ public class PistaTab extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private int mParam1;
-    private String mParam2;
+    private int idAlumno;
+    private String tipo;
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,8 +63,8 @@ public class PistaTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            idAlumno = getArguments().getInt(ARG_PARAM1);
+            tipo = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -71,16 +72,25 @@ public class PistaTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_pista_tab, container, false);
-
-        ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
         Database database = new Database(getActivity().getApplicationContext());
-        if (mParam1==0) pictogramas = database.getPictogramasCategory("pista");
-        else pictogramas = database.getPictogramasCategoryAndIdAlumno("pista",mParam1);
+        ArrayList<Pictograma>  pictogramasPistaAlumno = new ArrayList<Pictograma>();
+        pictogramasPistaAlumno = database.getPictogramasCategoryAndIdAlumno("pista",idAlumno);
+
+        if (tipo.equals("mTerapeuta")) {
+            ArrayList<Pictograma>  pictogramasPista = new ArrayList<Pictograma>();
+            pictogramasPista= database.getPictogramasCategory("pista");
+            GridAdaptor adaptor = new GridAdaptor(pictogramasPista);
+            GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+            grid.setAdapter(adaptor);
+
+        }
+        else{
+            GridAdaptor adaptor = new GridAdaptor(pictogramasPistaAlumno);
+            GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+            grid.setAdapter(adaptor);
+        }
 
 
-        GridAdaptor adaptor = new GridAdaptor(pictogramas);
-        GridView grid = (GridView) rootView.findViewById(R.id.gridView);
-        grid.setAdapter(adaptor);
 
 
         // Inflate the layout for this fragment
@@ -93,7 +103,6 @@ public class PistaTab extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

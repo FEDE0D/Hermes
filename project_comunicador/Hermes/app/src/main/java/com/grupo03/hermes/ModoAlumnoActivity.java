@@ -47,13 +47,13 @@ public class ModoAlumnoActivity extends AppCompatActivity {
         String solapas= database.getSolapasHabilitadas(getIntent().getIntExtra("alumno_id", 0));
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         if(solapas.contains("Necesidades"))
-            mSectionsPagerAdapter.addFragment(NecesidadesTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Necesidades");
+            mSectionsPagerAdapter.addFragment(NecesidadesTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "mAlumno"), "Necesidades");
         if(solapas.contains("Emociones"))
-            mSectionsPagerAdapter.addFragment(EmocionesTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Emociones");
+            mSectionsPagerAdapter.addFragment(EmocionesTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "mAlumno"), "Emociones");
         if(solapas.contains("Establo"))
-            mSectionsPagerAdapter.addFragment(EstabloTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Establo");
+            mSectionsPagerAdapter.addFragment(EstabloTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "mAlumno"), "Establo");
         if(solapas.contains("Pista"))
-            mSectionsPagerAdapter.addFragment(PistaTab.newInstance(getIntent().getIntExtra("alumno_id", 0), ""), "Pista");
+            mSectionsPagerAdapter.addFragment(PistaTab.newInstance(getIntent().getIntExtra("alumno_id", 0), "mAlumno"), "Pista");
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(mSectionsPagerAdapter);
@@ -61,8 +61,8 @@ public class ModoAlumnoActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         // SI-NO
-        Pictograma psi = new Pictograma(0, 0, 0, "Si", "opciones", "si.png", "Si.m4a");
-        Pictograma pno = new Pictograma(0, 0, 0, "No", "opciones", "no.png", "No.m4a");
+        Pictograma psi = new Pictograma(0, 0, 0, "Si", "opciones", "si.png", "Si.m4a",false);
+        Pictograma pno = new Pictograma(0, 0, 0, "No", "opciones", "no.png", "No.m4a",false);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.layoutOpciones);
         ImageView iSi = psi.getView(getApplicationContext());
