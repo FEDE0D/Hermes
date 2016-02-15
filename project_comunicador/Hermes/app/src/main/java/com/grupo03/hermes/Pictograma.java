@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -73,6 +74,15 @@ public class Pictograma {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(MainActivity.applicationContext, "LONG PRESS", Toast.LENGTH_SHORT).show();
+                Log.i("HERMES", "Long Press!");
+                return true;
             }
         });
 

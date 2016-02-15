@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,17 +85,6 @@ public class EmocionesTab extends Fragment {
         grid.setLongClickable(true);
         grid.setAdapter(adaptor);
 
-        grid.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           int position, long arg3) {
-                Toast.makeText(getContext(), "LONG PRESS", Toast.LENGTH_SHORT).show();
-                System.out.println("adsadsad");
-                //set the image as wallpaper
-                return true;
-            }
-        });
-        // Inflate the layout for this fragment
         return rootView;
     }
 
