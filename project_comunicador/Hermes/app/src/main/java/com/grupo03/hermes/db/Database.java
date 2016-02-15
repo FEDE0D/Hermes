@@ -163,7 +163,7 @@ public class Database extends SQLiteAssetHelper {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String sql="SELECT p.id, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta " +
                    "from pictograma_alumno p_a INNER JOIN pictograma p on (p_a.idPictograma = p.id)" +
-                "LEFT JOIN categoria c ON (p.idCategoria = c.id)"+
+                "LEFT JOIN Categoria c ON (p.idCategoria = c.id)"+
                   " where p_a.idAlumno=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(idAlumno)});
@@ -173,11 +173,11 @@ public class Database extends SQLiteAssetHelper {
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, c.id as idCategoria, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta" +
+        String sql="SELECT p.id, c.id as idCategoria, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta " +
                 "from pictograma p " +
                 "left join pictograma_alumno p_a on (p_a.idPictograma = p.id)" +
-                "LEFT JOIN categoria c ON (p.idCategoria = c.id) "+
-                " where carpeta=? and p_a.idAlumno=" + idAlumno;
+                " LEFT JOIN Categoria c on (p.idCategoria = c.id) "+
+                " where c.nombre=? and p_a.idAlumno=" + idAlumno;
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
         return recorrerCursor(c);
     }
@@ -187,8 +187,8 @@ public class Database extends SQLiteAssetHelper {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String sql="SELECT p.id, c.id as idCategoria, p.idContexto, p.nombre, c.nombre as carpeta " +
                 "from pictograma p " +
-                "LEFT JOIN categoria c ON (p.idCategoria = c.id)"+
-                " where carpeta=?";
+                " LEFT JOIN Categoria c on (p.idCategoria = c.id)"+
+                " where c.nombre=?";
 
         Cursor c = db.rawQuery(sql, new String[]{String.valueOf(categoria)});
         return recorrerCursor(c);

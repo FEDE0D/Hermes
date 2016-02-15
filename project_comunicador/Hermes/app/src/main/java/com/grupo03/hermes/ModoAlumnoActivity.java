@@ -91,7 +91,7 @@ public class ModoAlumnoActivity extends AppCompatActivity {
         String alumn_name = getIntent().getStringExtra("alumno_nombre");
         menu.findItem(R.id.alumn_name).setTitle(alumn_name);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_alumno);
-        toolbar.setTitle("Alumno ");
+        toolbar.setTitle("Modo alumno");
         menu.findItem(R.id.edit_mode).setTitle("Modo terapeuta");
 
         return true;

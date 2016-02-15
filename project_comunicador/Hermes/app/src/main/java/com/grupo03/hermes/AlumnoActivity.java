@@ -51,24 +51,7 @@ public class AlumnoActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        // SI-NO
-        Pictograma psi = new Pictograma(0, 0, 0, "Si", "opciones", "si.png", "Si.m4a");
-        Pictograma pno = new Pictograma(0, 0, 0, "No", "opciones", "no.png", "No.m4a");
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.layoutOpciones);
-        ImageView iSi = psi.getView(getApplicationContext());
-        ImageView iNo = pno.getView(getApplicationContext());
-
-        layout.addView(iSi);
-        layout.addView(iNo);
-
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) iSi.getLayoutParams();
-        params.weight = 0.5f;
-        iSi.setLayoutParams(params);
-
-        params = (LinearLayout.LayoutParams) iNo.getLayoutParams();
-        params.weight = 0.5f;
-        iNo.setLayoutParams(params);
 
     }
 
@@ -79,7 +62,7 @@ public class AlumnoActivity extends AppCompatActivity {
         String alumn_name = getIntent().getStringExtra("alumno_nombre");
         menu.findItem(R.id.alumn_name).setTitle(alumn_name);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_alumno);
-        toolbar.setTitle("Alumno");
+        toolbar.setTitle("Modo terapeuta");
 
         return true;
     }
