@@ -6,6 +6,7 @@ import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -32,11 +33,11 @@ public class Pictograma {
     private boolean istabAlumno=false;
     private AssetFileDescriptor fileDescriptor;
     private final static int _BORDER_WIDTH = 4;
-    private final static String _BORDER_COLOR = "#FF0000";
+    private final static String _BORDER_COLOR = "#56FF6D";
     private boolean isHabilitada = false;
     private MODO modo = MODO.ALUMNO;
-
-    public Pictograma(int id, int idCategoria, int idContexto, String name, String tab, String imgPath, String soundPath, boolean isTabAlumno){
+    private String tamanio;
+    public Pictograma(int id, int idCategoria, int idContexto, String name, String tab, String imgPath, String soundPath, boolean isTabAlumno, String tamanio){
         this.id = id;
         this.idCategoria = idCategoria;
         this.idContexto = idContexto;
@@ -45,6 +46,7 @@ public class Pictograma {
         this.imgPath = imgPath;
         this.soundPath = soundPath;
         this.istabAlumno= isTabAlumno;
+        this.tamanio=tamanio;
     }
 
     public ImageView getView(Context context){
@@ -53,11 +55,31 @@ public class Pictograma {
             return view;
 
         view = new ImageView(context);
-        view.setMaxWidth(64);
-        view.setMaxHeight(64);
-        view.setCropToPadding(true);
-        view.setPadding(_BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH);
-        view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        if (tamanio!= null) {
+            System.out.println("tamanio"+ tamanio);
+            switch (tamanio) {
+                case "Grande":
+                    view.setMinimumHeight(512);
+                    view.setMinimumWidth(512);
+                    System.out.println("Grande");
+                    break;
+                case "Mediano":
+                    view.setMinimumHeight(256);
+                    view.setMinimumWidth(256);
+                    System.out.println("mediano");
+                    break;
+                case "Chico":
+                    view.setMinimumHeight(60);
+                    view.setMinimumWidth(60);
+                    System.out.println("chco");
+                    break;
+            }
+        }
+
+        view.setAdjustViewBounds(true);
+       // view.setCropToPadding(true);
+       // view.setPadding(_BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH);
+       // view.setScaleType(ImageView.ScaleType.CENTER_CROP);
         hideBorder();
 
         try {

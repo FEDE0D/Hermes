@@ -33,8 +33,8 @@ public class AlumnoTab extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private int mParam1;
-    private String mParam2;
+    private int idAlumno;
+    private String tipo;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,8 +64,8 @@ public class AlumnoTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            idAlumno = getArguments().getInt(ARG_PARAM1);
+            tipo = getArguments().getString(ARG_PARAM2);
         }
 
     }
@@ -76,8 +76,13 @@ public class AlumnoTab extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_alumno_tab, container, false);
         Database database = new Database(getActivity().getApplicationContext());
-        ArrayList<Pictograma> pictogramas = database.getPictogramasFrom(mParam1);
-        GridAdaptor adaptor = new GridAdaptor(pictogramas);
+
+
+        ArrayList<Pictograma>  pictogramasPista = new ArrayList<Pictograma>();
+        pictogramasPista= database.getPictogramasFrom(idAlumno);
+        for (Pictograma p : pictogramasPista) p.setModo(Pictograma.MODO.TERAPEUTA);
+
+        GridAdaptor adaptor = new GridAdaptor(pictogramasPista);
         GridView grid = (GridView) rootView.findViewById(R.id.gridView);
         grid.setAdapter(adaptor);
 

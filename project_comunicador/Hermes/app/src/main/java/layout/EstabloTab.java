@@ -32,8 +32,8 @@ public class EstabloTab extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private int mParam1;
-    private String mParam2;
+    private int idAlumno;
+    private String tipo;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +63,8 @@ public class EstabloTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            idAlumno = getArguments().getInt(ARG_PARAM1);
+            tipo = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -72,17 +72,32 @@ public class EstabloTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
         View rootView = inflater.inflate(R.layout.fragment_establo_tab, container, false);
         Database database = new Database(getActivity().getApplicationContext());
-        if (mParam1==0) pictogramas = database.getPictogramasCategory("establo");
-        else pictogramas = database.getPictogramasCategoryAndIdAlumno("establo",mParam1);
-
-        GridAdaptor adaptor = new GridAdaptor(pictogramas);
-        GridView grid = (GridView) rootView.findViewById(R.id.gridView);
-        grid.setAdapter(adaptor);
 
 
+        ArrayList<Pictograma>  pictogramasPistaAlumno = new ArrayList<Pictograma>();
+        pictogramasPistaAlumno = database.getPictogramasCategoryAndIdAlumno("establo", idAlumno);
+        for (Pictograma p : pictogramasPistaAlumno){
+            p.setModo(Pictograma.MODO.ALUMNO);
+        }
+
+
+        if (tipo.equals("mTerapeuta")) {
+            ArrayList<Pictograma>  pictogramasPista = new ArrayList<Pictograma>();
+            pictogramasPista= database.getPictogramasCategory("establo");
+            for (Pictograma p : pictogramasPista) p.setModo(Pictograma.MODO.TERAPEUTA);
+
+            GridAdaptor adaptor = new GridAdaptor(pictogramasPista);
+            GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+            grid.setAdapter(adaptor);
+
+        }
+        else{
+            GridAdaptor adaptor = new GridAdaptor(pictogramasPistaAlumno);
+            GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+            grid.setAdapter(adaptor);
+        }
         // Inflate the layout for this fragment
         return rootView;
     }

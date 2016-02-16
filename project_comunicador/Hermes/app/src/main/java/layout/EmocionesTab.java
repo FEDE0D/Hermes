@@ -35,8 +35,8 @@ public class EmocionesTab extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private int mParam1;
-    private String mParam2;
+    private int idAlumno;
+    private String tipo;
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,8 +70,8 @@ public class EmocionesTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            idAlumno = getArguments().getInt(ARG_PARAM1);
+            tipo = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -80,16 +80,33 @@ public class EmocionesTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_emociones_tab, container, false);
-        ArrayList<Pictograma> pictogramas = new ArrayList<Pictograma>();
-        Database database = new Database(getActivity().getApplicationContext());
-        System.out.println(mParam1+"id alumno");
-        if (mParam1==0) pictogramas = database.getPictogramasCategory("emociones");
-        else pictogramas = database.getPictogramasCategoryAndIdAlumno("emociones", mParam1);
-        GridAdaptor adaptor = new GridAdaptor(pictogramas);
-        GridView grid = (GridView) rootView.findViewById(R.id.gridView);
-        grid.setLongClickable(true);
-        grid.setAdapter(adaptor);
 
+        Database database = new Database(getActivity().getApplicationContext());
+        ArrayList<Pictograma>  pictogramasPistaAlumno = new ArrayList<Pictograma>();
+        pictogramasPistaAlumno = database.getPictogramasCategoryAndIdAlumno("emociones", idAlumno);
+        String tamanio= database.getTamanio(idAlumno);
+
+
+        if (tipo.equals("mTerapeuta")) {
+            ArrayList<Pictograma>  pictogramasPista = new ArrayList<Pictograma>();
+            pictogramasPista= database.getPictogramasCategory("emociones");
+            for (Pictograma p : pictogramasPista) p.setModo(Pictograma.MODO.TERAPEUTA);
+
+            GridAdaptor adaptor = new GridAdaptor(pictogramasPista);
+            GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+            grid.setAdapter(adaptor);
+
+        }
+        else{
+
+            GridAdaptor adaptor = new GridAdaptor(pictogramasPistaAlumno);
+            GridView grid = (GridView) rootView.findViewById(R.id.gridView);
+            grid.setAdapter(adaptor);
+            for (Pictograma p : pictogramasPistaAlumno){
+                p.setModo(Pictograma.MODO.ALUMNO);
+            }
+
+        }
         return rootView;
     }
 

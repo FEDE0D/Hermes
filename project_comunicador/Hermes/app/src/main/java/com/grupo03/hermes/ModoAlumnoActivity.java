@@ -2,6 +2,7 @@ package com.grupo03.hermes;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -61,8 +62,8 @@ public class ModoAlumnoActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         // SI-NO
-        Pictograma psi = new Pictograma(0, 0, 0, "Si", "opciones", "si.png", "Si.m4a",false);
-        Pictograma pno = new Pictograma(0, 0, 0, "No", "opciones", "no.png", "No.m4a",false);
+        Pictograma psi = new Pictograma(0, 0, 0, "Si", "opciones", "si.png", "Si.m4a",false,null);
+        Pictograma pno = new Pictograma(0, 0, 0, "No", "opciones", "no.png", "No.m4a",false,null);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.layoutOpciones);
         ImageView iSi = psi.getView(getApplicationContext());

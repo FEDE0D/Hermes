@@ -152,7 +152,13 @@ public class Database extends SQLiteAssetHelper {
             if (nombre.equals("triste")) nombre= "triste_f";
             if (nombre.contains("sed")) nombre2= "Sed";
             nombre2 = nombre2.replace(" ", "_");
-            seleccionados.add(new Pictograma(id, idCategoria, idContexto, nombre, carpeta, nombre + ".png", nombre2 + ".m4a", isTabAlumno));
+
+            if (!c.isNull(c.getColumnIndex("idAlumno"))) {
+            int idAlumno=(c.getInt(c.getColumnIndex("idAlumno")));
+                System.out.println("database"+ idAlumno);
+                seleccionados.add(new Pictograma(id, idCategoria, idContexto, nombre, carpeta, nombre + ".png", nombre2 + ".m4a", isTabAlumno,this.getTamanio(idAlumno)));
+            }else
+            seleccionados.add(new Pictograma(id, idCategoria, idContexto, nombre, carpeta, nombre + ".png", nombre2 + ".m4a", isTabAlumno,null));
             c.moveToNext();
         }
         return seleccionados;
@@ -160,7 +166,7 @@ public class Database extends SQLiteAssetHelper {
     public ArrayList<Pictograma> getPictogramasFrom(int idAlumno){
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta " +
+        String sql="SELECT p_a.idAlumno as idAlumno, p.id, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta " +
                    "from pictograma_alumno p_a INNER JOIN pictograma p on (p_a.idPictograma = p.id)" +
                 "LEFT JOIN Categoria c ON (p.idCategoria = c.id)"+
                   " where p_a.idAlumno=?";
@@ -172,7 +178,7 @@ public class Database extends SQLiteAssetHelper {
         ArrayList<Pictograma> seleccionados= new ArrayList<Pictograma>();
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String sql="SELECT p.id, c.id as idCategoria, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta " +
+        String sql="SELECT p_a.idAlumno as idAlumno,  p.id, c.id as idCategoria, p.nombre, p.idCategoria, p.idContexto, c.nombre as carpeta " +
                 "from pictograma p " +
                 "left join pictograma_alumno p_a on (p_a.idPictograma = p.id)" +
                 " LEFT JOIN Categoria c on (p.idCategoria = c.id) "+
@@ -207,14 +213,26 @@ public class Database extends SQLiteAssetHelper {
     public void asignarPictograma(int idAlumno, int idPictograma){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("idAlumno", idAlumno);
-        cv.put("idPictograma", idPictograma);
-        db.insert("pictograma_alumno", null, cv);
-        db.close();
+        String sql= "select * from pictograma_alumno where idAlumno= "+ idAlumno + " and idPictograma= " + idPictograma;
+        Cursor c = db.rawQuery(sql,null);
+        if (c.getCount() == 0) {
+            cv.put("idAlumno", idAlumno);
+            cv.put("idPictograma", idPictograma);
+            db.insert("pictograma_alumno", null, cv);
+            db.close();
+        }
     }
     public void eliminarPictogramaAsignado(int idAlumno, int idPictograma){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM pictograma_alumno where idAlumno="+idAlumno+ " and idPictograma="+idPictograma); //delete all rows in a table
         db.close();
+    }
+    public String getTamanio(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String sql= "select tamanioPictograma from alumno where id= "+ id;
+        Cursor c = db.rawQuery(sql,null);
+        c.moveToFirst();
+        return   (c.getString(c.getColumnIndex("tamanioPictograma")));
     }
 }

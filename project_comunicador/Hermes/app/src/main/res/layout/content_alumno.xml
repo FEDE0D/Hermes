@@ -24,18 +24,10 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_columnWeight="0.7"
+            android:layout_columnWeight="0.9"
             android:layout_weight=".3" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/layoutOpciones"
-            android:layout_columnWeight="0.3"
-            android:layout_weight=".7">
 
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
