@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-
-import com.grupo03.hermes.AlumnoActivity;
 import com.grupo03.hermes.adaptors.GridAdaptor;
 import com.grupo03.hermes.Pictograma;
 import com.grupo03.hermes.R;
@@ -28,6 +26,7 @@ import java.util.ArrayList;
 public class PistaTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private View rootView;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -71,14 +70,18 @@ public class PistaTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_pista_tab, container, false);
+        rootView = inflater.inflate(R.layout.fragment_pista_tab, container, false);
         Database database = new Database(getActivity().getApplicationContext());
         ArrayList<Pictograma>  pictogramasPistaAlumno = new ArrayList<Pictograma>();
-        pictogramasPistaAlumno = database.getPictogramasCategoryAndIdAlumno("pista",idAlumno);
+        pictogramasPistaAlumno = database.getPictogramasCategoryAndIdAlumno("pista", idAlumno);
+        for (Pictograma p : pictogramasPistaAlumno) p.setModo(Pictograma.MODO.ALUMNO);
+
 
         if (tipo.equals("mTerapeuta")) {
             ArrayList<Pictograma>  pictogramasPista = new ArrayList<Pictograma>();
             pictogramasPista= database.getPictogramasCategory("pista");
+            for (Pictograma p : pictogramasPista) p.setModo(Pictograma.MODO.TERAPEUTA);
+
             GridAdaptor adaptor = new GridAdaptor(pictogramasPista);
             GridView grid = (GridView) rootView.findViewById(R.id.gridView);
             grid.setAdapter(adaptor);
@@ -89,9 +92,6 @@ public class PistaTab extends Fragment {
             GridView grid = (GridView) rootView.findViewById(R.id.gridView);
             grid.setAdapter(adaptor);
         }
-
-
-
 
         // Inflate the layout for this fragment
         return rootView;

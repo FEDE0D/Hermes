@@ -37,4 +37,5 @@ public class GridAdaptor extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         return pictogramas.get(position).getView(parent.getContext());
     }
+
 }
