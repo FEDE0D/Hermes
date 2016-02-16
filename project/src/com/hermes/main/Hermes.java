@@ -70,7 +70,7 @@ public class Hermes {
 		// Copiar el archivo de base de datos inicial, si no existe
 		File dbfile = new java.io.File(getDatabaseFilePath());
 		if (!dbfile.exists()){
-			FileUtils.copy("database/bbdd.db", getDatabaseFilePath());
+			FileUtils.copy("database/database.db", getDatabaseFilePath());
 		}
 		
 		Properties p = new Properties();
