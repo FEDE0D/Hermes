@@ -90,7 +90,11 @@ public class EmocionesTab extends Fragment {
         if (tipo.equals("mTerapeuta")) {
             ArrayList<Pictograma>  pictogramasPista = new ArrayList<Pictograma>();
             pictogramasPista= database.getPictogramasCategory("emociones");
-            for (Pictograma p : pictogramasPista) p.setModo(Pictograma.MODO.TERAPEUTA);
+            for (Pictograma p : pictogramasPista){
+                p.setModo(Pictograma.MODO.TERAPEUTA);
+                if (Pictograma.contains(pictogramasPistaAlumno, p))
+                    p.showBorder();
+            }
 
             GridAdaptor adaptor = new GridAdaptor(pictogramasPista);
             GridView grid = (GridView) rootView.findViewById(R.id.gridView);
