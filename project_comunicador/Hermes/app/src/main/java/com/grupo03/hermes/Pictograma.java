@@ -3,7 +3,11 @@ package com.grupo03.hermes;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -15,8 +19,10 @@ import android.widget.Toast;
 import com.grupo03.hermes.adaptors.GridAdaptor;
 import com.grupo03.hermes.db.Database;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by federico on 16/12/15.
@@ -37,6 +43,7 @@ public class Pictograma {
     private boolean isHabilitada = false;
     private MODO modo = MODO.ALUMNO;
     private String tamanio;
+
     public Pictograma(int id, int idCategoria, int idContexto, String name, String tab, String imgPath, String soundPath, boolean isTabAlumno, String tamanio){
         this.id = id;
         this.idCategoria = idCategoria;
@@ -77,14 +84,19 @@ public class Pictograma {
         }
 
         view.setAdjustViewBounds(true);
-       // view.setCropToPadding(true);
-       // view.setPadding(_BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH);
+        view.setCropToPadding(true);
+        view.setPadding(_BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH, _BORDER_WIDTH);
        // view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        hideBorder();
+
+        if (isHabilitada){ // puede haberse llamado a showBorder/hideBorder antes de que view != null => muestro borde ahora
+            showBorder();
+        } else {
+            hideBorder();
+        }
 
         try {
-            InputStream is = context.getAssets().open("pictogramas/" + tab + "/" + imgPath);
-            view.setImageDrawable(Drawable.createFromStream(is, null));
+
+            view.setImageDrawable(getAssetImage(MainActivity.applicationContext, "pictogramas/" + tab + "/" + imgPath));
 
             fileDescriptor = context.getAssets().openFd("pictogramas/" + tab + "/" + soundPath);
         } catch (IOException e) {
@@ -150,16 +162,16 @@ public class Pictograma {
     }
 
     public void showBorder(){
+        isHabilitada = true;
         if (view != null){
             view.setBackgroundColor(Color.parseColor(_BORDER_COLOR));
-            isHabilitada = true;
         }
     }
 
     public void hideBorder(){
+        isHabilitada = false;
         if (view != null){
             view.setBackgroundColor(0);
-            isHabilitada = false;
         }
     }
 
@@ -187,4 +199,24 @@ public class Pictograma {
         return idContexto;
     }
 
+    public static Drawable getAssetImage(Context context, String filename) throws IOException {
+        AssetManager assets = context.getResources().getAssets();
+        InputStream buffer = new BufferedInputStream((assets.open(filename)));
+        Bitmap bitmap = BitmapFactory.decodeStream(buffer);
+        return new BitmapDrawable(context.getResources(), bitmap);
+    }
+
+    public static boolean contains(List<Pictograma> pictogramaList, Pictograma pictograma) {
+
+        for (Pictograma p : pictogramaList) {
+            if (p.equals(pictograma))
+                return true;
+        }
+
+        return false;
+    }
+
+    public boolean equals(Pictograma p) {
+        return this.getId() == p.getId();
+    }
 }

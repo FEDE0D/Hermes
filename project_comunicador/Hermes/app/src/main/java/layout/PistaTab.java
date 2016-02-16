@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,8 @@ public class PistaTab extends Fragment {
             pictogramasPista= database.getPictogramasCategory("pista");
             for (Pictograma p : pictogramasPista){
                 p.setModo(Pictograma.MODO.TERAPEUTA);
+                if (Pictograma.contains(pictogramasPistaAlumno, p))
+                    p.showBorder();
             }
 
             GridAdaptor adaptor = new GridAdaptor(pictogramasPista);
